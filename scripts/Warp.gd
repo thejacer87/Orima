@@ -2,6 +2,7 @@ extends Area2D
 
 export(String, FILE, "*tscn") var target_scene
 export(Vector2) var direction
+export(Vector2) var local_position
 
 
 func _process(delta: float) -> void:
