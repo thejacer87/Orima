@@ -53,7 +53,7 @@ tracks/2/keys = {
 
 [node name="ItemBlock" type="StaticBody2D"]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 7
 script = ExtResource( 3 )
 
 [node name="EmptySprite" type="Sprite" parent="."]

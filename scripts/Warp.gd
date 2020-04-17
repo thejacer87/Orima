@@ -4,7 +4,6 @@ export(String, FILE, "*tscn") var target_scene
 export(Vector2) var direction
 export(Vector2) var local_position
 
-
 func _process(delta: float) -> void:
 	# Only the player can overlap
 	var bodies = get_overlapping_bodies()
@@ -16,9 +15,8 @@ func _process(delta: float) -> void:
 			warp_direction = "right"
 
 	if (Input.is_action_pressed(warp_direction) and bodies.size() > 0):
-		print("warp")
-		print(bodies[0].name)
-		bodies[0].warp(direction)
+		var player: Player = bodies[0] 
+		player.warp(direction)
 		# wait for warp animation to finish
 		yield(get_tree().create_timer(0.95), "timeout")
-		get_tree().change_scene(target_scene)
+		Globals.goto_scene(target_scene, local_position)
