@@ -1,9 +1,10 @@
 extends KinematicBody2D
+class_name Goomba
 
 const FLOOR = Vector2.UP
 
 var speed := 1.75 * Globals.UNIT_SIZE
-var velocity := Vector2()
+var velocity := Vector2.ZERO
 var direction := 1
 var gravity := 531.2
 var is_on_screen := false
@@ -25,8 +26,29 @@ func die():
 	queue_free()
 
 
-func _on_body_entered(body: Node) -> void:
+func squish():
+	velocity = Vector2.ZERO
+	speed = 0
+	gravity = 0
+	$AnimationPlayer.play("dead")
+	yield(get_tree().create_timer(1), "timeout")
 	die()
+
+
+func flip():
+	velocity.y -= 200
+	$AnimationPlayer.play("flip")
+	$Terrain.set_deferred("disabled", true)
+	$PlayerDamage/CollisionShape2D.set_deferred("disabled", true)
+	$GoombaTurnaround/CollisionShape2D.set_deferred("disabled", true)
+	$Kill/CollisionShape2D.set_deferred("disabled", true)
+	yield(get_tree().create_timer(3), "timeout")
+	die()
+
+func _on_body_entered(player: Player) -> void:
+	print('hit goomba')
+	player.velocity.y += -350
+	squish()
 
 
 func _on_Enemy_body_entered(body: Node) -> void:
