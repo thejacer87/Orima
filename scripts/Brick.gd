@@ -21,3 +21,8 @@ func _on_Break_body_entered(body: Node) -> void:
 	else:
 		hit_anitmation.play("break")
 		queue_free()
+
+
+func _on_BumpKill_body_entered(goomba: Goomba) -> void:
+	print('flip kill')
+	goomba.flip()

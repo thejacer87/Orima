@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Goomba
 
 const FLOOR = Vector2.UP
 
@@ -22,20 +23,31 @@ func _physics_process(delta: float) -> void:
 
 
 func die():
-	print("die: %d" % OS.get_ticks_msec())
 	queue_free()
+
 
 func squish():
 	velocity = Vector2.ZERO
 	speed = 0
 	gravity = 0
-	print("squish: %d" % OS.get_ticks_msec())
 	$AnimationPlayer.play("dead")
 	yield(get_tree().create_timer(1), "timeout")
 	die()
 
+
+func flip():
+	velocity.y -= 200
+	$AnimationPlayer.play("flip")
+	$Terrain.set_deferred("disabled", true)
+	$PlayerDamage/CollisionShape2D.set_deferred("disabled", true)
+	$GoombaTurnaround/CollisionShape2D.set_deferred("disabled", true)
+	$Kill/CollisionShape2D.set_deferred("disabled", true)
+	yield(get_tree().create_timer(3), "timeout")
+	die()
+
 func _on_body_entered(player: Player) -> void:
-	player.velocity.y += -100
+	print('hit goomba')
+	player.velocity.y += -350
 	squish()
 
 
