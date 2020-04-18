@@ -4,6 +4,7 @@
 [ext_resource path="res://scripts/Warp.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
 
 [node name="Warp" type="Area2D"]
 collision_layer = 32

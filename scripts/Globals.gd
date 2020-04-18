@@ -11,8 +11,8 @@ var current_scene
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() -1)
-	
-	
+
+
 func _process(time):
 	if loader == null:
 		# no need to process anymore
@@ -43,21 +43,21 @@ func _process(time):
 			break
 
 
-func goto_scene(path, coordinates): 
+func goto_scene(path, coordinates):
 	destination = coordinates
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null:
 		#show_error()
 		return
 	set_process(true)
-	
+
 	current_scene.queue_free() # get rid of the old scene
-	
+
 	# start your "loading..." animation
 	#get_node("animation").play("loading")
-	
+
 	wait_frames = 1
-	
+
 #func update_progress():
 	#var progress = float(loader.get_stage()) / loader.get_stage_count()
 	# Update your progress bar?

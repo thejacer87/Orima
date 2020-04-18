@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Mushroom
 
 onready var collision = $CollisionShape2D
 onready var activation_collision = $Activation/CollisionShape2D
@@ -25,13 +26,13 @@ func _physics_process(delta: float) -> void:
 			direction *= -1
 
 func _on_Powerup_body_entered(player: Player) -> void:
-	print('powerup')
 	player.powerup()
 	queue_free()
 
 
 func _on_Activation_body_entered(body: Node) -> void:
 	active = true
+	$Sprite.visible = true
 	activation_animation.play("activate")
 	yield(get_tree().create_timer(0.95), "timeout")
 	activation_collision.disabled = true

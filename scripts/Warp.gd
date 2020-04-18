@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 			warp_direction = "right"
 
 	if (Input.is_action_pressed(warp_direction) and bodies.size() > 0):
-		var player: Player = bodies[0] 
+		var player: Player = bodies[0]
 		player.warp(direction)
 		# wait for warp animation to finish
 		yield(get_tree().create_timer(0.95), "timeout")
