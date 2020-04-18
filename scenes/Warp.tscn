@@ -4,6 +4,7 @@
 [ext_resource path="res://scripts/Warp.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 4 )
 
 [node name="Warp" type="Area2D"]
 collision_layer = 32
@@ -13,5 +14,6 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="." to="." method="_on_Warp_body_entered"]

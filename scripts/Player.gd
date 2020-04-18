@@ -29,8 +29,10 @@ func _ready() -> void:
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
 
+
 func _physics_process(delta: float) -> void:
 	update_motion(delta)
+
 
 func update_motion(delta: float) -> void:
 	check_dead()
@@ -38,14 +40,17 @@ func update_motion(delta: float) -> void:
 	jump()
 	move(delta)
 
+
 func check_dead():
 	if health <= 0:
 		pass
 #		queue_free()
 
+
 func run() -> void:
 	if (on_ground):
 		speed = walk_speed * 1.5 if Input.is_action_pressed("run") else walk_speed
+
 
 func jump() -> void:
 	if Input.is_action_just_pressed("jump") and on_ground:
@@ -70,6 +75,7 @@ func move(delta: float) -> void:
 
 	velocity = move_and_slide(velocity, FLOOR)
 
+
 func warp(direction := Vector2.DOWN):
 	var animation_direction = "warp"
 	match direction:
@@ -80,6 +86,11 @@ func warp(direction := Vector2.DOWN):
 
 	warp_animation.play(animation_direction)
 
+func one_up():
+	print("1up")
+	pass
+
+
 func powerup():
 	health = 2
 	big_shape.set_deferred('disabled', false)
@@ -87,10 +98,14 @@ func powerup():
 	small_shape.set_deferred('disabled', true)
 	small_sprite.visible = false
 
+
 func damage():
 	big_shape.set_deferred('disabled', true)
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
-	velocity.y -= 250
 	health -= 1
+
+func die():
+	print('im dead')
+	get_tree().reload_current_scene()
