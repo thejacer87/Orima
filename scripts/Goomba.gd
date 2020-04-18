@@ -3,7 +3,7 @@ extends KinematicBody2D
 const FLOOR = Vector2.UP
 
 var speed := 1.75 * Globals.UNIT_SIZE
-var velocity := Vector2()
+var velocity := Vector2.ZERO
 var direction := 1
 var gravity := 531.2
 var is_on_screen := false
@@ -22,11 +22,21 @@ func _physics_process(delta: float) -> void:
 
 
 func die():
+	print("die: %d" % OS.get_ticks_msec())
 	queue_free()
 
-
-func _on_body_entered(body: Node) -> void:
+func squish():
+	velocity = Vector2.ZERO
+	speed = 0
+	gravity = 0
+	print("squish: %d" % OS.get_ticks_msec())
+	$AnimationPlayer.play("dead")
+	yield(get_tree().create_timer(1), "timeout")
 	die()
+
+func _on_body_entered(player: Player) -> void:
+	player.velocity.y += -100
+	squish()
 
 
 func _on_Enemy_body_entered(body: Node) -> void:

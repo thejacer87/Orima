@@ -104,7 +104,6 @@ func damage():
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
-	velocity.y -= 250
 	health -= 1
 
 func die():
