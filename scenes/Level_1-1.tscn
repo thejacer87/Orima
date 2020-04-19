@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://sprites/block.png" type="Texture" id=1]
 [ext_resource path="res://sprites/brick.png" type="Texture" id=2]
@@ -259,6 +259,9 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 10/shapes = [  ]
 10/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 938, 24 )
+
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 50, 50 )
 
@@ -322,11 +325,11 @@ position = Vector2( 848, 216 )
 [node name="Goomba4" parent="Enemies" instance=ExtResource( 12 )]
 position = Vector2( 824, 216 )
 
-[node name="KoopaGreen" parent="Enemies" instance=ExtResource( 13 )]
-position = Vector2( 1800, 216 )
+[node name="KoopaGreen2" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 1848, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1408, 192 )
+position = Vector2( 880, 144 )
 
 [node name="Warps" type="Node" parent="."]
 
@@ -533,13 +536,17 @@ texture = ExtResource( 20 )
 centered = false
 
 [node name="DeathBlock" type="Area2D" parent="."]
-position = Vector2( 1086, 322 )
+position = Vector2( 1736, 328 )
 collision_layer = 0
 collision_mask = 5
 script = ExtResource( 21 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock"]
-shape = SubResource( 10 )
+position = Vector2( 16, -32 )
+shape = SubResource( 12 )
 
 [node name="DeathBlock4" type="Area2D" parent="."]
 position = Vector2( -48, 208 )
@@ -549,24 +556,6 @@ script = ExtResource( 21 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock4"]
 position = Vector2( -16, 40 )
-shape = SubResource( 10 )
-
-[node name="DeathBlock2" type="Area2D" parent="."]
-position = Vector2( 2424, 322 )
-collision_layer = 0
-collision_mask = 5
-script = ExtResource( 21 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock2"]
-shape = SubResource( 10 )
-
-[node name="DeathBlock3" type="Area2D" parent="."]
-position = Vector2( 1376, 322 )
-collision_layer = 0
-collision_mask = 5
-script = ExtResource( 21 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock3"]
 shape = SubResource( 10 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -585,5 +574,3 @@ volume_db = -5.0
 autoplay = true
 [connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
 [connection signal="body_entered" from="DeathBlock4" to="DeathBlock4" method="_on_DeathBlock_body_entered"]
-[connection signal="body_entered" from="DeathBlock2" to="DeathBlock2" method="_on_DeathBlock_body_entered"]
-[connection signal="body_entered" from="DeathBlock3" to="DeathBlock3" method="_on_DeathBlock_body_entered"]

@@ -25,6 +25,5 @@ func _on_Hit_body_entered(body: Node) -> void:
 		collision.set_deferred('disabled', false)
 
 
-func _on_BumpKill_body_entered(goomba: Goomba) -> void:
-	print('flip kill')
-	goomba.flip()
+func _on_BumpKill_body_entered(enemy: Enemy) -> void:
+	enemy.bump()

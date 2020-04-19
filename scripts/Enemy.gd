@@ -8,6 +8,10 @@ var velocity := Vector2.ZERO
 var direction := 1
 var gravity := 531.2
 var is_on_screen := false
+var is_flipped := false
+
+func _ready() -> void:
+	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -31,33 +35,43 @@ func squish():
 	speed = 0
 	gravity = 0
 	$AnimationPlayer.play("dead")
+	remove_collisions()
 	$Squish.play()
 	yield(get_tree().create_timer(1), "timeout")
 	die()
 
 
-func flip():
+func bump():
 	velocity.y -= 200
-	$AnimationPlayer.play("flip")
-	$Terrain.set_deferred("disabled", true)
-	$PlayerDamage/CollisionShape2D.set_deferred("disabled", true)
-	$Turnaround/CollisionShape2D.set_deferred("disabled", true)
-	$Kill/CollisionShape2D.set_deferred("disabled", true)
+	$AnimationPlayer.play("bump")
+	remove_collisions()
 	yield(get_tree().create_timer(3), "timeout")
 	die()
 
 func _on_body_entered(player: Player) -> void:
-	player.velocity.y += -350
+	is_flipped = true
+	player.velocity.y = max(player.velocity.y - 350, -350)
 	squish()
 
 
 func _on_Enemy_body_entered(body: Node) -> void:
 	direction *= -1
 
+
 func _on_PlayerDamage_body_entered(body: Node) -> void:
-	if "Player" in body.name:
-		body.damage()
+	if not is_flipped:
+		if "Player" in body.name:
+			print("shoudld be disabled...? damaging: %s" % is_flipped)
+			print('player damage: %d' % OS.get_ticks_msec())
+			body.damage()
 
 
 func _on_VisibilityNotifier2D_screen_entered() -> void:
 	is_on_screen = true
+
+
+func remove_collisions():
+	$Terrain.set_deferred("disabled", true)
+	$PlayerDamage/CollisionShape2D.set_deferred("disabled", true)
+	$TurnAround/CollisionShape2D.set_deferred("disabled", true)
+	$Kill/CollisionShape2D.set_deferred("disabled", true)
