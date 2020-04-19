@@ -326,7 +326,7 @@ position = Vector2( 824, 216 )
 position = Vector2( 1800, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 1224, 208 )
+position = Vector2( 1408, 192 )
 
 [node name="Warps" type="Node" parent="."]
 

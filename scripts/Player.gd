@@ -54,6 +54,10 @@ func run() -> void:
 
 func jump() -> void:
 	if Input.is_action_just_pressed("jump") and on_ground:
+		if (true): # todo check state for size
+			$SmallJump.play()
+		else:
+			$BigJump.play()
 		velocity.y = max_jump_velocity
 		on_ground = false
 	if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
@@ -93,6 +97,7 @@ func one_up():
 
 func powerup():
 	health = 2
+	$PowerUp.play()
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
