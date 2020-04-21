@@ -23,6 +23,5 @@ func _on_Break_body_entered(body: Node) -> void:
 		queue_free()
 
 
-func _on_BumpKill_body_entered(goomba: Goomba) -> void:
-	print('flip kill')
-	goomba.flip()
+func _on_BumpKill_body_entered(enemy: Enemy) -> void:
+	enemy.bump()

@@ -33,6 +33,7 @@ func _on_Powerup_body_entered(player: Player) -> void:
 func _on_Activation_body_entered(body: Node) -> void:
 	active = true
 	$Sprite.visible = true
+	$Audio_Activate.play()
 	activation_animation.play("activate")
 	yield(get_tree().create_timer(0.95), "timeout")
 	activation_collision.disabled = true

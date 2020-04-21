@@ -1,14 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://sprites/mario_big.png" type="Texture" id=3]
+[ext_resource path="res://SFX/Sounds/smb_jump-small.wav" type="AudioStream" id=4]
+[ext_resource path="res://SFX/Sounds/smb_jump-super.wav" type="AudioStream" id=5]
+[ext_resource path="res://SFX/Sounds/smb_powerup.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 8 )
+extents = Vector2( 7, 7.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 16 )
+extents = Vector2( 7, 15.5 )
 
 [sub_resource type="Animation" id=3]
 tracks/0/type = "value"
@@ -88,11 +91,12 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 
 [node name="SmallShape" type="CollisionShape2D" parent="Player"]
+position = Vector2( 0, 0.5 )
 shape = SubResource( 1 )
 
 [node name="BigShape" type="CollisionShape2D" parent="Player"]
 visible = false
-position = Vector2( 0, -8 )
+position = Vector2( 0, -7.5 )
 shape = SubResource( 2 )
 disabled = true
 
@@ -106,3 +110,12 @@ limit_left = 0
 limit_top = 24
 limit_right = 3392
 limit_bottom = 248
+
+[node name="SmallJump" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 4 )
+
+[node name="BigJump" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 5 )
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource( 6 )

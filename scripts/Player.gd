@@ -8,7 +8,7 @@ var gravity
 var max_jump_velocity
 var min_jump_velocity
 var speed
-var health = 2
+var health = 1
 var walk_speed = 7 * Globals.UNIT_SIZE
 var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
@@ -43,8 +43,7 @@ func update_motion(delta: float) -> void:
 
 func check_dead():
 	if health <= 0:
-		pass
-#		queue_free()
+		die()
 
 
 func run() -> void:
@@ -54,6 +53,10 @@ func run() -> void:
 
 func jump() -> void:
 	if Input.is_action_just_pressed("jump") and on_ground:
+		if (true): # todo check state for size
+			$SmallJump.play()
+		else:
+			$BigJump.play()
 		velocity.y = max_jump_velocity
 		on_ground = false
 	if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
@@ -71,6 +74,7 @@ func move(delta: float) -> void:
 
 	on_ground = is_on_floor()
 
+#	velocity.y += max(gravity * delta, MAX_FALL_SPEED)
 	velocity.y += gravity * delta
 
 	velocity = move_and_slide(velocity, FLOOR)
@@ -93,6 +97,7 @@ func one_up():
 
 func powerup():
 	health = 2
+	$PowerUp.play()
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
@@ -100,12 +105,14 @@ func powerup():
 
 
 func damage():
+	print('damaged')
 	big_shape.set_deferred('disabled', true)
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
 	health -= 1
+	check_dead()
 
 func die():
-	print('im dead')
+	print('im dying')
 	get_tree().reload_current_scene()
