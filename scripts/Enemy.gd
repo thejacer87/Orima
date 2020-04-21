@@ -8,7 +8,8 @@ var velocity := Vector2.ZERO
 var direction := 1
 var gravity := 531.2
 var is_on_screen := false
-var is_flipped := false
+var is_dead := false
+
 
 func _ready() -> void:
 	pass
@@ -48,8 +49,9 @@ func bump():
 	yield(get_tree().create_timer(3), "timeout")
 	die()
 
+
 func _on_body_entered(player: Player) -> void:
-	is_flipped = true
+	is_dead = true
 	player.velocity.y = max(player.velocity.y - 350, -350)
 	squish()
 
@@ -59,10 +61,8 @@ func _on_Enemy_body_entered(body: Node) -> void:
 
 
 func _on_PlayerDamage_body_entered(body: Node) -> void:
-	if not is_flipped:
+	if not is_dead:
 		if "Player" in body.name:
-			print("shoudld be disabled...? damaging: %s" % is_flipped)
-			print('player damage: %d' % OS.get_ticks_msec())
 			body.damage()
 
 

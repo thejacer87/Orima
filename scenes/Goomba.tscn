@@ -8,16 +8,16 @@
 radius = 0.8
 height = 12.4
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.72175, 2.77459 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 9, 7 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 7, 7.5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "bump"
 length = 0.1
 step = 0.05
@@ -34,8 +34,7 @@ tracks/0/keys = {
 "values": [ 0.0, 180.0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "dead"
+[sub_resource type="Animation" id=6]
 length = 0.01
 step = 0.01
 tracks/0/type = "value"
@@ -115,7 +114,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TurnAround"]
 visible = false
-shape = SubResource( 7 )
+shape = SubResource( 2 )
 
 [node name="PlayerDamage" type="Area2D" parent="."]
 collision_layer = 4
@@ -125,7 +124,7 @@ shape = SubResource( 3 )
 
 [node name="Terrain" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
@@ -133,8 +132,8 @@ position = Vector2( -3, 0 )
 scale = Vector2( 1.3, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/bump = SubResource( 6 )
-anims/dead = SubResource( 5 )
+anims/bump = SubResource( 5 )
+anims/dead = SubResource( 6 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
