@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/FlagPole.gd" type="Script" id=1]
+[ext_resource path="res://sprites/flag.png" type="Texture" id=2]
+[ext_resource path="res://sprites/flag_top.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1.5, 60 )
+
+[node name="FlagPole" type="Area2D"]
+collision_layer = 64
+script = ExtResource( 1 )
+local_position = Vector2( 48, 36 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_left = -1.0
+margin_top = -70.0
+margin_right = 1.0
+margin_bottom = 70.0
+color = Color( 0.517647, 0.827451, 0.0627451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Top" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( -8, -65 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, -75 )
+texture = ExtResource( 3 )
+[connection signal="body_entered" from="." to="." method="_on_FlagPole_body_entered"]

@@ -105,7 +105,6 @@ anims/warp = SubResource( 3 )
 anims/warp_right = SubResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 limit_left = 0
 limit_top = 24
 limit_right = 3392
