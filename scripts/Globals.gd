@@ -44,6 +44,7 @@ func _process(time):
 
 
 func goto_scene(path, coordinates):
+	print(path)
 	destination = coordinates
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null:
@@ -57,19 +58,6 @@ func goto_scene(path, coordinates):
 	#get_node("animation").play("loading")
 
 	wait_frames = 1
-
-#func update_progress():
-	#var progress = float(loader.get_stage()) / loader.get_stage_count()
-	# Update your progress bar?
-#	get_node("progress").set_progress(progress)
-
-	# ... or update a progress animation?
-	#var length = get_node("animation").get_current_animation_length()
-
-	# Call this on a paused animation. Use "true" as the second argument to force the animation to update.
-	#get_node("animation").seek(progress * length, true)
-	#add_child(current_scene)
-
 
 func set_new_scene(scene_resource):
 	set_process(false)

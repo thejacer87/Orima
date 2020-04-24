@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/Coin.gd" type="Script" id=1]
+[ext_resource path="res://Coin.gd" type="Script" id=1]
 [ext_resource path="res://sprites/coin.png" type="Texture" id=2]
 [ext_resource path="res://SFX/Sounds/smb_coin.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 7.5 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.85497
 
 [sub_resource type="Animation" id=2]
 resource_name = "collect"
@@ -45,7 +45,6 @@ rotation = 6.28319
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

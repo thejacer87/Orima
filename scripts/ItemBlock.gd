@@ -8,6 +8,8 @@ onready var empty_sprite = $EmptySprite
 onready var collision = $CollisionShape2D
 onready var powerup_collision = $Hit/CollisionShape2D
 onready var bump_kill_collision = $BumpKill/CollisionShape2D
+onready var items = $Items
+
 
 func _ready() -> void:
 	if is_hidden:
@@ -19,6 +21,10 @@ func _ready() -> void:
 func _on_Hit_body_entered(body: Node) -> void:
 	if body.velocity.y < 0 or not is_hidden:
 		hit_anitmation.play("hit")
+		for item in items.get_children():
+			item.activate()
+		# Make entire block visible in case it was a hidden block
+		visible = true
 		sprite.visible = false
 		empty_sprite.visible = true
 		powerup_collision.set_deferred('disabled', true)

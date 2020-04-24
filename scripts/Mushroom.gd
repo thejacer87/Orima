@@ -2,7 +2,6 @@ extends KinematicBody2D
 class_name Mushroom
 
 onready var collision = $CollisionShape2D
-onready var activation_collision = $Activation/CollisionShape2D
 onready var activation_animation = $AnimationPlayer
 onready var powerup_collision = $Powerup/CollisionShape2D
 
@@ -30,12 +29,12 @@ func _on_Powerup_body_entered(player: Player) -> void:
 	queue_free()
 
 
-func _on_Activation_body_entered(body: Node) -> void:
+func activate() -> void:
 	active = true
-	$Sprite.visible = true
+	visible = true
 	$Audio_Activate.play()
 	activation_animation.play("activate")
 	yield(get_tree().create_timer(0.95), "timeout")
-	activation_collision.disabled = true
+	z_index = 0
 	powerup_collision.disabled = false
 	collision.disabled = false
