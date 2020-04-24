@@ -1,8 +1,10 @@
 extends KinematicBody2D
 class_name Player
 
+
 const FLOOR := Vector2.UP
 const ACC := 100
+
 
 var gravity
 var max_jump_velocity
@@ -14,6 +16,9 @@ var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
 var jump_duration: = .5
 var is_warping := false
+var velocity: = Vector2()
+var on_ground: = true
+
 
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
@@ -21,8 +26,6 @@ onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var warp_animation = $AnimationPlayer
 
-var velocity: = Vector2()
-var on_ground: = true
 
 func _ready() -> void:
 	Globals.Player = self
@@ -38,7 +41,6 @@ func _physics_process(delta: float) -> void:
 
 
 func update_motion(delta: float) -> void:
-	check_dead()
 	run()
 	jump()
 	move(delta)
@@ -92,6 +94,7 @@ func warp(direction := Vector2.DOWN):
 			animation_direction = "warp_right"
 
 	warp_animation.play(animation_direction)
+
 
 func one_up():
 	print("1up")

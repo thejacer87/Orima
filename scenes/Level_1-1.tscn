@@ -1040,6 +1040,7 @@ extents = Vector2( 32, 88 )
 
 [node name="Level_1-1" type="Node2D"]
 script = ExtResource( 24 )
+starting_lives = 99
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 9 )
@@ -1100,7 +1101,7 @@ position = Vector2( 824, 216 )
 position = Vector2( 1848, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 880, 136 )
+position = Vector2( 40, 216 )
 z_index = 1
 
 [node name="Camera2D" parent="Player/Player" index="5"]
@@ -1382,6 +1383,7 @@ shape = SubResource( 24 )
 [node name="Music" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )
 volume_db = -5.0
+autoplay = true
 
 [node name="FlagPole" parent="." instance=ExtResource( 23 )]
 position = Vector2( 3144, 144 )

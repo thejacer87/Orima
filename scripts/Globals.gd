@@ -6,6 +6,13 @@ var GameState
 var Player
 var GUI
 
+var default_starting_position := Vector2(40.0, 216.0)
+var levels := { 
+		"1-1": "res://scenes/Level_1-1.tscn",
+		"1-2": "res://scenes/Level_1-2.tscn",
+		"1-3": "res://scenes/Level_1-3.tscn",
+		"1-4": "res://scenes/Level_1-4.tscn",
+	}
 var destination := Vector2()
 var loader
 var wait_frames

@@ -9,9 +9,13 @@ func _ready() -> void:
 
 
 func die() -> void:
+	print(lives)
 	lives -= 1
 	if lives < 0:
 		game_over()
+	else:
+		SceneTransition.change_scene(Globals.levels["1-1"], Globals.default_starting_position)
+		
 
 
 func game_over() -> void:

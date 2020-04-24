@@ -1,21 +1,15 @@
 extends Control
 
+onready var start_button := $Start
+onready var quit_button := $Quit
+
+func _ready() -> void:
+	start_button.grab_focus()
+
 
 func _on_Start_pressed() -> void:
-	print("here")
-	Globals.goto_level("res://scenes/Level_1-1.tscn", Vector2.ZERO)
+	SceneTransition.change_scene(Globals.levels["1-1"], Globals.default_starting_position)
 
 
 func _on_Quit_pressed() -> void:
-	print("here")
-	get_tree().quit()
-
-
-func _on_Button_pressed() -> void:
-	print("here")
-	get_tree().quit()
-
-
-func _on_TextureButton_pressed() -> void:
-	print("here")
 	get_tree().quit()
