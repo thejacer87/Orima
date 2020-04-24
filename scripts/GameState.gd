@@ -1,7 +1,7 @@
 extends Node
 
-export(int) onready var starting_lives := 3 setget set_lives
-var lives
+onready var starting_lives := 3
+var lives setget set_lives
 
 func _ready() -> void:
 	Globals.GameState = self
@@ -9,18 +9,16 @@ func _ready() -> void:
 
 
 func die() -> void:
-	print(lives)
 	lives -= 1
 	if lives < 0:
 		game_over()
 	else:
 		SceneTransition.change_scene(Globals.levels["1-1"], Globals.default_starting_position)
-		
 
 
 func game_over() -> void:
-	get_tree().change_scene("res://scenes/GameOver.tscn")
+	SceneTransition.change_scene(Globals.scenes["gameover"], Globals.default_starting_position)
 
 
 func set_lives(value) -> void:
-	self.lives = value
+	lives = value

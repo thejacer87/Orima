@@ -16,6 +16,7 @@ var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
 var jump_duration: = .5
 var is_warping := false
+var is_sliding := false
 var velocity: = Vector2()
 var on_ground: = true
 
@@ -24,7 +25,7 @@ onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
-onready var warp_animation = $AnimationPlayer
+onready var animation_player = $AnimationWrapper/AnimationPlayer
 
 
 func _ready() -> void:
@@ -57,25 +58,27 @@ func run() -> void:
 
 
 func jump() -> void:
-	if Input.is_action_just_pressed("jump") and on_ground:
-		if (true): # todo check state for size
-			$SmallJump.play()
-		else:
-			$BigJump.play()
-		velocity.y = max_jump_velocity
-		on_ground = false
-	if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
-		velocity.y = min_jump_velocity
+	if not is_sliding:
+		if Input.is_action_just_pressed("jump") and on_ground:
+			if (true): # todo check state for size
+				$SmallJump.play()
+			else:
+				$BigJump.play()
+			velocity.y = max_jump_velocity
+			on_ground = false
+		if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
+			velocity.y = min_jump_velocity
 
 
 func move(delta: float) -> void:
 	var friction = false
-	if Input.is_action_pressed("right"):
-		velocity.x = min(velocity.x + ACC, speed)
-	elif Input.is_action_pressed("left"):
-		velocity.x = max(velocity.x - ACC, -speed)
-	else:
-		velocity.x = 0
+	if not is_sliding:
+		if Input.is_action_pressed("right"):
+			velocity.x = min(velocity.x + ACC, speed)
+		elif Input.is_action_pressed("left"):
+			velocity.x = max(velocity.x - ACC, -speed)
+		else:
+			velocity.x = 0
 
 	on_ground = is_on_floor()
 
@@ -93,12 +96,17 @@ func warp(direction := Vector2.DOWN):
 		Vector2.RIGHT:
 			animation_direction = "warp_right"
 
-	warp_animation.play(animation_direction)
+	print(animation_direction)
+	animation_player.play(animation_direction)
 
 
 func one_up():
 	print("1up")
 	$OneUp.play()
+
+func slide():
+	is_sliding = true
+	velocity = Vector2.ZERO
 
 
 func powerup():

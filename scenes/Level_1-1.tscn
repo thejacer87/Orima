@@ -21,9 +21,9 @@
 [ext_resource path="res://scenes/ItemBlock.tscn" type="PackedScene" id=19]
 [ext_resource path="res://sprites/background_sky.png" type="Texture" id=20]
 [ext_resource path="res://scripts/DeathBlock.gd" type="Script" id=21]
-[ext_resource path="res://SFX/Music/01-main-theme-overworld.wav" type="AudioStream" id=22]
+[ext_resource path="res://scripts/Level_1-1.gd" type="Script" id=22]
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=23]
-[ext_resource path="res://scripts/GameState.gd" type="Script" id=24]
+[ext_resource path="res://SFX/Music/01-main-theme-overworld.wav" type="AudioStream" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -1039,8 +1039,7 @@ extents = Vector2( 50, 50 )
 extents = Vector2( 32, 88 )
 
 [node name="Level_1-1" type="Node2D"]
-script = ExtResource( 24 )
-starting_lives = 99
+script = ExtResource( 22 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 9 )
@@ -1101,10 +1100,10 @@ position = Vector2( 824, 216 )
 position = Vector2( 1848, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 40, 216 )
+position = Vector2( 880, 128 )
 z_index = 1
 
-[node name="Camera2D" parent="Player/Player" index="5"]
+[node name="Camera2D" parent="Player" index="4"]
 limit_left = 0
 limit_top = 24
 limit_right = 3392
@@ -1378,17 +1377,14 @@ collision_layer = 0
 position = Vector2( -8, -41 )
 shape = SubResource( 24 )
 
-[node name="Sounds" type="Node2D" parent="."]
-
-[node name="Music" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 22 )
-volume_db = -5.0
-autoplay = true
-
 [node name="FlagPole" parent="." instance=ExtResource( 23 )]
 position = Vector2( 3144, 144 )
 z_index = -1
 target_scene = "res://scenes/Level_1-2.tscn"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 24 )
+autoplay = true
 [connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
 [connection signal="body_entered" from="DeathBlock4" to="DeathBlock4" method="_on_DeathBlock_body_entered"]
 

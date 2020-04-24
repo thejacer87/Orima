@@ -3,15 +3,23 @@ extends Node
 const UNIT_SIZE = 16
 
 var GameState
+var GameMusic
 var Player
 var GUI
 
 var default_starting_position := Vector2(40.0, 216.0)
-var levels := { 
+var levels := {
 		"1-1": "res://scenes/Level_1-1.tscn",
 		"1-2": "res://scenes/Level_1-2.tscn",
 		"1-3": "res://scenes/Level_1-3.tscn",
 		"1-4": "res://scenes/Level_1-4.tscn",
+	}
+var scenes := {
+		"gameover": "res://scenes/GameOver.tscn",
+	}
+var music := {
+		"main": "res://SFX/Music/01-main-theme-overworld.wav",
+		"underground": "res://SFX/Music/02-underground.wav"
 	}
 var destination := Vector2()
 var loader
@@ -74,5 +82,5 @@ func set_new_scene(scene_resource):
 	set_process(false)
 	current_scene = scene_resource.instance()
 	get_node("/root").add_child(current_scene)
-	var player = current_scene.get_node("Player").get_node("Player")
+	var player = current_scene.get_node("Player")
 	player.global_position = destination   # move player to new position
