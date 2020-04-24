@@ -57,6 +57,7 @@ run/main_scene="res://scenes/Level_1-1.tscn"
 
 Globals="*res://scripts/Globals.gd"
 SceneTransition="*res://scenes/SceneTransition.tscn"
+GameState="*res://scripts/GameState.gd"
 
 [display]
 

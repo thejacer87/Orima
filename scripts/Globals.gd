@@ -2,6 +2,10 @@ extends Node
 
 const UNIT_SIZE = 16
 
+var GameState
+var Player
+var GUI
+
 var destination := Vector2()
 var loader
 var wait_frames
@@ -43,10 +47,9 @@ func _process(time):
 			break
 
 
-func goto_scene(path, coordinates):
-	print(path)
+func goto_level(level_path, coordinates):
 	destination = coordinates
-	loader = ResourceLoader.load_interactive(path)
+	loader = ResourceLoader.load_interactive(level_path)
 	if loader == null:
 		#show_error()
 		return
@@ -58,6 +61,7 @@ func goto_scene(path, coordinates):
 	#get_node("animation").play("loading")
 
 	wait_frames = 1
+
 
 func set_new_scene(scene_resource):
 	set_process(false)

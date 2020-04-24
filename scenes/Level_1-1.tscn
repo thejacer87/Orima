@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://sprites/block.png" type="Texture" id=1]
 [ext_resource path="res://sprites/brick.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scripts/DeathBlock.gd" type="Script" id=21]
 [ext_resource path="res://SFX/Music/01-main-theme-overworld.wav" type="AudioStream" id=22]
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scripts/GameState.gd" type="Script" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -1038,6 +1039,7 @@ extents = Vector2( 50, 50 )
 extents = Vector2( 32, 88 )
 
 [node name="Level_1-1" type="Node2D"]
+script = ExtResource( 24 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 9 )

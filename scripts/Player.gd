@@ -25,6 +25,7 @@ var velocity: = Vector2()
 var on_ground: = true
 
 func _ready() -> void:
+	Globals.Player = self
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -107,7 +108,6 @@ func powerup():
 
 
 func damage():
-	print('damaged')
 	big_shape.set_deferred('disabled', true)
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
@@ -116,5 +116,4 @@ func damage():
 	check_dead()
 
 func die():
-	print('im dying')
-	get_tree().reload_current_scene()
+	Globals.GameState.die()
