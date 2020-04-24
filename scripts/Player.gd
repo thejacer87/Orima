@@ -13,6 +13,7 @@ var walk_speed = 7 * Globals.UNIT_SIZE
 var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
 var jump_duration: = .5
+var is_warping := false
 
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
@@ -31,7 +32,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	update_motion(delta)
+	if not is_warping:
+		update_motion(delta)
 
 
 func update_motion(delta: float) -> void:

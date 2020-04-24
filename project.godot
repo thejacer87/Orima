@@ -56,6 +56,7 @@ run/main_scene="res://scenes/Level_1-1.tscn"
 [autoload]
 
 Globals="*res://scripts/Globals.gd"
+SceneTransition="*res://scenes/SceneTransition.tscn"
 
 [display]
 

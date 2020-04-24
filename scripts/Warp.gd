@@ -2,7 +2,10 @@ extends Area2D
 
 export(String, FILE, "*tscn") var target_scene
 export(Vector2) var direction
+export(Vector2) var exit_direction
 export(Vector2) var local_position
+
+onready var pipe_audio := $EnterPipe
 
 func _process(delta: float) -> void:
 	# Only the player can overlap
@@ -13,10 +16,16 @@ func _process(delta: float) -> void:
 			warp_direction = "up"
 		Vector2.RIGHT:
 			warp_direction = "right"
+		Vector2.LEFT:
+			warp_direction = "left"
 
-	if (Input.is_action_pressed(warp_direction) and bodies.size() > 0):
+	if (Input.is_action_just_pressed(warp_direction) and bodies.size() > 0):
 		var player: Player = bodies[0]
+		pipe_audio.play()
 		player.warp(direction)
+		player.is_warping = true
 		# wait for warp animation to finish
-		yield(get_tree().create_timer(0.95), "timeout")
+		yield(get_tree().create_timer(1), "timeout")
+		player.is_warping = false
 		Globals.goto_scene(target_scene, local_position)
+		yield(get_tree().create_timer(0.5), "timeout")
