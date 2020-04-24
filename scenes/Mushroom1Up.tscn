@@ -41,7 +41,7 @@ data = PoolByteArray( 255, 255, 0, 0, 255, 255, 255, 255, 1, 0, 0, 0, 255, 255, 
 format = 1
 mix_rate = 22050
 
-[node name="Mushroom" type="KinematicBody2D"]
+[node name="Mushroom1Up" type="KinematicBody2D"]
 collision_layer = 16
 collision_mask = 10
 script = ExtResource( 2 )

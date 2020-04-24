@@ -94,7 +94,7 @@ func warp(direction := Vector2.DOWN):
 
 func one_up():
 	print("1up")
-	pass
+	$OneUp.play()
 
 
 func powerup():
