@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://SFX/Sounds/smb_gameover.wav" type="AudioStream" id=1]
-[ext_resource path="res://Fonts/SuperMario256.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/SuperMario256.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/GameOver.gd" type="Script" id=3]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )

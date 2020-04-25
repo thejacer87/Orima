@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://sprites/block.png" type="Texture" id=1]
 [ext_resource path="res://sprites/brick.png" type="Texture" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://scripts/DeathBlock.gd" type="Script" id=21]
 [ext_resource path="res://scripts/Level_1-1.gd" type="Script" id=22]
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=23]
-[ext_resource path="res://SFX/Music/01-main-theme-overworld.wav" type="AudioStream" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -1381,10 +1380,6 @@ shape = SubResource( 24 )
 position = Vector2( 3144, 144 )
 z_index = -1
 target_scene = "res://scenes/Level_1-2.tscn"
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 24 )
-autoplay = true
 [connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
 [connection signal="body_entered" from="DeathBlock4" to="DeathBlock4" method="_on_DeathBlock_body_entered"]
 

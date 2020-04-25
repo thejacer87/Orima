@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://sprites/mario.png" type="Texture" id=1]
-[ext_resource path="res://Fonts/SuperMario256.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/SuperMario256.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://sprites/blank.png" type="Texture" id=3]
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://sprites/border.png" type="Texture" id=5]
-[ext_resource path="res://SFX/Music/title.wav" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -96,10 +95,5 @@ text = "QUIT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Title" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-volume_db = -5.0
-autoplay = true
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

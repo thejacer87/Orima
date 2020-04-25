@@ -4,4 +4,5 @@ screenshots/
 user/
 *.import
 fonts/
+build/
 

@@ -42,11 +42,13 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Top" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 show_behind_parent = true
 position = Vector2( -8, -64 )
 texture = ExtResource( 2 )

@@ -20,6 +20,7 @@ var sequence = [
 var sequence_index = 0
 
 func _ready() -> void:
+	Globals.GameMusic.play(Globals.music["menu"])
 	start_button.grab_focus()
 
 
@@ -41,5 +42,5 @@ func _on_Start_pressed() -> void:
 
 
 func _on_Quit_pressed() -> void:
-	audio.stop()
+	Globals.GameMusic.stop()
 	get_tree().quit()
