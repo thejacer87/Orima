@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/FlagPole.gd" type="Script" id=1]
 [ext_resource path="res://sprites/flag.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://SFX/Sounds/smb_flagpole.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1.5, 60 )
+extents = Vector2( 1.5, 71 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "drop"
@@ -24,6 +24,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( -8, -64 ), Vector2( -8, 55 ) ]
 }
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 35 )
 
 [node name="FlagPole" type="Area2D"]
 collision_layer = 64
@@ -42,13 +45,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Top" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 show_behind_parent = true
 position = Vector2( -8, -64 )
 texture = ExtResource( 2 )
@@ -65,4 +66,12 @@ stream = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/drop = SubResource( 2 )
+
+[node name="Blocker" type="StaticBody2D" parent="."]
+position = Vector2( -70, -22 )
+collision_layer = 2
+
+[node name="BlockerShape" type="CollisionShape2D" parent="Blocker"]
+position = Vector2( 81, -83 )
+shape = SubResource( 3 )
 [connection signal="body_entered" from="." to="." method="_on_FlagPole_body_entered"]

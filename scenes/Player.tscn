@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
@@ -14,7 +14,35 @@ extents = Vector2( 7, 7.5 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 15.5 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
+resource_name = "dead"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.7, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -48 ), Vector2( 0, 256 ) ]
+}
+
+[sub_resource type="Animation" id=4]
 resource_name = "slide"
 length = 1.5
 tracks/0/type = "value"
@@ -30,8 +58,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 64 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "warp_right"
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
 tracks/0/interp = 1
@@ -148,6 +175,17 @@ stream = ExtResource( 7 )
 [node name="AnimationWrapper" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationWrapper"]
-anims/slide = SubResource( 5 )
-anims/warp = SubResource( 3 )
+anims/dead = SubResource( 3 )
+anims/slide = SubResource( 4 )
+anims/warp = SubResource( 5 )
 anims/warp_right = SubResource( 6 )
+
+[node name="Lives" type="Label" parent="."]
+margin_left = -24.0
+margin_top = -48.0
+margin_right = 25.0
+margin_bottom = -34.0
+text = "Lives: 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}

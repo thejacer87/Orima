@@ -15,10 +15,11 @@ var walk_speed = 7 * Globals.UNIT_SIZE
 var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
 var jump_duration: = .5
-var is_warping := false
+var is_dying := false
 var is_sliding := false
-var velocity: = Vector2()
-var on_ground: = true
+var is_warping := false
+var velocity := Vector2()
+var on_ground := true
 
 
 onready var small_shape = $SmallShape
@@ -26,10 +27,12 @@ onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
+onready var lives = $Lives
 
 
 func _ready() -> void:
 	Globals.Player = self
+	lives.text = "Lives: %s" % Globals.GameState.lives
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -37,7 +40,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_warping:
+	lives.text = "Lives: %s" % Globals.GameState.lives
+	if not is_dying and not is_warping:
 		update_motion(delta)
 
 
@@ -96,13 +100,13 @@ func warp(direction := Vector2.DOWN):
 		Vector2.RIGHT:
 			animation_direction = "warp_right"
 
-	print(animation_direction)
 	animation_player.play(animation_direction)
 
 
 func one_up():
-	print("1up")
+	Globals.GameState.lives += 1
 	$OneUp.play()
+
 
 func slide():
 	is_sliding = true
@@ -126,5 +130,9 @@ func damage():
 	health -= 1
 	check_dead()
 
+
 func die():
-	Globals.GameState.die()
+	if not is_dying:
+		is_dying = true
+		animation_player.play("dead")
+		Globals.GameState.die()

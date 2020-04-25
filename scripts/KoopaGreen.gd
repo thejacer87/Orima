@@ -72,7 +72,6 @@ func kick():
 
 
 func flip():
-	print('stop')
 	remove_collisions()
 	velocity = Vector2.ZERO
 	speed = 0
@@ -86,7 +85,6 @@ func flip():
 
 
 func stop():
-	print('stop')
 	remove_collisions()
 	$TurnAround/CollisionShape2D.set_deferred("disabled", false)
 	is_sliding = false
@@ -115,13 +113,11 @@ func move_again():
 
 
 func _on_Timer_timeout() -> void:
-	print('timer out')
 	if not is_sliding:
 		move_again()
 
 
 func _on_Timer2_timeout() -> void:
-	print('timer2 out')
 	if not is_sliding:
 		$AnimationPlayer.play("shaking")
 

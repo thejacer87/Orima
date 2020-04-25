@@ -38,6 +38,7 @@ func cheat_code(event):
 			sequence_index = 0
 
 func _on_Start_pressed() -> void:
+	Globals.GameMusic.stop()
 	SceneTransition.change_scene(Globals.levels["1-1"], Globals.default_starting_position)
 
 
