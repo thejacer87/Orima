@@ -51,12 +51,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Orima"
-run/main_scene="res://scenes/Level_1-1.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 
 [autoload]
 
 Globals="*res://scripts/Globals.gd"
 SceneTransition="*res://scenes/SceneTransition.tscn"
+GameState="*res://scripts/GameState.gd"
+GameMusic="*res://scenes/GameMusic.tscn"
 
 [display]
 

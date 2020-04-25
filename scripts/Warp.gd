@@ -27,5 +27,5 @@ func _process(delta: float) -> void:
 		# wait for warp animation to finish
 		yield(get_tree().create_timer(1), "timeout")
 		player.is_warping = false
-		Globals.goto_scene(target_scene, local_position)
+		Globals.goto_level(target_scene, local_position)
 		yield(get_tree().create_timer(0.5), "timeout")

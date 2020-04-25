@@ -1,8 +1,10 @@
 extends KinematicBody2D
 class_name Player
 
+
 const FLOOR := Vector2.UP
 const ACC := 100
+
 
 var gravity
 var max_jump_velocity
@@ -13,18 +15,24 @@ var walk_speed = 7 * Globals.UNIT_SIZE
 var max_jump_height: = 4.15 * Globals.UNIT_SIZE
 var min_jump_height: = 1.25 * Globals.UNIT_SIZE
 var jump_duration: = .5
+var is_dying := false
+var is_sliding := false
 var is_warping := false
+var velocity := Vector2()
+var on_ground := true
+
 
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
-onready var warp_animation = $AnimationPlayer
+onready var animation_player = $AnimationWrapper/AnimationPlayer
+onready var lives = $Lives
 
-var velocity: = Vector2()
-var on_ground: = true
 
 func _ready() -> void:
+	Globals.Player = self
+	lives.text = "Lives: %s" % Globals.GameState.lives
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -32,12 +40,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not is_warping:
+	lives.text = "Lives: %s" % Globals.GameState.lives
+	if not is_dying and not is_warping:
 		update_motion(delta)
 
 
 func update_motion(delta: float) -> void:
-	check_dead()
 	run()
 	jump()
 	move(delta)
@@ -54,25 +62,27 @@ func run() -> void:
 
 
 func jump() -> void:
-	if Input.is_action_just_pressed("jump") and on_ground:
-		if (true): # todo check state for size
-			$SmallJump.play()
-		else:
-			$BigJump.play()
-		velocity.y = max_jump_velocity
-		on_ground = false
-	if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
-		velocity.y = min_jump_velocity
+	if not is_sliding:
+		if Input.is_action_just_pressed("jump") and on_ground:
+			if (true): # todo check state for size
+				$SmallJump.play()
+			else:
+				$BigJump.play()
+			velocity.y = max_jump_velocity
+			on_ground = false
+		if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
+			velocity.y = min_jump_velocity
 
 
 func move(delta: float) -> void:
 	var friction = false
-	if Input.is_action_pressed("right"):
-		velocity.x = min(velocity.x + ACC, speed)
-	elif Input.is_action_pressed("left"):
-		velocity.x = max(velocity.x - ACC, -speed)
-	else:
-		velocity.x = 0
+	if not is_sliding:
+		if Input.is_action_pressed("right"):
+			velocity.x = min(velocity.x + ACC, speed)
+		elif Input.is_action_pressed("left"):
+			velocity.x = max(velocity.x - ACC, -speed)
+		else:
+			velocity.x = 0
 
 	on_ground = is_on_floor()
 
@@ -90,11 +100,17 @@ func warp(direction := Vector2.DOWN):
 		Vector2.RIGHT:
 			animation_direction = "warp_right"
 
-	warp_animation.play(animation_direction)
+	animation_player.play(animation_direction)
+
 
 func one_up():
-	print("1up")
+	Globals.GameState.lives += 1
 	$OneUp.play()
+
+
+func slide():
+	is_sliding = true
+	velocity = Vector2.ZERO
 
 
 func powerup():
@@ -107,7 +123,6 @@ func powerup():
 
 
 func damage():
-	print('damaged')
 	big_shape.set_deferred('disabled', true)
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
@@ -115,6 +130,9 @@ func damage():
 	health -= 1
 	check_dead()
 
+
 func die():
-	print('im dying')
-	get_tree().reload_current_scene()
+	if not is_dying:
+		is_dying = true
+		animation_player.play("dead")
+		Globals.GameState.die()
