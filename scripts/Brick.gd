@@ -11,17 +11,19 @@ func _ready() -> void:
 	if sprite_texture != null:
 		set_sprite(sprite_texture)
 
+
 func set_sprite(texture):
 	sprite.texture = texture
 
-func _on_Break_body_entered(body: Node) -> void:
-	# if small,need a player state?
+
+func _on_BumpKill_body_entered(body: Node) -> void:
+	body.bump()
+
+
+func _on_BlockHitbox_bump(body: Node) -> void:
+	print("brick bump")
+	# if small, need a player state?
 	if (true):
 		hit_anitmation.play("hit")
 	else:
-		hit_anitmation.play("break")
-		queue_free()
-
-
-func _on_BumpKill_body_entered(enemy: Enemy) -> void:
-	enemy.bump()
+		hit_anitmation.play("hit")
