@@ -20,12 +20,14 @@ var sequence = [
 var sequence_index = 0
 
 func _ready() -> void:
+	Globals.GameState.lives = Globals.GameState.starting_lives
 	Globals.GameMusic.play(Globals.music["menu"])
 	start_button.grab_focus()
 
 
 func _process(delta: float) -> void:
 	pass
+
 
 func cheat_code(event):
 	if event.type == InputEvent.KEY and event.pressed:
@@ -36,6 +38,7 @@ func cheat_code(event):
 				sequence_index = 0
 		else:
 			sequence_index = 0
+
 
 func _on_Start_pressed() -> void:
 	Globals.GameMusic.stop()
