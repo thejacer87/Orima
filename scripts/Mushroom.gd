@@ -26,9 +26,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_Powerup_body_entered(body: Node) -> void:
-	print(body.name)
 	if "Player" in body.name:
-		body.powerup()
+		body.set_state("big")
 		queue_free()
 
 

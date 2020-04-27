@@ -39,18 +39,6 @@ func _ready() -> void:
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
 
 
-func _physics_process(delta: float) -> void:
-	lives.text = "Lives: %s" % Globals.GameState.lives
-	if not is_dying and not is_warping:
-		update_motion(delta)
-
-
-func update_motion(delta: float) -> void:
-	run()
-	jump()
-	move(delta)
-
-
 func check_dead():
 	if health <= 0:
 		die()
@@ -116,6 +104,7 @@ func slide():
 func powerup():
 	health = 2
 	$PowerUp.play()
+
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
