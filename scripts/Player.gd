@@ -28,6 +28,8 @@ onready var animation_player = $AnimationWrapper/AnimationPlayer
 
 func _ready() -> void:
 	Globals.Player = self
+	if Globals.GameState.powerup == Globals.GameState.powerup_states.BIG:
+		self.powerup()
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -104,6 +106,7 @@ func powerup():
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
 	small_sprite.visible = false
+	Globals.GameState.powerup = Globals.GameState.powerup_states.BIG
 
 
 func damage():
@@ -111,6 +114,7 @@ func damage():
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
+	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
 	health -= 1
 	check_dead()
 

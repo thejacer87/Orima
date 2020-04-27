@@ -11,7 +11,8 @@ var powerup setget set_powerup
 func _ready() -> void:
 	Globals.GameState = self
 	self.lives = max(0, starting_lives)
-	self.powerup = powerup_states.SMALL
+#	self.powerup = powerup_states.SMALL
+	self.powerup = powerup_states.BIG
 
 
 func die() -> void:
