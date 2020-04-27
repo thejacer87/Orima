@@ -100,7 +100,7 @@ func slide():
 
 func powerup():
 	health = 2
-	$PowerUp.play()
+#	$PowerUp.play()
 
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true

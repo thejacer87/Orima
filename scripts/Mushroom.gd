@@ -25,10 +25,13 @@ func _physics_process(delta: float) -> void:
 			direction *= -1
 
 
-func _on_Powerup_body_entered(body: Node) -> void:
-	if "Player" in body.name:
-		body.powerup()
-		queue_free()
+func _on_Powerup_body_entered(player: Player) -> void:
+	player.powerup()
+	visible = false
+	$Audio_Collect.play()
+	# need to give it time to play the audio before freeing
+	yield(get_tree().create_timer(1), "timeout")
+	queue_free()
 
 
 func activate() -> void:
