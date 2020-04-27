@@ -1,12 +1,17 @@
 extends Node
 
+
+enum powerup_states {SMALL, BIG, INVICIBLE}
+
 onready var starting_lives := 0
 var lives setget set_lives
+var powerup setget set_powerup
 
 
 func _ready() -> void:
 	Globals.GameState = self
-	lives = max(0, starting_lives)
+	self.lives = max(0, starting_lives)
+	self.powerup = powerup_states.SMALL
 
 
 func die() -> void:
@@ -27,3 +32,7 @@ func game_over() -> void:
 
 func set_lives(value) -> void:
 	lives = value
+	
+
+func set_powerup(value) -> void:
+	powerup = value
