@@ -190,14 +190,3 @@ anims/dead = SubResource( 3 )
 anims/slide = SubResource( 4 )
 anims/warp = SubResource( 5 )
 anims/warp_right = SubResource( 6 )
-
-[node name="Lives" type="Label" parent="."]
-visible = false
-margin_left = -24.0
-margin_top = -48.0
-margin_right = 25.0
-margin_bottom = -34.0
-text = "Lives: 2"
-__meta__ = {
-"_edit_use_anchors_": false
-}

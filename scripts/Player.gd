@@ -1,10 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
-
 const FLOOR := Vector2.UP
 const ACC := 100
-
 
 var gravity
 var max_jump_velocity
@@ -21,18 +19,15 @@ var is_warping := false
 var velocity := Vector2()
 var on_ground := true
 
-
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
-onready var lives = $Lives
 
 
 func _ready() -> void:
 	Globals.Player = self
-	lives.text = "Lives: %s" % Globals.GameState.lives
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)

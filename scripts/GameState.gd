@@ -32,7 +32,7 @@ func game_over() -> void:
 
 func set_lives(value) -> void:
 	lives = value
-	
+
 
 func set_powerup(value) -> void:
 	powerup = value
