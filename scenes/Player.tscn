@@ -1,26 +1,23 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/mario.png" type="Texture" id=2]
 [ext_resource path="res://sprites/mario_big.png" type="Texture" id=3]
 [ext_resource path="res://SFX/Sounds/smb_jump-small.wav" type="AudioStream" id=4]
 [ext_resource path="res://SFX/Sounds/smb_jump-super.wav" type="AudioStream" id=5]
-[ext_resource path="res://SFX/Sounds/smb_powerup.wav" type="AudioStream" id=6]
-[ext_resource path="res://SFX/Sounds/smb_1-up.wav" type="AudioStream" id=7]
 [ext_resource path="res://scripts/PlayerState.gd" type="Script" id=8]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=1]
 radius = 7.0
 
-[sub_resource type="CapsuleShape2D" id=8]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 7.0
 height = 16.0
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 7, 2 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "dead"
+[sub_resource type="Animation" id=4]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:rotation_degrees")
@@ -47,8 +44,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -48 ), Vector2( 0, 256 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "slide"
+[sub_resource type="Animation" id=5]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
@@ -63,7 +59,23 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 64 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
+resource_name = "stun"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
 tracks/0/interp = 1
@@ -101,8 +113,7 @@ tracks/2/keys = {
 "values": [ -10, 0 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "warp_right"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BigSprite:position")
 tracks/0/interp = 1
@@ -143,6 +154,9 @@ tracks/2/keys = {
 [node name="Player" type="KinematicBody2D"]
 z_index = -10
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 8 )
@@ -156,17 +170,17 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 
 [node name="SmallShape" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
-shape = SubResource( 7 )
+position = Vector2( 0, -0.9 )
+shape = SubResource( 1 )
 
 [node name="BigShape" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9 )
-shape = SubResource( 8 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
-shape = SubResource( 9 )
+shape = SubResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -177,16 +191,16 @@ stream = ExtResource( 4 )
 [node name="BigJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 
-[node name="PowerUp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-
-[node name="OneUp" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-
 [node name="AnimationWrapper" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationWrapper"]
-anims/dead = SubResource( 3 )
-anims/slide = SubResource( 4 )
-anims/warp = SubResource( 5 )
-anims/warp_right = SubResource( 6 )
+anims/dead = SubResource( 4 )
+anims/slide = SubResource( 5 )
+anims/stun = SubResource( 6 )
+anims/warp = SubResource( 7 )
+anims/warp_right = SubResource( 8 )
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+[connection signal="timeout" from="StunTimer" to="." method="_on_StunTimer_timeout"]

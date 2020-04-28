@@ -90,7 +90,6 @@ func warp(direction := Vector2.DOWN):
 
 func one_up():
 	Globals.GameState.lives += 1
-	$OneUp.play()
 
 
 func slide():
@@ -100,8 +99,6 @@ func slide():
 
 func powerup():
 	health = 2
-#	$PowerUp.play()
-
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
@@ -114,10 +111,13 @@ func damage():
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
-	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+	Globals.GameState.powerup = Globals.GameState.powerup_states.STUNNED
+	stun()
 	health -= 1
 	check_dead()
 
+func stun():
+	animation_player.play("stun")
 
 func die():
 	if not is_dying:
@@ -125,3 +125,8 @@ func die():
 		if health <= 0:
 			animation_player.play("dead")
 		Globals.GameState.die()
+
+
+func _on_StunTimer_timeout() -> void:
+	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+	pass # Replace with function body.

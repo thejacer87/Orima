@@ -1,7 +1,7 @@
 extends Node
 
 
-enum powerup_states {SMALL, BIG, INVICIBLE}
+enum powerup_states {SMALL, BIG, STUNNED, INVICIBLE}
 
 onready var starting_lives := 3
 var lives setget set_lives
