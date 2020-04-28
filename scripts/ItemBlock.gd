@@ -9,7 +9,9 @@ onready var collision = $CollisionShape2D
 onready var block_hitbox = $BlockHitbox/CollisionShape2D
 onready var bump_kill_collision = $BumpKill/CollisionShape2D
 onready var items = $Items
+onready var audio_bump = $AudioBump
 
+var is_empty := false
 
 func _ready() -> void:
 	if is_hidden:
@@ -18,22 +20,23 @@ func _ready() -> void:
 		collision.set_deferred('disabled', true)
 
 
-
 func _on_BumpKill_body_entered(body: Node) -> void:
-	print(body.name)
 	body.bump()
 
 
-func _on_BlockHitbox_bump(body: Node) -> void:
-	print(body.name)
-	if body.velocity.y < 0 or not is_hidden:
-		hit_anitmation.play("hit")
-		for item in items.get_children():
-			item.activate()
-		# Make entire block visible in case it was a hidden block
-		visible = true
-		sprite.visible = false
-		empty_sprite.visible = true
-		block_hitbox.set_deferred('disabled', true)
-		bump_kill_collision.set_deferred('disabled', true)
-		collision.set_deferred('disabled', false)
+func _on_BlockHitbox_bump(player: Player) -> void:
+	if is_empty:
+		audio_bump.play()
+	else:
+		if player.velocity.y < 0 or not is_hidden:
+			hit_anitmation.play("hit")
+			audio_bump.play()
+			for item in items.get_children():
+				item.activate()
+			# Make entire block visible in case it was a hidden block
+			visible = true
+			sprite.visible = false
+			is_empty = true
+			empty_sprite.visible = true
+			bump_kill_collision.set_deferred('disabled', true)
+			collision.set_deferred('disabled', false)
