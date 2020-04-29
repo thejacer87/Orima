@@ -4,51 +4,39 @@ class_name Koopa
 const SLIDE_FACTOR := 7
 
 var is_sliding := false
-
 var inital_velocity : Vector2
 var inital_gravity : float
 var inital_speed : float
 var is_flipped := false
 
+onready var audio_kick = $AudioKick
+onready var audio_squish = $AudioSquish
+onready var audio_bump = $AudioBump
 
 func _ready() -> void:
 	._ready()
-	inital_speed = speed
+	inital_speed = speed / 2
 	inital_gravity = gravity
 	inital_velocity = velocity
 
-# didn't override physics_process cuz passing the delta seemed to cause issues
-func _process(delta: float) -> void:
-#	$States.text = """
-#	 sliding: %s\n
-#	 direction: %s\n
-#	 speed: %s\n
-#	 velocity: %s %s\n
-#	 flipped: %s""" % [
-#		is_sliding,
-#		direction,
-#		speed,
-#		velocity.x, velocity.y,
-#		is_flipped,
-#		]
+#func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	._physics_process(delta)
+#	if is_on_screen:
+#		velocity.x = speed * direction
+#		# just need something so it stays on the ground
+#		velocity.y += gravity * delta
 #
-#	$Collisions.text = """
-#	 kill: %s\n
-#	 Turnaround: %s\n
-#	 PlayerDamage: %s\n
-#	 Terrain: %s\n
-#	 Sliding: %s\n
-#	 Kick: %s %s""" % [
-#		!$Kill/CollisionShape2D.disabled,
-#		!$TurnAround/CollisionShape2D.disabled,
-#		!$PlayerDamage/CollisionShape2D.disabled,
-#		!$Terrain.disabled,
-#		!$Sliding/CollisionShape2D.disabled,
-#		$Kick/KickLeft.enabled,
-#		$Kick/KickRight.enabled,
-#		]
+#		velocity = move_and_slide(velocity, FLOOR)
+#
+#		if is_on_wall():
+#			direction *= -1
+
 	if is_flipped and not is_sliding:
 		kick()
+
+	if is_sliding and is_on_wall():
+		audio_bump.play()
 
 
 func _on_body_entered(player: Player) -> void:
@@ -63,6 +51,7 @@ func kick():
 		direction = 1 if $Kick/KickRight.is_colliding() else -1;
 		speed = inital_speed * direction * SLIDE_FACTOR
 		is_sliding = true
+		audio_kick.play()
 		$Kick/KickLeft.set_deferred("enabled", false)
 		$Kick/KickRight.set_deferred("enabled", false)
 		$Timer.stop()
@@ -77,7 +66,7 @@ func flip():
 	speed = 0
 	gravity = 0
 	$AnimationPlayer.play("flip")
-	$Squish.play()
+	audio_squish.play()
 	$Timer.start()
 	$Timer2.start()
 	yield(get_tree().create_timer(0.1), "timeout")
@@ -92,7 +81,7 @@ func stop():
 	speed = 0
 	gravity = 0
 	$AnimationPlayer.stop()
-	$Squish.play()
+	audio_squish.play()
 	$Timer.start()
 	$Timer2.start()
 	yield(get_tree().create_timer(0.1), "timeout")
@@ -125,7 +114,7 @@ func _on_Timer2_timeout() -> void:
 func _on_Sliding_body_entered(body: Node) -> void:
 	if is_sliding:
 		if "Goomba" in body.name:
-			$SlideKill.play()
+			$AudioKick.play()
 			body.bump()
 		if "Player" in body.name:
 			body.damage()
