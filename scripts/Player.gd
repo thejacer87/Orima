@@ -24,6 +24,7 @@ onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
+onready var stun_timer = $StunTimer
 
 
 func _ready() -> void:
@@ -118,6 +119,7 @@ func damage():
 
 func stun():
 	animation_player.play("stun")
+	stun_timer.start()
 
 func die():
 	if not is_dying:
@@ -128,5 +130,5 @@ func die():
 
 
 func _on_StunTimer_timeout() -> void:
+	print('time out')
 	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
-	pass # Replace with function body.
