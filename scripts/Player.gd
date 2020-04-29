@@ -24,6 +24,7 @@ onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
+onready var audio_stun = $AudioStun
 onready var stun_timer = $StunTimer
 
 
@@ -112,13 +113,15 @@ func damage():
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
-	Globals.GameState.powerup = Globals.GameState.powerup_states.STUNNED
-	stun()
+	if Globals.GameState.powerup != Globals.GameState.powerup_states.SMALL:
+		stun()
 	health -= 1
 	check_dead()
 
 func stun():
+	Globals.GameState.powerup = Globals.GameState.powerup_states.STUNNED
 	animation_player.play("stun")
+	audio_stun.play()
 	stun_timer.start()
 
 func die():
@@ -130,5 +133,5 @@ func die():
 
 
 func _on_StunTimer_timeout() -> void:
-	print('time out')
 	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+	animation_player.play("idle")

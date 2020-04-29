@@ -1099,7 +1099,7 @@ position = Vector2( 824, 216 )
 position = Vector2( 1848, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 32, 216 )
+position = Vector2( 256, 216 )
 z_index = 1
 
 [node name="Camera2D" parent="Player" index="6"]
