@@ -203,6 +203,7 @@ right={
 2d_physics/layer_5="items"
 2d_physics/layer_6="warp"
 2d_physics/layer_7="flagpole"
+2d_physics/layer_8="checkpoints"
 
 [rendering]
 

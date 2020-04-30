@@ -9,6 +9,7 @@ onready var slide_audio := $Slide
 onready var clear_audio := $StageClear
 
 func _on_FlagPole_body_entered(player: Player) -> void:
+	Globals.GameState.checkpoint_reached = false
 	Globals.GameMusic.get_node("Audio").stop()
 	slide_audio.play()
 	player.slide()

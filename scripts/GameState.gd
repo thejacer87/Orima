@@ -6,6 +6,7 @@ enum powerup_states {SMALL, BIG, STUNNED, INVICIBLE}
 onready var starting_lives := 3
 var lives setget set_lives
 var powerup setget set_powerup
+var checkpoint_reached = false
 
 
 func _ready() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 
 func die() -> void:
 	Globals.GameMusic.play(Globals.music["die"])
+	self.powerup = powerup_states.SMALL
 	lives -= 1
 	if lives < 0:
 		game_over()

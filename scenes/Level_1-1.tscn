@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://sprites/block.png" type="Texture" id=1]
 [ext_resource path="res://sprites/brick.png" type="Texture" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scripts/DeathBlock.gd" type="Script" id=21]
 [ext_resource path="res://scripts/Level_1-1.gd" type="Script" id=22]
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=23]
+[ext_resource path="res://scenes/Checkpoint.tscn" type="PackedScene" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -1099,7 +1100,7 @@ position = Vector2( 824, 216 )
 position = Vector2( 1848, 216 )
 
 [node name="Player" parent="." instance=ExtResource( 11 )]
-position = Vector2( 256, 216 )
+position = Vector2( 1285, 88 )
 z_index = 1
 
 [node name="Camera2D" parent="Player" index="6"]
@@ -1380,6 +1381,9 @@ shape = SubResource( 24 )
 position = Vector2( 3144, 144 )
 z_index = -1
 target_scene = "res://scenes/Level_1-2.tscn"
+
+[node name="Checkpoint" parent="." instance=ExtResource( 24 )]
+position = Vector2( 1312, 224 )
 [connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
 [connection signal="body_entered" from="DeathBlock4" to="DeathBlock4" method="_on_DeathBlock_body_entered"]
 
