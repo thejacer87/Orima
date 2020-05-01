@@ -45,7 +45,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -48 ), Vector2( 0, 256 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=5]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
@@ -61,7 +61,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
@@ -76,8 +76,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 64 ) ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "stun"
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 step = 0.05
@@ -93,8 +92,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.25098 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
 tracks/0/interp = 1
@@ -132,7 +143,7 @@ tracks/2/keys = {
 "values": [ -10, 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BigSprite:position")
 tracks/0/interp = 1
@@ -189,18 +200,15 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 
 [node name="SmallShape" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -0.9 )
 shape = SubResource( 1 )
 
 [node name="BigShape" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -9 )
 shape = SubResource( 2 )
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 6 )
 shape = SubResource( 3 )
 
@@ -221,11 +229,11 @@ stream = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationWrapper"]
 anims/dead = SubResource( 4 )
-anims/idle = SubResource( 9 )
-anims/slide = SubResource( 5 )
-anims/stun = SubResource( 6 )
-anims/warp = SubResource( 7 )
-anims/warp_right = SubResource( 8 )
+anims/idle = SubResource( 5 )
+anims/slide = SubResource( 6 )
+anims/stun = SubResource( 7 )
+anims/warp = SubResource( 8 )
+anims/warp_right = SubResource( 9 )
 
 [node name="StunTimer" type="Timer" parent="."]
 wait_time = 3.0
