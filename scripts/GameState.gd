@@ -6,7 +6,7 @@ var lives setget set_lives
 
 func _ready() -> void:
 	Globals.GameState = self
-	lives = starting_lives
+	lives = max(0, starting_lives)
 
 
 func die() -> void:

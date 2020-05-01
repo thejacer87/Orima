@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://sprites/block_empty.png" type="Texture" id=1]
 [ext_resource path="res://sprites/block.png" type="Texture" id=2]
 [ext_resource path="res://scripts/ItemBlock.gd" type="Script" id=3]
+[ext_resource path="res://scenes/BlockHitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/BlockCollision.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -10,10 +12,7 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 1.25 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 1.25 )
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.3
 step = 0.05
 tracks/0/type = "value"
@@ -79,7 +78,7 @@ tracks/4/keys = {
 
 [node name="ItemBlock" type="StaticBody2D"]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 6
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
@@ -95,28 +94,24 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="Hit" type="Area2D" parent="."]
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hit"]
-position = Vector2( 0, 6.81874 )
-shape = SubResource( 2 )
-one_way_collision = true
+[node name="BlockCollision" parent="." instance=ExtResource( 5 )]
 
 [node name="BumpKill" type="Area2D" parent="."]
-collision_layer = 24
+collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BumpKill"]
 position = Vector2( 0, -6.819 )
 rotation = 3.14159
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 disabled = true
 one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hit = SubResource( 4 )
+anims/hit = SubResource( 3 )
 
 [node name="Items" type="Node2D" parent="."]
-[connection signal="body_entered" from="Hit" to="." method="_on_Hit_body_entered"]
+
+[node name="BlockHitbox" parent="." instance=ExtResource( 4 )]
 [connection signal="body_entered" from="BumpKill" to="." method="_on_BumpKill_body_entered"]
+[connection signal="bump" from="BlockHitbox" to="." method="_on_BlockHitbox_bump"]

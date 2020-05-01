@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="BlockCollision" type="StaticBody2D"]
+collision_layer = 8
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8, -8, -8, 0, -6.1, 7.5, 6.1, 7.5, 8, 0, 8, -8 )

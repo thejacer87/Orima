@@ -24,9 +24,12 @@ func _physics_process(delta: float) -> void:
 		if is_on_wall():
 			direction *= -1
 
-func _on_Powerup_body_entered(player: Player) -> void:
-	player.powerup()
-	queue_free()
+
+func _on_Powerup_body_entered(body: Node) -> void:
+	print(body.name)
+	if "Player" in body.name:
+		body.powerup()
+		queue_free()
 
 
 func activate() -> void:
@@ -38,3 +41,6 @@ func activate() -> void:
 	z_index = 0
 	powerup_collision.disabled = false
 	collision.disabled = false
+
+func bump():
+	velocity.y = min(150, velocity.y - 150)

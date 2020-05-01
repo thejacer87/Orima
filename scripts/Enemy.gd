@@ -43,7 +43,7 @@ func squish():
 
 
 func bump():
-	velocity.y -= 200
+	velocity.y = min(200, velocity.y - 200)
 	$AnimationPlayer.play("bump")
 	remove_collisions()
 	yield(get_tree().create_timer(3), "timeout")
