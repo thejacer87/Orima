@@ -43,6 +43,7 @@ func kick():
 		speed = inital_speed * SLIDE_FACTOR
 		is_sliding = true
 		is_stopped = false
+		gravity = inital_gravity
 		audio_kick.play()
 		kick_left.set_deferred("enabled", false)
 		kick_right.set_deferred("enabled", false)
