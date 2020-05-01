@@ -8,30 +8,21 @@ var inital_velocity : Vector2
 var inital_gravity : float
 var inital_speed : float
 var is_flipped := false
+var is_stopped := false
 
 onready var audio_kick = $AudioKick
 onready var audio_squish = $AudioSquish
 onready var audio_bump = $AudioBump
+onready var kick_right = $Kick/KickRight
+onready var kick_left = $Kick/KickLeft
 
 func _ready() -> void:
-	._ready()
-	inital_speed = speed / 2
+	inital_speed = speed
 	inital_gravity = gravity
 	inital_velocity = velocity
 
-#func _process(delta: float) -> void:
-func _physics_process(delta: float) -> void:
-	._physics_process(delta)
-#	if is_on_screen:
-#		velocity.x = speed * direction
-#		# just need something so it stays on the ground
-#		velocity.y += gravity * delta
-#
-#		velocity = move_and_slide(velocity, FLOOR)
-#
-#		if is_on_wall():
-#			direction *= -1
 
+func _physics_process(delta: float) -> void:
 	if is_flipped and not is_sliding:
 		kick()
 
@@ -47,17 +38,21 @@ func _on_body_entered(player: Player) -> void:
 
 
 func kick():
-	if $Kick/KickRight.is_colliding() or $Kick/KickLeft.is_colliding() and not is_sliding:
+	if (kick_right.is_colliding() or kick_left.is_colliding()) and is_stopped and not is_sliding:
 		direction = 1 if $Kick/KickRight.is_colliding() else -1;
-		speed = inital_speed * direction * SLIDE_FACTOR
+		speed = inital_speed * SLIDE_FACTOR
 		is_sliding = true
+		is_stopped = false
+		gravity = inital_gravity
 		audio_kick.play()
-		$Kick/KickLeft.set_deferred("enabled", false)
-		$Kick/KickRight.set_deferred("enabled", false)
+		kick_left.set_deferred("enabled", false)
+		kick_right.set_deferred("enabled", false)
 		$Timer.stop()
 		$Timer2.stop()
 		yield(get_tree().create_timer(0.1), "timeout")
 		enable_collisions()
+		yield(get_tree().create_timer(0.8), "timeout")
+		$PlayerDamage/CollisionShape2D.set_deferred("disabled", false)
 
 
 func flip():
@@ -71,6 +66,7 @@ func flip():
 	$Timer2.start()
 	yield(get_tree().create_timer(0.1), "timeout")
 	is_flipped = true
+	is_stopped = true
 
 
 func stop():
@@ -84,10 +80,11 @@ func stop():
 	audio_squish.play()
 	$Timer.start()
 	$Timer2.start()
-	yield(get_tree().create_timer(0.1), "timeout")
-	$Kick/KickLeft.set_deferred("enabled", true)
-	$Kick/KickRight.set_deferred("enabled", true)
 	is_flipped = true
+	yield(get_tree().create_timer(0.3), "timeout")
+	is_stopped = true
+	kick_left.set_deferred("enabled", true)
+	kick_right.set_deferred("enabled", true)
 
 
 func move_again():
@@ -119,23 +116,24 @@ func _on_Sliding_body_entered(body: Node) -> void:
 		if "Player" in body.name:
 			body.damage()
 
+
 func _on_PlayerDamage_body_entered(body: Node) -> void:
 	if not is_dead and not is_sliding:
 		if "Player" in body.name:
 			body.damage()
 
+
 func enable_collisions():
 	$Terrain.set_deferred("disabled", false)
-	$PlayerDamage/CollisionShape2D.set_deferred("disabled", false)
 	$Kill/CollisionShape2D.set_deferred("disabled", false)
 	$Sliding/CollisionShape2D.set_deferred("disabled", false)
-	$Kick/KickLeft.set_deferred("enabled", false)
-	$Kick/KickRight.set_deferred("enabled", false)
+	kick_left.set_deferred("enabled", false)
+	kick_right.set_deferred("enabled", false)
+
 
 func remove_collisions():
 	.remove_collisions()
-	$Kick/KickLeft.set_deferred("enabled", true)
-	$Kick/KickRight.set_deferred("enabled", true)
+	kick_left.set_deferred("enabled", true)
+	kick_right.set_deferred("enabled", true)
 	$Terrain.set_deferred("disabled", false)
 	$Sliding/CollisionShape2D.set_deferred("disabled", true)
-
