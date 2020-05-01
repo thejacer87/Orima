@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://sprites/brick.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Brick.gd" type="Script" id=2]
 [ext_resource path="res://scenes/BlockCollision.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/BlockHitbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SFX/Sounds/smb_breakblock.wav" type="AudioStream" id=5]
+[ext_resource path="res://SFX/Sounds/smb_bump.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -12,8 +14,24 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 8, 1.25 )
 
 [sub_resource type="Animation" id=3]
+resource_name = "break"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1, 6 ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.3
-step = 0.05
+step = 0.005
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:position")
 tracks/0/interp = 1
@@ -45,15 +63,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.005, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, false, true ]
 }
 
 [node name="Brick" type="StaticBody2D"]
 collision_layer = 8
-collision_mask = 22
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -78,6 +96,13 @@ disabled = true
 one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hit = SubResource( 3 )
+anims/break = SubResource( 3 )
+anims/hit = SubResource( 4 )
+
+[node name="AudioBump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="AudioBreak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 [connection signal="bump" from="BlockHitbox" to="." method="_on_BlockHitbox_bump"]
 [connection signal="body_entered" from="BumpKill" to="." method="_on_BumpKill_body_entered"]

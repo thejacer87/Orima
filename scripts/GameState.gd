@@ -1,23 +1,32 @@
 extends Node
 
-onready var starting_lives := 0
+
+enum powerup_states {SMALL, BIG, STUNNED, INVICIBLE}
+
+onready var starting_lives := 3
 var lives setget set_lives
+var powerup setget set_powerup
+var checkpoint_reached = false
 
 
 func _ready() -> void:
 	Globals.GameState = self
-	lives = max(0, starting_lives)
+	self.lives = max(0, starting_lives)
+	self.powerup = powerup_states.SMALL
 
 
 func die() -> void:
 	Globals.GameMusic.play(Globals.music["die"])
+	self.powerup = powerup_states.SMALL
 	lives -= 1
 	if lives < 0:
 		game_over()
 	else:
 		yield(get_tree().create_timer(2), "timeout")
-#		figure out how to
-		SceneTransition.reload_scene(Globals.levels["1-1"], Globals.default_starting_position)
+		SceneTransition.reload_scene(
+			Globals.current_scene.filename,
+			Globals.default_starting_position
+		)
 
 
 func game_over() -> void:
@@ -27,3 +36,7 @@ func game_over() -> void:
 
 func set_lives(value) -> void:
 	lives = value
+
+
+func set_powerup(value) -> void:
+	powerup = value

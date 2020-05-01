@@ -1,10 +1,8 @@
 extends KinematicBody2D
 class_name Player
 
-
 const FLOOR := Vector2.UP
 const ACC := 100
-
 
 var gravity
 var max_jump_velocity
@@ -21,34 +19,23 @@ var is_warping := false
 var velocity := Vector2()
 var on_ground := true
 
-
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
-onready var lives = $Lives
+onready var audio_stun = $AudioStun
+onready var stun_timer = $StunTimer
 
 
 func _ready() -> void:
 	Globals.Player = self
-	lives.text = "Lives: %s" % Globals.GameState.lives
+	if Globals.GameState.powerup == Globals.GameState.powerup_states.BIG:
+		self.powerup()
 	speed = walk_speed
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
-
-
-func _physics_process(delta: float) -> void:
-	lives.text = "Lives: %s" % Globals.GameState.lives
-	if not is_dying and not is_warping:
-		update_motion(delta)
-
-
-func update_motion(delta: float) -> void:
-	run()
-	jump()
-	move(delta)
 
 
 func check_dead():
@@ -105,7 +92,6 @@ func warp(direction := Vector2.DOWN):
 
 func one_up():
 	Globals.GameState.lives += 1
-	$OneUp.play()
 
 
 func slide():
@@ -115,11 +101,11 @@ func slide():
 
 func powerup():
 	health = 2
-	$PowerUp.play()
 	big_shape.set_deferred('disabled', false)
 	big_sprite.visible = true
 	small_shape.set_deferred('disabled', true)
 	small_sprite.visible = false
+	Globals.GameState.powerup = Globals.GameState.powerup_states.BIG
 
 
 func damage():
@@ -127,9 +113,16 @@ func damage():
 	big_sprite.visible = false
 	small_shape.set_deferred('disabled', false)
 	small_sprite.visible = true
+	if Globals.GameState.powerup != Globals.GameState.powerup_states.SMALL:
+		stun()
 	health -= 1
 	check_dead()
 
+func stun():
+	Globals.GameState.powerup = Globals.GameState.powerup_states.STUNNED
+	animation_player.play("stun")
+	audio_stun.play()
+	stun_timer.start()
 
 func die():
 	if not is_dying:
@@ -137,3 +130,8 @@ func die():
 		if health <= 0:
 			animation_player.play("dead")
 		Globals.GameState.die()
+
+
+func _on_StunTimer_timeout() -> void:
+	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+	animation_player.play("idle")

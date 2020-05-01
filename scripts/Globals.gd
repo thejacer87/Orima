@@ -94,5 +94,5 @@ func set_new_scene(scene_resource):
 	current_scene = scene_resource.instance()
 	get_node("/root").add_child(current_scene)
 	var player = current_scene.get_node("Player")
-	if player != null:
+	if player != null and not GameState.checkpoint_reached:
 		player.global_position = destination   # move player to new position
