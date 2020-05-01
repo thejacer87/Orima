@@ -23,10 +23,11 @@ func _on_BumpKill_body_entered(body: Node) -> void:
 
 
 func _on_BlockHitbox_bump(player: Player) -> void:
+	hit_anitmation.play("hit")
 	if Globals.GameState.powerup == Globals.GameState.powerup_states.SMALL:
-		hit_anitmation.play("hit")
 		audio_bump.play()
 	else:
+		yield(get_tree().create_timer(0.05), "timeout")
 		hit_anitmation.play("break")
 		audio_break.play()
 		yield(get_tree().create_timer(0.2), "timeout")
