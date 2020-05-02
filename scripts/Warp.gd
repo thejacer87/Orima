@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 		Vector2.LEFT:
 			warp_direction = "left"
 
-	if (Input.is_action_just_pressed(warp_direction) and bodies.size() > 0):
+	if (Input.is_action_pressed(warp_direction) and bodies.size() > 0):
 		var player: Player = bodies[0]
 		pipe_audio.play()
 		player.warp(direction)

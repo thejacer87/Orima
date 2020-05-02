@@ -10,6 +10,7 @@ onready var audio_break = $AudioBreak
 onready var audio_bump = $AudioBump
 
 func _ready() -> void:
+	print("ready")
 	if sprite_texture != null:
 		set_sprite(sprite_texture)
 
@@ -19,10 +20,12 @@ func set_sprite(texture):
 
 
 func _on_BumpKill_body_entered(body: Node) -> void:
+	print("bumpkill")
 	body.bump()
 
 
 func _on_BlockHitbox_bump(player: Player) -> void:
+	print("block")
 	hit_anitmation.play("hit")
 	if Globals.GameState.powerup == Globals.GameState.powerup_states.SMALL:
 		audio_bump.play()

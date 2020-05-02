@@ -8,6 +8,7 @@ var Player
 var GUI
 
 var default_starting_position := Vector2(40.0, 216.0)
+var brick = "res://scenes/Brick.tscn"
 var levels = {
 		"1-1": "res://scenes/Level_1-1.tscn",
 		"1-2": "res://scenes/Level_1-2.tscn",

@@ -25,6 +25,9 @@
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/Checkpoint.tscn" type="PackedScene" id=24]
 
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
@@ -46,10 +49,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
-
-[sub_resource type="TileSet" id=10]
+[sub_resource type="TileSet" id=9]
 0/name = "block.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -60,14 +60,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape = SubResource( 2 )
+0/shape = SubResource( 1 )
 0/shape_one_way = false
 0/shape_one_way_margin = 1.0
 0/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 2 ),
+"shape": SubResource( 1 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -81,14 +81,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 1/navigation_offset = Vector2( 0, 0 )
 1/shape_offset = Vector2( 0, 0 )
 1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-1/shape = SubResource( 3 )
+1/shape = SubResource( 2 )
 1/shape_one_way = false
 1/shape_one_way_margin = 1.0
 1/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
@@ -102,14 +102,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 2/navigation_offset = Vector2( 0, 0 )
 2/shape_offset = Vector2( 0, 0 )
 2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-2/shape = SubResource( 4 )
+2/shape = SubResource( 3 )
 2/shape_one_way = false
 2/shape_one_way_margin = 1.0
 2/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 4 ),
+"shape": SubResource( 3 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 2/z_index = 0
@@ -123,14 +123,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape = SubResource( 5 )
+3/shape = SubResource( 4 )
 3/shape_one_way = false
 3/shape_one_way_margin = 1.0
 3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 5 ),
+"shape": SubResource( 4 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
@@ -144,14 +144,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 4/navigation_offset = Vector2( 0, 0 )
 4/shape_offset = Vector2( 0, 0 )
 4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-4/shape = SubResource( 6 )
+4/shape = SubResource( 5 )
 4/shape_one_way = false
 4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 6 ),
+"shape": SubResource( 5 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 4/z_index = 0
@@ -165,14 +165,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 5/navigation_offset = Vector2( 0, 0 )
 5/shape_offset = Vector2( 0, 0 )
 5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape = SubResource( 7 )
+5/shape = SubResource( 6 )
 5/shape_one_way = false
 5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 7 ),
+"shape": SubResource( 6 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 5/z_index = 0
@@ -186,14 +186,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 6/navigation_offset = Vector2( 0, 0 )
 6/shape_offset = Vector2( 0, 0 )
 6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape = SubResource( 8 )
+6/shape = SubResource( 7 )
 6/shape_one_way = false
 6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 8 ),
+"shape": SubResource( 7 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 6/z_index = 0
@@ -207,14 +207,14 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 7/navigation_offset = Vector2( 0, 0 )
 7/shape_offset = Vector2( 0, 0 )
 7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape = SubResource( 9 )
+7/shape = SubResource( 8 )
 7/shape_one_way = false
 7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 9 ),
+"shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 7/z_index = 0
@@ -260,6 +260,70 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
+
+[sub_resource type="Animation" id=10]
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EmptySprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("EmptySprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -8 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BumpKill:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -8 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BumpKill/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=11]
 length = 0.3
@@ -965,84 +1029,20 @@ tracks/4/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=22]
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("EmptySprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("EmptySprite:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -8 ), Vector2( 0, 0 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("BumpKill:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -8 ), Vector2( 0, -8 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("BumpKill/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="RectangleShape2D" id=24]
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 856, 32 )
 
 [sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 32, 88 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 56, 32 )
 
 [node name="Level_1-1" type="Node2D"]
 script = ExtResource( 22 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 10 )
+tile_set = SubResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 2
 collision_mask = 5
@@ -1115,7 +1115,7 @@ limit_bottom = 248
 position = Vector2( 880, 160 )
 target_scene = "res://scenes/Level_1-1_secret.tscn"
 direction = Vector2( 0, 1 )
-local_position = Vector2( 40, 56 )
+local_position = Vector2( 40, 8 )
 
 [node name="Coins" type="Node" parent="."]
 
@@ -1223,7 +1223,7 @@ z_index = -1
 position = Vector2( 200, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock4" index="5"]
-anims/hit = SubResource( 11 )
+anims/hit = SubResource( 10 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock4/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1232,7 +1232,7 @@ z_index = -1
 position = Vector2( 328, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock15" index="5"]
-anims/hit = SubResource( 12 )
+anims/hit = SubResource( 11 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock15/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1241,7 +1241,7 @@ z_index = -1
 position = Vector2( 312, 104 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock17" index="5"]
-anims/hit = SubResource( 13 )
+anims/hit = SubResource( 12 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock17/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1250,7 +1250,7 @@ z_index = -1
 position = Vector2( 1224, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock18" index="5"]
-anims/hit = SubResource( 14 )
+anims/hit = SubResource( 13 )
 
 [node name="Mushroom" parent="ItemBlocks/ItemBlock18/Items" index="0" instance=ExtResource( 17 )]
 z_index = -1
@@ -1265,7 +1265,7 @@ visible = false
 disabled = true
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock24" index="5"]
-anims/hit = SubResource( 15 )
+anims/hit = SubResource( 14 )
 
 [node name="Mushroom" parent="ItemBlocks/ItemBlock24/Items" index="0" instance=ExtResource( 18 )]
 visible = false
@@ -1275,7 +1275,7 @@ z_index = -1
 position = Vector2( 1480, 104 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock19" index="5"]
-anims/hit = SubResource( 16 )
+anims/hit = SubResource( 15 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock19/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1284,7 +1284,7 @@ z_index = -1
 position = Vector2( 1720, 104 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock20" index="5"]
-anims/hit = SubResource( 17 )
+anims/hit = SubResource( 16 )
 
 [node name="Mushroom" parent="ItemBlocks/ItemBlock20/Items" index="0" instance=ExtResource( 17 )]
 z_index = -1
@@ -1293,7 +1293,7 @@ z_index = -1
 position = Vector2( 2040, 104 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock25" index="5"]
-anims/hit = SubResource( 18 )
+anims/hit = SubResource( 17 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock25/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1302,7 +1302,7 @@ z_index = -1
 position = Vector2( 2056, 104 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock26" index="5"]
-anims/hit = SubResource( 19 )
+anims/hit = SubResource( 18 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock26/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1311,7 +1311,7 @@ z_index = -1
 position = Vector2( 2696, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock27" index="5"]
-anims/hit = SubResource( 20 )
+anims/hit = SubResource( 19 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock27/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1320,7 +1320,7 @@ z_index = -1
 position = Vector2( 1672, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock21" index="5"]
-anims/hit = SubResource( 21 )
+anims/hit = SubResource( 20 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock21/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1329,7 +1329,7 @@ z_index = -1
 position = Vector2( 1720, 168 )
 
 [node name="AnimationPlayer" parent="ItemBlocks/ItemBlock22" index="5"]
-anims/hit = SubResource( 22 )
+anims/hit = SubResource( 21 )
 
 [node name="Coin" parent="ItemBlocks/ItemBlock22/Items" index="0" instance=ExtResource( 15 )]
 z_index = -1
@@ -1356,7 +1356,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock"]
-shape = SubResource( 24 )
+shape = SubResource( 22 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( -24, 200 )
@@ -1385,7 +1385,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock2"]
 position = Vector2( 64, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 24 )
 [connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
 [connection signal="body_entered" from="DeathBlock2" to="DeathBlock2" method="_on_DeathBlock_body_entered"]
 

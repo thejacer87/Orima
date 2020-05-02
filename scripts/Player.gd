@@ -3,6 +3,7 @@ class_name Player
 
 const FLOOR := Vector2.UP
 const ACC := 100
+const RUN_SCALE := 1.5
 
 var gravity
 var max_jump_velocity
@@ -17,7 +18,6 @@ var is_dying := false
 var is_sliding := false
 var is_warping := false
 var velocity := Vector2()
-var on_ground := true
 
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
@@ -44,25 +44,23 @@ func check_dead():
 
 
 func run() -> void:
-	if (on_ground):
-		speed = walk_speed * 1.5 if Input.is_action_pressed("run") else walk_speed
+	if is_on_floor():
+		speed = walk_speed * RUN_SCALE if Input.is_action_pressed("run") else walk_speed
 
 
 func jump() -> void:
 	if not is_sliding:
-		if Input.is_action_just_pressed("jump") and on_ground:
-			if (true): # todo check state for size
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			if Globals.GameState.powerup == Globals.GameState.powerup_states.SMALL:
 				$SmallJump.play()
 			else:
 				$BigJump.play()
 			velocity.y = max_jump_velocity
-			on_ground = false
 		if Input.is_action_just_released("jump") and velocity.y < min_jump_velocity:
 			velocity.y = min_jump_velocity
 
 
 func move(delta: float) -> void:
-	var friction = false
 	if not is_sliding:
 		if Input.is_action_pressed("right"):
 			velocity.x = min(velocity.x + ACC, speed)
@@ -71,9 +69,6 @@ func move(delta: float) -> void:
 		else:
 			velocity.x = 0
 
-	on_ground = is_on_floor()
-
-#	velocity.y += max(gravity * delta, MAX_FALL_SPEED)
 	velocity.y += gravity * delta
 
 	velocity = move_and_slide(velocity, FLOOR)
