@@ -10,7 +10,7 @@ const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 var GameState
 var GameMusic
 var Player
-var GUI
+var Enemies
 
 var default_starting_position := Vector2(40.0, 216.0)
 var levels = {

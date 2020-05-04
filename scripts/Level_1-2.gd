@@ -23,6 +23,8 @@ func _ready() -> void:
 					var mushroom = Globals.MUSHROOM.instance()
 					mushroom.z_index = -1
 					child.get_node("Items").add_child(mushroom)
+				"piranha_open.png 4":
+					child = Globals.Enemies.PIRANHA.instance()
 
 			if child != null:
 				child.position = dynamic_tilemap.map_to_world(cell) + (dynamic_tilemap.cell_size / 2)

@@ -65,6 +65,7 @@ Globals="*res://scripts/Globals.gd"
 SceneTransition="*res://scenes/SceneTransition.tscn"
 GameState="*res://scripts/GameState.gd"
 GameMusic="*res://scenes/GameMusic.tscn"
+GlobalEnemies="*res://scripts/Enemies/GlobalEnemies.gd"
 
 [display]
 
