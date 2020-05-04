@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Enemies/PiranhaPlant.gd" type="Script" id=1]
 [ext_resource path="res://sprites/piranha_closed.png" type="Texture" id=2]
@@ -11,34 +11,18 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
-"speed": 5.0
+"speed": 7.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 18, 512 )
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 23, 512 )
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 8.0
 height = 8.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "exit_pipe"
-length = 5.0
-step = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 3.5, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -24 ), Vector2( 0, -24 ), Vector2( 0, 0 ) ]
-}
-
 [node name="PiranhaPlant" type="KinematicBody2D"]
+position = Vector2( 0, -24 )
 z_index = -1
 script = ExtResource( 1 )
 
@@ -50,22 +34,22 @@ playing = true
 [node name="DetectionZone" parent="." instance=ExtResource( 4 )]
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
-position = Vector2( 0, 496 )
-shape = SubResource( 4 )
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-autostart = true
+shape = SubResource( 2 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 4 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/exit_pipe = SubResource( 3 )
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="TweenUp" type="Tween" parent="."]
+
+[node name="TweenDown" type="Tween" parent="."]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
+[connection signal="tween_completed" from="TweenUp" to="." method="_on_TweenUp_tween_completed"]
+[connection signal="tween_completed" from="TweenDown" to="." method="_on_TweenDown_tween_completed"]
 
 [editable path="DetectionZone"]
 
