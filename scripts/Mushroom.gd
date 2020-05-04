@@ -8,7 +8,7 @@ onready var powerup_collision = $Powerup/CollisionShape2D
 const FLOOR = Vector2.UP
 
 var active = false
-var speed := 1.75 * Globals.UNIT_SIZE
+var speed : float = 1.75 * Globals.UNIT_SIZE
 var velocity := Vector2()
 var direction := 1
 var gravity := 531.2

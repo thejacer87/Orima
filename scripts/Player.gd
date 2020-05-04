@@ -9,11 +9,11 @@ var gravity
 var max_jump_velocity
 var min_jump_velocity
 var speed
-var health = 1
-var walk_speed = 7 * Globals.UNIT_SIZE
-var max_jump_height: = 4.15 * Globals.UNIT_SIZE
-var min_jump_height: = 1.25 * Globals.UNIT_SIZE
-var jump_duration: = .5
+var health := 1
+var walk_speed : float = 7.0 * Globals.UNIT_SIZE
+var max_jump_height : float = 4.15 * Globals.UNIT_SIZE
+var min_jump_height : float = 1.25 * Globals.UNIT_SIZE
+var jump_duration := .5
 var is_dying := false
 var is_sliding := false
 var is_warping := false

@@ -29,6 +29,7 @@ tracks/0/keys = {
 extents = Vector2( 10, 35 )
 
 [node name="FlagPole" type="Area2D"]
+z_index = -1
 collision_layer = 64
 script = ExtResource( 1 )
 local_position = Vector2( 48, 36 )

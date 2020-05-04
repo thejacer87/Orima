@@ -1,6 +1,11 @@
 extends Node
 
 const UNIT_SIZE = 16
+const COIN = preload("res://scenes/Coin.tscn")
+const BRICK = preload("res://scenes/Brick.tscn")
+const BLOCK = preload("res://scenes/ItemBlock.tscn")
+const MUSHROOM = preload("res://scenes/Mushroom.tscn")
+const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 
 var GameState
 var GameMusic
@@ -8,19 +13,18 @@ var Player
 var GUI
 
 var default_starting_position := Vector2(40.0, 216.0)
-var brick = "res://scenes/Brick.tscn"
 var levels = {
-		"1-1": "res://scenes/Level_1-1.tscn",
-		"1-2": "res://scenes/Level_1-2.tscn",
-		"1-3": "res://scenes/Level_1-3.tscn",
-		"1-4": "res://scenes/Level_1-4.tscn",
+		"1-1": "res://scenes/Levels/1-1.tscn",
+		"1-2": "res://scenes/Levels/1-2.tscn",
+		"1-3": "res://scenes/Levels/1-3.tscn",
+		"1-4": "res://scenes/Levels/1-4.tscn",
 	}
 # gross, but helpful
 var levels_flip = {
-		"res://scenes/Level_1-1.tscn": "1-1",
-		"res://scenes/Level_1-2.tscn": "1-2",
-		"res://scenes/Level_1-3.tscn": "1-3",
-		"res://scenes/Level_1-4.tscn": "1-4",
+		"res://scenes/Levels/1-1.tscn": "1-1",
+		"res://scenes/Levels/1-2.tscn": "1-2",
+		"res://scenes/Levels/1-3.tscn": "1-3",
+		"res://scenes/Levels/1-4.tscn": "1-4",
 	}
 var scenes = {
 		"menu": "res://scenes/MainMenu.tscn",

@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Goomba.gd" type="Script" id=1]
-[ext_resource path="res://sprites/goomba.png" type="Texture" id=2]
-[ext_resource path="res://SFX/Sounds/smb_stomp.wav" type="AudioStream" id=3]
+[ext_resource path="res://SFX/Sounds/smb_stomp.wav" type="AudioStream" id=2]
+[ext_resource path="res://sprites/goomba.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 0.8
@@ -95,7 +95,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Kill" type="Area2D" parent="."]
 monitorable = false
@@ -136,7 +136,7 @@ anims/bump = SubResource( 5 )
 anims/dead = SubResource( 6 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 2 )
 [connection signal="body_entered" from="Kill" to="." method="_on_body_entered"]
 [connection signal="body_entered" from="TurnAround" to="." method="_on_Enemy_body_entered"]
 [connection signal="body_entered" from="PlayerDamage" to="." method="_on_PlayerDamage_body_entered"]
