@@ -214,11 +214,10 @@ anims/warp = SubResource( 6 )
 anims/warp_right = SubResource( 7 )
 
 [node name="BigHurtbox" parent="." instance=ExtResource( 7 )]
-visible = false
+monitoring = false
 collision_layer = 256
 
 [node name="CollisionShape2D" parent="BigHurtbox" index="0"]
-visible = false
 position = Vector2( 0, -8 )
 shape = SubResource( 8 )
 

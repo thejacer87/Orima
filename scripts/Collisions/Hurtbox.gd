@@ -9,20 +9,18 @@ signal invincibility_ended
 
 func set_invincible(value):
 	invincible = value
-	if invincible == true:
+	if invincible:
 		emit_signal("invincibility_started")
 	else:
 		emit_signal("invincibility_ended")
 
 
 func start_invincibility(duration):
-	print("start inv")
 	self.invincible = true
 	timer.start(duration)
 
 
 func _on_Timer_timeout():
-	print("timout")
 	self.invincible = false
 
 

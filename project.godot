@@ -206,6 +206,8 @@ right={
 2d_physics/layer_7="flagpole"
 2d_physics/layer_8="checkpoints"
 2d_physics/layer_9="player_hurtbox"
+2d_physics/layer_10="enemy_hurtbox"
+2d_physics/layer_11="fireballs"
 
 [rendering]
 

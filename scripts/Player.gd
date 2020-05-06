@@ -41,9 +41,11 @@ func _ready() -> void:
 	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
 
 
-func check_dead():
+func check_dead() -> bool:
 	if health <= 0:
 		die()
+		return true
+	return false
 
 
 func run() -> void:
@@ -108,15 +110,15 @@ func powerup():
 
 func damage():
 	health -= 1
-	check_dead()
-#	big_hurtbox.set_deferred("monitoring", false)
-	big_sprite.visible = false
-#	small_hurtbox.set_deferred("monitoring", false)
-	small_sprite.visible = true
-	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
-	small_hurtbox.start_invincibility(2.5)
-	animation_player.play("stun")
-	audio_stun.play()
+	if not check_dead():
+		big_sprite.visible = false
+		small_sprite.visible = true
+		if Globals.GameState.powerup == Globals.GameState.powerup_states.BIG:
+			Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+			big_hurtbox.set_deferred("monitoring", false)
+			small_hurtbox.start_invincibility(2.5)
+		animation_player.play("stun")
+		audio_stun.play()
 
 
 func die():
@@ -128,12 +130,10 @@ func die():
 
 
 func _on_SmallHurtbox_area_entered(area: Area2D) -> void:
-	print("small hurt")
 	self.damage()
 
 
 func _on_BigHurtbox_area_entered(area: Area2D) -> void:
-	print("big hurt")
 	self.damage()
 
 
