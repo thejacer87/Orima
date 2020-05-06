@@ -27,11 +27,8 @@ func _ready() -> void:
 				"piranha_open.png 4":
 					child = Globals.Enemies.PIRANHA.instance()
 					offset = Vector2(8, 0)
-					print(child.position)
 
 			if child != null:
 				child.position = dynamic_tilemap.map_to_world(cell) + (dynamic_tilemap.cell_size / 2) + offset
-				if tile_name == "piranha_open.png 4":
-					print(child.position)
 				self.add_child(child)
 	dynamic_tilemap.clear()

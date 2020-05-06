@@ -40,3 +40,4 @@ func pipe_down():
 	tween_down.interpolate_property(self, "position",
 		position, Vector2(position.x, position.y + ANIM_HEIGHT), 0.75)
 	tween_down.start()
+

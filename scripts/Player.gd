@@ -19,6 +19,8 @@ var is_sliding := false
 var is_warping := false
 var velocity := Vector2()
 
+onready var small_hurtbox = $SmallHurtbox
+onready var big_hurtbox = $BigHurtbox
 onready var small_shape = $SmallShape
 onready var small_sprite = $Sprite
 onready var big_shape = $BigShape
@@ -30,6 +32,7 @@ onready var stun_timer = $StunTimer
 
 func _ready() -> void:
 	Globals.Player = self
+	animation_player.play("idle")
 	if Globals.GameState.powerup == Globals.GameState.powerup_states.BIG:
 		self.powerup()
 	speed = walk_speed
@@ -96,28 +99,21 @@ func slide():
 
 func powerup():
 	health = 2
-	big_shape.set_deferred('disabled', false)
+	big_hurtbox.set_deferred("monitoring", true)
 	big_sprite.visible = true
-	small_shape.set_deferred('disabled', true)
+	small_hurtbox.set_deferred("monitoring", false)
 	small_sprite.visible = false
 	Globals.GameState.powerup = Globals.GameState.powerup_states.BIG
 
 
 func damage():
-	big_shape.set_deferred('disabled', true)
-	big_sprite.visible = false
-	small_shape.set_deferred('disabled', false)
-	small_sprite.visible = true
-	if Globals.GameState.powerup != Globals.GameState.powerup_states.SMALL:
-		stun()
 	health -= 1
 	check_dead()
+#		big_hurtbox.set_deferred("monitoring", false)
+	big_sprite.visible = false
+#	small_hurtbox.set_deferred("monitoring", false)
+	small_sprite.visible = true
 
-func stun():
-	Globals.GameState.powerup = Globals.GameState.powerup_states.STUNNED
-	animation_player.play("stun")
-	audio_stun.play()
-	stun_timer.start()
 
 func die():
 	if not is_dying:
@@ -127,6 +123,19 @@ func die():
 		Globals.GameState.die()
 
 
-func _on_StunTimer_timeout() -> void:
+func _on_SmallHurtbox_area_entered(area: Area2D) -> void:
+	print("small hurt")
+	self.damage()
+
+
+func _on_BigHurtbox_area_entered(area: Area2D) -> void:
+	print("big hurt")
+	self.damage()
+
+
+func _on_BigHurtbox_invincibility_started() -> void:
+	print("inv start")
 	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
-	animation_player.play("idle")
+	small_hurtbox.start_invincibility(2.5)
+	animation_player.play("stun")
+	audio_stun.play()

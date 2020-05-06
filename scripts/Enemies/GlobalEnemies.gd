@@ -7,7 +7,5 @@ const KOOPA_GREEN = preload("res://scenes/Enemies/KoopaGreen.tscn")
 
 
 func _ready() -> void:
-	print("enemies ready")
-	print(PIRANHA)
 	Globals.Enemies = self
 
