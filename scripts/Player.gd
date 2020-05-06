@@ -109,10 +109,14 @@ func powerup():
 func damage():
 	health -= 1
 	check_dead()
-#		big_hurtbox.set_deferred("monitoring", false)
+#	big_hurtbox.set_deferred("monitoring", false)
 	big_sprite.visible = false
 #	small_hurtbox.set_deferred("monitoring", false)
 	small_sprite.visible = true
+	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+	small_hurtbox.start_invincibility(2.5)
+	animation_player.play("stun")
+	audio_stun.play()
 
 
 func die():
@@ -133,9 +137,5 @@ func _on_BigHurtbox_area_entered(area: Area2D) -> void:
 	self.damage()
 
 
-func _on_BigHurtbox_invincibility_started() -> void:
-	print("inv start")
-	Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
-	small_hurtbox.start_invincibility(2.5)
-	animation_player.play("stun")
-	audio_stun.play()
+func _on_SmallHurtbox_invincibility_ended():
+	animation_player.play("idle")

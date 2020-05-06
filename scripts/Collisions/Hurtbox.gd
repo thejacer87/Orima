@@ -16,11 +16,13 @@ func set_invincible(value):
 
 
 func start_invincibility(duration):
+	print("start inv")
 	self.invincible = true
 	timer.start(duration)
 
 
 func _on_Timer_timeout():
+	print("timout")
 	self.invincible = false
 
 

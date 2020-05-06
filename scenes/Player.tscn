@@ -9,11 +9,11 @@
 [ext_resource path="res://scenes/Collisions/Hurtbox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scripts/PlayerState.gd" type="Script" id=8]
 
-[sub_resource type="CapsuleShape2D" id=12]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 1.0
 height = 14.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:rotation_degrees")
@@ -40,7 +40,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -48 ), Vector2( 0, 256 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
@@ -56,7 +56,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
@@ -71,7 +71,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 64 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 step = 0.05
@@ -88,7 +88,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.25098 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.25098 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:position")
 tracks/0/interp = 1
@@ -126,7 +126,7 @@ tracks/2/keys = {
 "values": [ -10, 0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../BigSprite:position")
 tracks/0/interp = 1
@@ -164,10 +164,10 @@ tracks/2/keys = {
 "values": [ -10, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8, 16 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 8, 8 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -192,7 +192,7 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 7 )
 rotation = 1.5708
-shape = SubResource( 12 )
+shape = SubResource( 1 )
 
 [node name="SmallJump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
@@ -206,12 +206,12 @@ stream = ExtResource( 6 )
 [node name="AnimationWrapper" type="Node2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimationWrapper"]
-anims/dead = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/slide = SubResource( 6 )
-anims/stun = SubResource( 7 )
-anims/warp = SubResource( 8 )
-anims/warp_right = SubResource( 9 )
+anims/dead = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/slide = SubResource( 4 )
+anims/stun = SubResource( 5 )
+anims/warp = SubResource( 6 )
+anims/warp_right = SubResource( 7 )
 
 [node name="BigHurtbox" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -220,16 +220,16 @@ collision_layer = 256
 [node name="CollisionShape2D" parent="BigHurtbox" index="0"]
 visible = false
 position = Vector2( 0, -8 )
-shape = SubResource( 11 )
+shape = SubResource( 8 )
 
 [node name="SmallHurtbox" parent="." instance=ExtResource( 7 )]
 collision_layer = 256
 
 [node name="CollisionShape2D" parent="SmallHurtbox" index="0"]
-shape = SubResource( 10 )
+shape = SubResource( 9 )
 [connection signal="area_entered" from="BigHurtbox" to="." method="_on_BigHurtbox_area_entered"]
-[connection signal="invincibility_started" from="BigHurtbox" to="." method="_on_BigHurtbox_invincibility_started"]
 [connection signal="area_entered" from="SmallHurtbox" to="." method="_on_SmallHurtbox_area_entered"]
+[connection signal="invincibility_ended" from="SmallHurtbox" to="." method="_on_SmallHurtbox_invincibility_ended"]
 
 [editable path="BigHurtbox"]
 
