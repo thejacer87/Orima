@@ -86,7 +86,8 @@ func goto_level(level_path, coordinates):
 		return
 	set_process(true)
 
-	current_scene.queue_free() # get rid of the old scene
+	if current_scene != null:
+		current_scene.queue_free()
 
 	# start your "loading..." animation
 	#get_node("animation").play("loading")
