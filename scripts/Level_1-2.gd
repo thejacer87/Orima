@@ -27,6 +27,12 @@ func _ready() -> void:
 				"piranha_open.png 4":
 					child = Globals.Enemies.PIRANHA.instance()
 					offset = Vector2(8, 0)
+				"goomba.png 5":
+					child = Globals.Enemies.GOOMBA.instance()
+				"koopa_green.png 6":
+					child = Globals.Enemies.KOOPA_GREEN.instance()
+				"koopa_red.png 7":
+					child = Globals.Enemies.KOOPA_GREEN.instance()
 
 			if child != null:
 				child.position = dynamic_tilemap.map_to_world(cell) + (dynamic_tilemap.cell_size / 2) + offset

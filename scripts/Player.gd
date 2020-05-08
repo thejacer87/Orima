@@ -4,6 +4,8 @@ class_name Player
 const FLOOR := Vector2.UP
 const ACC := 100
 const RUN_SCALE := 1.5
+const SMALL_SHAPE := Vector2(7.75, 7.5)
+const BIG_SHAPE := Vector2(15.5, 7.5)
 
 var gravity
 var max_jump_velocity
@@ -21,9 +23,8 @@ var velocity := Vector2()
 
 onready var small_hurtbox = $SmallHurtbox
 onready var big_hurtbox = $BigHurtbox
-onready var small_shape = $SmallShape
+onready var mario_shape = $MarioShape
 onready var small_sprite = $Sprite
-onready var big_shape = $BigShape
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
 onready var audio_stun = $AudioStun
@@ -101,6 +102,7 @@ func slide():
 
 func powerup():
 	health = 2
+	set_hitbox_size(Globals.GameState.powerup_states.BIG)
 	big_hurtbox.set_deferred("monitoring", true)
 	big_sprite.visible = true
 	small_hurtbox.set_deferred("monitoring", false)
@@ -115,6 +117,7 @@ func damage():
 		small_sprite.visible = true
 		if Globals.GameState.powerup == Globals.GameState.powerup_states.BIG:
 			Globals.GameState.powerup = Globals.GameState.powerup_states.SMALL
+			set_hitbox_size(Globals.GameState.powerup_states.SMALL)
 			big_hurtbox.set_deferred("monitoring", false)
 			small_hurtbox.start_invincibility(2.5)
 		animation_player.play("stun")
@@ -139,3 +142,12 @@ func _on_BigHurtbox_area_entered(area: Area2D) -> void:
 
 func _on_SmallHurtbox_invincibility_ended():
 	animation_player.play("idle")
+
+
+func set_hitbox_size(size):
+	if size == Globals.GameState.powerup_states.BIG:
+		mario_shape.position.y = -7.5
+		mario_shape.get_shape().set_extents(BIG_SHAPE)
+	else:
+		mario_shape.position.y = -0.25
+		mario_shape.get_shape().set_extents(SMALL_SHAPE)

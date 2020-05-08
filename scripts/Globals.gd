@@ -12,7 +12,7 @@ var GameMusic
 var Player
 var Enemies
 
-var default_starting_position := Vector2(40.0, 216.0)
+var default_starting_position := Vector2(40.0, 0.0)
 var levels = {
 		"1-1": "res://scenes/Levels/1-1.tscn",
 		"1-2": "res://scenes/Levels/1-2.tscn",
