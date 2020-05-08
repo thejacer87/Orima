@@ -25,7 +25,7 @@ _global_script_classes=[ {
 "path": "res://scripts/Goomba.gd"
 }, {
 "base": "Enemy",
-"class": "Koopa",
+"class": "KoopaGreen",
 "language": "GDScript",
 "path": "res://scripts/KoopaGreen.gd"
 }, {
@@ -48,7 +48,7 @@ _global_script_class_icons={
 "Enemy": "",
 "FlagPole": "",
 "Goomba": "",
-"Koopa": "",
+"KoopaGreen": "",
 "Mushroom": "",
 "Player": "",
 "StateMachine": ""

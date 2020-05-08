@@ -36,6 +36,9 @@ var music = {
 		"die": "res://SFX/Sounds/smb_mariodie.wav",
 		"underworld": "res://SFX/Music/02-underworld.wav",
 	}
+var sprites = {
+		"brick": "res://sprites/brick.png"
+	}
 var destination := Vector2()
 var loader
 var wait_frames

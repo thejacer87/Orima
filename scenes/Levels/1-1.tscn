@@ -1,10 +1,10 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://scenes/Checkpoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Enemies/Goomba.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/cloud.png" type="Texture" id=4]
-[ext_resource path="res://scripts/DeathBlock.gd" type="Script" id=5]
+[ext_resource path="res://scenes/DeathBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/Level_1-1.gd" type="Script" id=7]
 [ext_resource path="res://sprites/brick_blue.png" type="Texture" id=8]
@@ -24,6 +24,7 @@
 [ext_resource path="res://scenes/Warp.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/Enemies/KoopaGreen.tscn" type="PackedScene" id=23]
 [ext_resource path="res://scenes/Brick.tscn" type="PackedScene" id=24]
+[ext_resource path="res://scenes/Collisions/DeathBlock.tscn" type="PackedScene" id=25]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -1030,13 +1031,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 856, 32 )
-
-[sub_resource type="RectangleShape2D" id=23]
 extents = Vector2( 32, 88 )
-
-[sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 56, 32 )
 
 [node name="Level_1-1" type="Node2D"]
 script = ExtResource( 7 )
@@ -1344,17 +1339,8 @@ position = Vector2( 1768, 168 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 17 )]
 
-[node name="DeathBlock" type="Area2D" parent="."]
-position = Vector2( 1704, 312 )
-collision_layer = 0
-collision_mask = 5
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock"]
-shape = SubResource( 22 )
+[node name="DeathBlock" parent="." instance=ExtResource( 25 )]
+position = Vector2( 1768, 312 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( -24, 200 )
@@ -1362,7 +1348,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( -8, -41 )
-shape = SubResource( 23 )
+shape = SubResource( 22 )
 
 [node name="FlagPole" parent="." instance=ExtResource( 6 )]
 position = Vector2( 3144, 144 )
@@ -1371,20 +1357,8 @@ target_scene = "res://scenes/Levels/1-2.tscn"
 [node name="Checkpoint" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1312, 224 )
 
-[node name="DeathBlock2" type="Area2D" parent="."]
-position = Vector2( -128, 264 )
-collision_layer = 0
-collision_mask = 5
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathBlock2"]
-position = Vector2( 64, 0 )
-shape = SubResource( 24 )
-[connection signal="body_entered" from="DeathBlock" to="DeathBlock" method="_on_DeathBlock_body_entered"]
-[connection signal="body_entered" from="DeathBlock2" to="DeathBlock2" method="_on_DeathBlock_body_entered"]
+[node name="DeathBlock3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -72, 248 )
 
 [editable path="ItemBlocks/ItemBlock2"]
 
