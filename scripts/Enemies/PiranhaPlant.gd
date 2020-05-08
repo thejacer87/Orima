@@ -3,6 +3,7 @@ extends KinematicBody2D
 const ANIM_HEIGHT := 24
 
 var pause := false
+var pipe_down_finished := true
 onready var tween_up = $TweenUp
 onready var tween_down = $TweenDown
 
@@ -30,14 +31,18 @@ func _on_TweenDown_tween_completed(object: Object, key: NodePath) -> void:
 
 
 func pipe_up():
-	if not pause:
+	if not pause and pipe_down_finished:
 		tween_up.interpolate_property(self, "position",
 			position, Vector2(position.x, position.y - ANIM_HEIGHT), 0.75)
 		tween_up.start()
 
 
 func pipe_down():
+	pipe_down_finished = true
 	tween_down.interpolate_property(self, "position",
 		position, Vector2(position.x, position.y + ANIM_HEIGHT), 0.75)
 	tween_down.start()
 
+
+func _on_TweenDown_tween_all_completed():
+	pipe_down_finished = true

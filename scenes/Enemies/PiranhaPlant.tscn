@@ -28,7 +28,6 @@ script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="DetectionZone" parent="." instance=ExtResource( 4 )]
@@ -50,6 +49,7 @@ shape = SubResource( 3 )
 [connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
 [connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
 [connection signal="tween_completed" from="TweenUp" to="." method="_on_TweenUp_tween_completed"]
+[connection signal="tween_all_completed" from="TweenDown" to="." method="_on_TweenDown_tween_all_completed"]
 [connection signal="tween_completed" from="TweenDown" to="." method="_on_TweenDown_tween_completed"]
 
 [editable path="DetectionZone"]
