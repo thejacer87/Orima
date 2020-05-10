@@ -77,7 +77,7 @@ func move(delta: float) -> void:
 
 	velocity.y += gravity * delta
 
-	velocity = move_and_slide(velocity, FLOOR)
+	velocity = move_and_slide(velocity, FLOOR, true)
 
 
 func warp(direction := Vector2.DOWN):

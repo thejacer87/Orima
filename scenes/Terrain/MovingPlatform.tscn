@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Terrain/Platform.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Terrain/MovingPlatform.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 24, -64, 0, 0, 0, 0, 24, 256 )
+}
+
+[node name="MovingPlatform" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MovingPlatformPathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2( 24, -64 )
+rotation = 1.5708
+
+[node name="Platform" parent="MovingPlatformPathFollow2D" instance=ExtResource( 1 )]
+position = Vector2( 0, 24 )
+rotation = 4.71239
