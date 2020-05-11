@@ -16,7 +16,7 @@ func _state_logic(delta) -> void:
 		parent.move(delta)
 
 
-func _get_transition(delta) -> String:
+func _get_transition(_delta) -> String:
 	match state:
 		states.warping:
 			return ""

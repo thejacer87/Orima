@@ -28,7 +28,6 @@ onready var small_sprite = $Sprite
 onready var big_sprite = $BigSprite
 onready var animation_player = $AnimationWrapper/AnimationPlayer
 onready var audio_stun = $AudioStun
-onready var stun_timer = $StunTimer
 
 
 func _ready() -> void:
@@ -77,6 +76,8 @@ func move(delta: float) -> void:
 
 	velocity.y += gravity * delta
 
+	var snap = Vector2.DOWN * 32 if not is_on_floor() else Vector2.ZERO
+#	velocity = move_and_slide_with_snap(velocity, snap, FLOOR, true)
 	velocity = move_and_slide(velocity, FLOOR, true)
 
 

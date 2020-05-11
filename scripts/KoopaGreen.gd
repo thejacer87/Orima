@@ -22,7 +22,7 @@ func _ready() -> void:
 	inital_velocity = velocity
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_flipped and not is_sliding:
 		kick()
 

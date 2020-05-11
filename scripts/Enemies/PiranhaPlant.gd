@@ -12,23 +12,23 @@ func _ready() -> void:
 	pipe_up()
 
 
-func _on_DetectionZone_body_entered(body: Node) -> void:
+func _on_DetectionZone_body_entered(_body: Node) -> void:
 	pause = true
 
 
-func _on_DetectionZone_body_exited(body: Node) -> void:
+func _on_DetectionZone_body_exited(_body: Node) -> void:
 	pause = false
 	if pipe_down_finished and pipe_up_finished:
 		pipe_up()
 
 
-func _on_TweenUp_tween_completed(object: Object, key: NodePath) -> void:
+func _on_TweenUp_tween_completed(_object: Object, _key: NodePath) -> void:
 	yield(get_tree().create_timer(1.0), "timeout")
 	pipe_up_finished = true
 	pipe_down()
 
 
-func _on_TweenDown_tween_completed(object: Object, key: NodePath) -> void:
+func _on_TweenDown_tween_completed(_object: Object, _key: NodePath) -> void:
 	yield(get_tree().create_timer(1.0), "timeout")
 	pipe_down_finished = true
 	pipe_up()
