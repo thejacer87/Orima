@@ -18,6 +18,7 @@ var min_jump_height : float = 1.25 * Globals.UNIT_SIZE
 var jump_duration := .5
 var is_dying := false
 var is_sliding := false
+var is_jumping := false
 var is_warping := false
 var velocity := Vector2()
 
@@ -56,6 +57,7 @@ func run() -> void:
 func jump() -> void:
 	if not is_sliding:
 		if Input.is_action_just_pressed("jump") and is_on_floor():
+			is_jumping = true
 			if Globals.GameState.powerup == Globals.GameState.powerup_states.SMALL:
 				$SmallJump.play()
 			else:
@@ -76,9 +78,12 @@ func move(delta: float) -> void:
 
 	velocity.y += gravity * delta
 
-	var snap = Vector2.DOWN * 32 if not is_on_floor() else Vector2.ZERO
-#	velocity = move_and_slide_with_snap(velocity, snap, FLOOR, true)
-	velocity = move_and_slide(velocity, FLOOR, true)
+	var snap = Vector2.DOWN * 8 if not is_jumping else Vector2.ZERO
+	velocity = move_and_slide_with_snap(velocity, snap, FLOOR, true)
+	print(is_jumping)
+	is_jumping = false
+	print(snap)
+#	velocity = move_and_slide(velocity, FLOOR, true)
 
 
 func warp(direction := Vector2.DOWN):
