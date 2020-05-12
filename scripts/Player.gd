@@ -80,10 +80,7 @@ func move(delta: float) -> void:
 
 	var snap = Vector2.DOWN * 8 if not is_jumping else Vector2.ZERO
 	velocity = move_and_slide_with_snap(velocity, snap, FLOOR, true)
-	print(is_jumping)
 	is_jumping = false
-	print(snap)
-#	velocity = move_and_slide(velocity, FLOOR, true)
 
 
 func warp(direction := Vector2.DOWN):

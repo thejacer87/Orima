@@ -97,6 +97,69 @@ func goto_level(level_path, coordinates):
 
 	wait_frames = 1
 
+func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
+	var cells = tilemap.get_used_cells()
+	for cell in cells:
+		var cell_id = tilemap.get_cellv(cell)
+		if cell_id != tilemap.INVALID_CELL:
+			var tile_name = tilemap.tile_set.tile_get_name(cell_id)
+			var child
+			var offset = Vector2.ZERO
+			match tile_name:
+				"brick.png 0":
+					child = Globals.BRICK.instance()
+					child.get_node("Sprite").self_modulate = color
+				"block.png 1":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.get_node("Items").add_child(Globals.COIN.instance())
+				"block_empty.png 10":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.get_node("Sprite").visible = false
+					child.get_node("Items").add_child(Globals.COIN.instance())
+				"mushroom.png 2":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.get_node("Items").add_child(Globals.MUSHROOM.instance())
+				"brick_mushroom.png 13":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
+					child.get_node("Items").add_child(Globals.MUSHROOM.instance())
+				"brick_mushroom_1up.png 12":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
+					child.get_node("Items").add_child(Globals.MUSHROOM_1UP.instance())
+				"coin.png 3":
+					child = Globals.COIN.instance()
+				"piranha_open.png 4":
+					child = Globals.Enemies.PIRANHA.instance()
+					offset = Vector2(8, 0)
+				"goomba.png 5":
+					child = Globals.Enemies.GOOMBA.instance()
+				"koopa_green.png 6":
+					child = Globals.Enemies.KOOPA_GREEN.instance()
+				"koopa_red.png 7":
+					child = Globals.Enemies.KOOPA_RED.instance()
+				"brick_coin.png 11":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					for n in range(5):
+						child.get_node("Items").add_child(Globals.COIN.instance())
+
+			if child != null:
+				child.position = tilemap.map_to_world(cell) + (tilemap.cell_size / 2) + offset
+				level.add_child(child)
+	tilemap.clear()
 
 func set_new_scene(scene_resource):
 	set_process(false)
