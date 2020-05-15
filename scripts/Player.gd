@@ -79,7 +79,7 @@ func move(delta: float) -> void:
 	velocity.y += gravity * delta
 
 	var snap = Vector2.DOWN * 8 if not is_jumping else Vector2.ZERO
-	velocity = move_and_slide_with_snap(velocity, snap, FLOOR, true)
+	velocity = move_and_slide_with_snap(velocity, snap, FLOOR)
 	is_jumping = false
 
 

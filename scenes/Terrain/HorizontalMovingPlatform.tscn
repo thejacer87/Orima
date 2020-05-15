@@ -7,6 +7,7 @@
 script = ExtResource( 2 )
 
 [node name="Platform" parent="." instance=ExtResource( 1 )]
+motion/sync_to_physics = true
 
 [node name="HorizontalMovementTween" type="Tween" parent="."]
 repeat = true
