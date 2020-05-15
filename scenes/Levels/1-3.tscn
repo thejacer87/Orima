@@ -1,0 +1,487 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://scenes/Checkpoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/coin.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/cloud.png" type="Texture" id=4]
+[ext_resource path="res://scenes/DeathBlock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/FlagPole.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/Levels/Level_1-3.gd" type="Script" id=7]
+[ext_resource path="res://sprites/brick_blue.png" type="Texture" id=8]
+[ext_resource path="res://sprites/pipe.png" type="Texture" id=9]
+[ext_resource path="res://sprites/ground_blue.png" type="Texture" id=10]
+[ext_resource path="res://sprites/block_empty.png" type="Texture" id=11]
+[ext_resource path="res://sprites/brick.png" type="Texture" id=12]
+[ext_resource path="res://sprites/mountain_big.png" type="Texture" id=13]
+[ext_resource path="res://sprites/bush.png" type="Texture" id=14]
+[ext_resource path="res://sprites/block.png" type="Texture" id=15]
+[ext_resource path="res://sprites/ground.png" type="Texture" id=16]
+[ext_resource path="res://scenes/Background.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sprites/mushroom_1up.png" type="Texture" id=18]
+[ext_resource path="res://sprites/mushroom.png" type="Texture" id=19]
+[ext_resource path="res://sprites/piranha_open.png" type="Texture" id=20]
+[ext_resource path="res://sprites/koopa_green.png" type="Texture" id=21]
+[ext_resource path="res://scenes/Warp.tscn" type="PackedScene" id=22]
+[ext_resource path="res://sprites/goomba.png" type="Texture" id=23]
+[ext_resource path="res://sprites/koopa_red.png" type="Texture" id=24]
+[ext_resource path="res://scenes/Collisions/DeathBlock.tscn" type="PackedScene" id=25]
+[ext_resource path="res://scenes/TileMaps/DynamicTileMap.tscn" type="PackedScene" id=26]
+[ext_resource path="res://sprites/brick_mushroom_1up.png" type="Texture" id=27]
+[ext_resource path="res://sprites/brick_coin.png" type="Texture" id=28]
+[ext_resource path="res://sprites/brick_mushroom.png" type="Texture" id=29]
+[ext_resource path="res://scenes/Terrain/HorizontalMovingPlatform.tscn" type="PackedScene" id=30]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
+[sub_resource type="TileSet" id=7]
+0/name = "block.png 0"
+0/texture = ExtResource( 15 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+2/name = "ground.png 2"
+2/texture = ExtResource( 16 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 2 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "pipe.png 3"
+3/texture = ExtResource( 9 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 3 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+5/name = "brick_blue.png 5"
+5/texture = ExtResource( 8 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape = SubResource( 4 )
+5/shape_one_way = false
+5/shape_one_way_margin = 1.0
+5/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+5/z_index = 0
+6/name = "ground_blue.png 6"
+6/texture = ExtResource( 10 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 0, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape = SubResource( 5 )
+6/shape_one_way = false
+6/shape_one_way_margin = 1.0
+6/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+6/z_index = 0
+7/name = "block_empty.png 7"
+7/texture = ExtResource( 11 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape = SubResource( 6 )
+7/shape_one_way = false
+7/shape_one_way_margin = 1.0
+7/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+7/z_index = 0
+8/name = "cloud.png 8"
+8/texture = ExtResource( 4 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "mountain_big.png 9"
+9/texture = ExtResource( 13 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 80, 48 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "bush.png 10"
+10/texture = ExtResource( 14 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
+
+[sub_resource type="TileSet" id=8]
+0/name = "brick.png 0"
+0/texture = ExtResource( 12 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "block.png 1"
+1/texture = ExtResource( 15 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+2/name = "mushroom.png 2"
+2/texture = ExtResource( 19 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 16, 16 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
+2/shapes = [  ]
+2/z_index = 0
+3/name = "coin.png 3"
+3/texture = ExtResource( 2 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "piranha_open.png 4"
+4/texture = ExtResource( 20 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 16, 32 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+5/name = "goomba.png 5"
+5/texture = ExtResource( 23 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 16, 16 )
+5/tile_mode = 0
+5/occluder_offset = Vector2( 0, 0 )
+5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
+5/shapes = [  ]
+5/z_index = 0
+6/name = "koopa_green.png 6"
+6/texture = ExtResource( 21 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 0, 16, 16 )
+6/tile_mode = 0
+6/occluder_offset = Vector2( 0, 0 )
+6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
+6/shapes = [  ]
+6/z_index = 0
+7/name = "koopa_red.png 7"
+7/texture = ExtResource( 24 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "mushroom_1up.png 8"
+8/texture = ExtResource( 18 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
+9/name = "cloud.png 9"
+9/texture = ExtResource( 4 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 16, 16 )
+9/tile_mode = 0
+9/occluder_offset = Vector2( 0, 0 )
+9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
+9/shapes = [  ]
+9/z_index = 0
+10/name = "block_empty.png 10"
+10/texture = ExtResource( 11 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 16, 16 )
+10/tile_mode = 0
+10/occluder_offset = Vector2( 0, 0 )
+10/navigation_offset = Vector2( 0, 0 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
+10/shapes = [  ]
+10/z_index = 0
+11/name = "brick_coin.png 11"
+11/texture = ExtResource( 28 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 16, 16 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
+11/shapes = [  ]
+11/z_index = 0
+12/name = "brick_mushroom_1up.png 12"
+12/texture = ExtResource( 27 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 0, 16, 16 )
+12/tile_mode = 0
+12/occluder_offset = Vector2( 0, 0 )
+12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
+12/shapes = [  ]
+12/z_index = 0
+13/name = "brick_mushroom.png 13"
+13/texture = ExtResource( 29 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 0, 16, 16 )
+13/tile_mode = 0
+13/occluder_offset = Vector2( 0, 0 )
+13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
+13/shapes = [  ]
+13/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 32, 88 )
+
+[node name="Level_1-3" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 7 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 5
+format = 1
+tile_data = PoolIntArray( 524289, 1, 0, 524290, 1, 0, 589825, 1, 0, 589826, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 917503, 2, 0, 851968, 2, 0, 851969, 2, 0, 851970, 2, 0, 851971, 2, 0, 851972, 2, 0, 851973, 2, 0, 851974, 2, 0, 851975, 2, 0, 851976, 2, 0, 851977, 2, 0, 851978, 2, 0, 851979, 2, 0, 851980, 2, 0, 851981, 2, 0, 851982, 2, 0, 851983, 2, 0, 852098, 2, 0, 852099, 2, 0, 852100, 2, 0, 852101, 2, 0, 852102, 2, 0, 852103, 2, 0, 852104, 2, 0, 852105, 2, 0, 852106, 2, 0, 852107, 2, 0, 852108, 2, 0, 852109, 2, 0, 852110, 2, 0, 852111, 2, 0, 852112, 2, 0, 852113, 2, 0, 852114, 2, 0, 852115, 2, 0, 852116, 2, 0, 852117, 2, 0, 852118, 2, 0, 852119, 2, 0, 852120, 2, 0, 852121, 2, 0, 852122, 2, 0, 852123, 2, 0, 852124, 2, 0, 852125, 2, 0, 852126, 2, 0, 852127, 2, 0, 852128, 2, 0, 852129, 2, 0, 852130, 2, 0, 852131, 2, 0, 852132, 2, 0, 852133, 2, 0, 852134, 2, 0, 852135, 2, 0, 983039, 2, 0, 917504, 2, 0, 917505, 2, 0, 917506, 2, 0, 917507, 2, 0, 917508, 2, 0, 917509, 2, 0, 917510, 2, 0, 917511, 2, 0, 917512, 2, 0, 917513, 2, 0, 917514, 2, 0, 917515, 2, 0, 917516, 2, 0, 917517, 2, 0, 917518, 2, 0, 917519, 2, 0, 917634, 2, 0, 917635, 2, 0, 917636, 2, 0, 917637, 2, 0, 917638, 2, 0, 917639, 2, 0, 917640, 2, 0, 917641, 2, 0, 917642, 2, 0, 917643, 2, 0, 917644, 2, 0, 917645, 2, 0, 917646, 2, 0, 917647, 2, 0, 917648, 2, 0, 917649, 2, 0, 917650, 2, 0, 917651, 2, 0, 917652, 2, 0, 917653, 2, 0, 917654, 2, 0, 917655, 2, 0, 917656, 2, 0, 917657, 2, 0, 917658, 2, 0, 917659, 2, 0, 917660, 2, 0, 917661, 2, 0, 917662, 2, 0, 917663, 2, 0, 917664, 2, 0, 917665, 2, 0, 917666, 2, 0, 917667, 2, 0, 917668, 2, 0, 917669, 2, 0, 917670, 2, 0, 917671, 2, 0, 1048575, 2, 0, 983040, 2, 0, 983041, 2, 0, 983042, 2, 0, 983043, 2, 0, 983044, 2, 0, 983045, 2, 0, 983046, 2, 0, 983047, 2, 0, 983048, 2, 0, 983049, 2, 0, 983050, 2, 0, 983051, 2, 0, 983052, 2, 0, 983053, 2, 0, 983054, 2, 0, 983055, 2, 0, 983170, 2, 0, 983171, 2, 0, 983172, 2, 0, 983173, 2, 0, 983174, 2, 0, 983175, 2, 0, 983176, 2, 0, 983177, 2, 0, 983178, 2, 0, 983179, 2, 0, 983180, 2, 0, 983181, 2, 0, 983182, 2, 0, 983183, 2, 0, 983184, 2, 0, 983185, 2, 0, 983186, 2, 0, 983187, 2, 0, 983188, 2, 0, 983189, 2, 0, 983190, 2, 0, 983191, 2, 0, 983192, 2, 0, 983193, 2, 0, 983194, 2, 0, 983195, 2, 0, 983196, 2, 0, 983197, 2, 0, 983198, 2, 0, 983199, 2, 0, 983200, 2, 0, 983201, 2, 0, 983202, 2, 0, 983203, 2, 0, 983204, 2, 0, 983205, 2, 0, 983206, 2, 0, 983207, 2, 0 )
+
+[node name="DynamicTileMap" parent="." instance=ExtResource( 26 )]
+tile_set = SubResource( 8 )
+tile_data = PoolIntArray( 196648, 10, 0, 196649, 10, 0, 196650, 10, 0, 196651, 10, 0, 196652, 10, 0, 196653, 10, 0, 196654, 10, 0, 262170, 10, 0, 262171, 10, 0, 262172, 10, 0, 262173, 10, 0, 262174, 10, 0, 262204, 10, 0, 262205, 10, 0, 262206, 10, 0, 262207, 10, 0, 262304, 0, 0, 262305, 0, 0, 262306, 0, 0, 327755, 10, 0, 327756, 10, 0, 327757, 10, 0, 327758, 10, 0, 327759, 10, 0, 327760, 10, 0, 327823, 10, 0, 327824, 10, 0, 327840, 0, 0, 327841, 0, 0, 327842, 0, 0, 393359, 10, 0, 393360, 10, 0, 393374, 0, 0, 393375, 0, 0, 393376, 0, 0, 393377, 0, 0, 393378, 0, 0, 393379, 0, 0, 393380, 0, 0, 458787, 10, 0, 458788, 10, 0, 458789, 10, 0, 458790, 10, 0, 458791, 10, 0, 458856, 10, 0, 458857, 10, 0, 458858, 10, 0, 458859, 10, 0, 458860, 10, 0, 458861, 10, 0, 458862, 10, 0, 458863, 10, 0, 458893, 10, 0, 458894, 10, 0, 458895, 10, 0, 458896, 10, 0, 458910, 0, 0, 458911, 0, 0, 458912, 0, 0, 458913, 0, 0, 458914, 0, 0, 458915, 0, 0, 458916, 0, 0, 524312, 10, 0, 524313, 10, 0, 524314, 10, 0, 524315, 10, 0, 524316, 10, 0, 524317, 10, 0, 524318, 10, 0, 524319, 10, 0, 524358, 10, 0, 524359, 10, 0, 524360, 10, 0, 524429, 10, 0, 524430, 10, 0, 524431, 10, 0, 524432, 10, 0, 524446, 0, 0, 524447, 0, 0, 524448, 0, 0, 524449, 0, 0, 524450, 0, 0, 524451, 0, 0, 524452, 0, 0, 589883, 2, 0, 589940, 10, 0, 589941, 10, 0, 589942, 10, 0, 589943, 10, 0, 589946, 10, 0, 589947, 10, 0, 589948, 10, 0, 589949, 10, 0, 589963, 10, 0, 589964, 10, 0, 589965, 10, 0, 589966, 10, 0, 589967, 10, 0, 589968, 10, 0, 589980, 0, 0, 589981, 0, 0, 589982, 0, 0, 589983, 0, 0, 589984, 0, 0, 589985, 0, 0, 589986, 0, 0, 589987, 0, 0, 589988, 0, 0, 589989, 0, 0, 589990, 0, 0, 589991, 0, 0, 655499, 10, 0, 655500, 10, 0, 655501, 10, 0, 655502, 10, 0, 655503, 10, 0, 655504, 10, 0, 655516, 0, 0, 655517, 0, 0, 655518, 0, 0, 655519, 0, 0, 655520, 0, 0, 655521, 0, 0, 655522, 0, 0, 655523, 0, 0, 655524, 0, 0, 655525, 0, 0, 655526, 0, 0, 655527, 0, 0, 720914, 10, 0, 720915, 10, 0, 720916, 10, 0, 720917, 10, 0, 720928, 10, 0, 720929, 10, 0, 720930, 10, 0, 720996, 10, 0, 720997, 10, 0, 720998, 10, 0, 720999, 10, 0, 721035, 10, 0, 721036, 10, 0, 721037, 10, 0, 721038, 10, 0, 721039, 10, 0, 721040, 10, 0, 721052, 0, 0, 721053, 0, 0, 721054, 0, 0, 721055, 0, 0, 721056, 0, 0, 721057, 0, 0, 721058, 0, 0, 721059, 0, 0, 721060, 0, 0, 721061, 0, 0, 721062, 0, 0, 721063, 0, 0, 786482, 10, 0, 786483, 10, 0, 786484, 10, 0, 786485, 10, 0, 786491, 10, 0, 786492, 10, 0, 786493, 10, 0, 786494, 10, 0, 786495, 10, 0, 786497, 10, 0, 786498, 10, 0, 786499, 10, 0, 786500, 10, 0, 786501, 10, 0, 786545, 10, 0, 786546, 10, 0, 786547, 10, 0, 786571, 10, 0, 786572, 10, 0, 786573, 10, 0, 786574, 10, 0, 786575, 10, 0, 786576, 10, 0, 786585, 10, 0, 786588, 0, 0, 786589, 0, 0, 786590, 0, 0, 786591, 0, 0, 786592, 0, 0, 786593, 0, 0, 786594, 0, 0, 786595, 0, 0, 786596, 0, 0, 786597, 0, 0, 786598, 0, 0, 786599, 0, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 32, 198 )
+current = true
+limit_left = 0
+limit_top = 8
+limit_right = 2672
+limit_bottom = 232
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 198 )
+z_index = 1
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Warps" type="Node" parent="."]
+
+[node name="Warp" parent="Warps" instance=ExtResource( 22 )]
+position = Vector2( 880, 144 )
+target_scene = "res://scenes/Level_1-1_secret.tscn"
+direction = Vector2( 0, 1 )
+local_position = Vector2( 40, 8 )
+
+[node name="ParallaxBackground" parent="." instance=ExtResource( 17 )]
+
+[node name="DeathBlock" parent="." instance=ExtResource( 25 )]
+position = Vector2( 1192, 288 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( -24, 200 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -8, -41 )
+shape = SubResource( 9 )
+
+[node name="FlagPole" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2456, 128 )
+target_scene = "res://scenes/Levels/1-2.tscn"
+
+[node name="Checkpoint" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1272, 216 )
+
+[node name="DeathBlock3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -72, 248 )
+
+[node name="HorizontalMovingPlatform" parent="." instance=ExtResource( 30 )]
+position = Vector2( 120, 120 )
+
+[editable path="DeathBlock"]

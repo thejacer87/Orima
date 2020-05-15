@@ -14,6 +14,9 @@ onready var audio_bump = $AudioBump
 var is_empty := false
 
 func _ready() -> void:
+	for item in items.get_children():
+		item.z_index = -1
+		item.visible = false
 	if is_hidden:
 		sprite.visible = false
 		empty_sprite.visible = false
@@ -31,12 +34,24 @@ func _on_BlockHitbox_bump(player: Player) -> void:
 		if player.velocity.y < 0 or not is_hidden:
 			hit_anitmation.play("hit")
 			audio_bump.play()
-			for item in items.get_children():
-				item.activate()
 			# Make entire block visible in case it was a hidden block
 			visible = true
-			sprite.visible = false
-			is_empty = true
-			empty_sprite.visible = true
-			bump_kill_collision.set_deferred('disabled', true)
-			collision.set_deferred('disabled', false)
+
+			var item_count = items.get_child_count()
+			var item = items.get_child(0)
+			if item != null:
+				# Doing this so you can't keep hitting the mushroom item block
+				# before actually getting the mushroom.
+				var old_position = item.global_position
+				var grandparent = item.get_parent().get_parent()
+				items.remove_child(item)
+				grandparent.add_child(item)
+				item.global_position = old_position
+				item.visible = true
+				item.activate()
+			if item_count <= 1:
+				sprite.visible = false
+				is_empty = true
+				empty_sprite.visible = true
+				bump_kill_collision.set_deferred('disabled', true)
+				collision.set_deferred('disabled', false)

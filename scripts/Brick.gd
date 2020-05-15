@@ -4,8 +4,6 @@ export(Texture) var sprite_texture setget set_sprite
 
 onready var hit_anitmation = $AnimationPlayer
 onready var sprite = $Sprite
-onready var empty_sprite = $EmptySprite
-onready var collision = $PowerUp/CollisionShape2D
 onready var audio_break = $AudioBreak
 onready var audio_bump = $AudioBump
 

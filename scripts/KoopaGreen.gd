@@ -1,5 +1,5 @@
 extends Enemy
-class_name Koopa
+class_name KoopaGreen
 
 const SLIDE_FACTOR := 7
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 	inital_velocity = velocity
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_flipped and not is_sliding:
 		kick()
 
@@ -110,7 +110,7 @@ func _on_Timer2_timeout() -> void:
 
 func _on_Sliding_body_entered(body: Node) -> void:
 	if is_sliding:
-		if "Goomba" in body.name:
+		if "Goomba" in body.name or "KoopaGreen" in body.name or "KoopaRed" in body.name:
 			$AudioKick.play()
 			body.bump()
 		if "Player" in body.name:
