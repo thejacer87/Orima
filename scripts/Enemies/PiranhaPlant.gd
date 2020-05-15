@@ -4,12 +4,9 @@ const ANIM_HEIGHT := 24
 
 var pause := false
 var pipe_down_finished := true
-var pipe_up_finished := false
+var pipe_up_finished := true
 onready var tween_up = $TweenUp
 onready var tween_down = $TweenDown
-
-func _ready() -> void:
-	pipe_up()
 
 
 func _on_DetectionZone_body_entered(_body: Node) -> void:
@@ -47,3 +44,8 @@ func pipe_down():
 	tween_down.interpolate_property(self, "position",
 		position, Vector2(position.x, position.y + ANIM_HEIGHT), 0.75)
 	tween_down.start()
+
+
+func _on_Timer_timeout() -> void:
+	if pipe_up_finished:
+		pipe_up()
