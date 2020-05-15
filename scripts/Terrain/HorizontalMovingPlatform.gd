@@ -5,6 +5,7 @@ export var delay := 1.0
 export var distance := 128
 export var speed := 3.5
 
+
 var follow = Vector2.ZERO
 
 onready var platform = $Platform
