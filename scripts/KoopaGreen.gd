@@ -31,14 +31,15 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_body_entered(player: Player) -> void:
-	player.velocity.y = max(player.velocity.y - 350, -350)
+	player.velocity.y = min(player.velocity.y - 120, -120)
 	if is_sliding:
 		stop()
-	flip()
+	else:
+		flip()
 
 
 func kick():
-	if (kick_right.is_colliding() or kick_left.is_colliding()) and is_stopped and not is_sliding:
+	if (kick_right.is_colliding() or kick_left.is_colliding()) and is_stopped:
 		direction = 1 if $Kick/KickRight.is_colliding() else -1;
 		speed = inital_speed * SLIDE_FACTOR
 		is_sliding = true
@@ -109,9 +110,10 @@ func _on_Timer2_timeout() -> void:
 
 
 func _on_Sliding_body_entered(body: Node) -> void:
-	if is_sliding:
+	if body != self and is_sliding:
 		if "Goomba" in body.name or "KoopaGreen" in body.name or "KoopaRed" in body.name:
 			$AudioKick.play()
+			print(self == body)
 			body.bump()
 		if "Player" in body.name:
 			body.damage()
