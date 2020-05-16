@@ -8,7 +8,7 @@ export var speed := 3.5
 var follow = Vector2.ZERO
 
 onready var platform = $Platform
-onready var tween = $HorizontalMovementTween
+onready var tween = $MovementTween
 
 func _ready() -> void:
 	_init_tween()
