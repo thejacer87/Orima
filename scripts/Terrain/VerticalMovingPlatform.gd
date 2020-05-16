@@ -1,6 +1,6 @@
 extends Node2D
 
-export var move_to := Vector2.RIGHT * 192
+export var move_to := Vector2.UP * 192
 export var delay := 1.0
 export var distance := 128
 export var speed := 3.5
