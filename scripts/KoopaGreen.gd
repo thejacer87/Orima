@@ -88,6 +88,14 @@ func stop():
 	kick_right.set_deferred("enabled", true)
 
 
+func bump():
+	print("bump koopa")
+	velocity.y = min(200, velocity.y - 200)
+	$AnimationPlayer.play("bump")
+	.remove_collisions()
+	yield(get_tree().create_timer(3), "timeout")
+	die()
+
 func move_again():
 	$AnimationPlayer.play_backwards("flip")
 	enable_collisions()
@@ -113,7 +121,6 @@ func _on_Sliding_body_entered(body: Node) -> void:
 	if body != self and is_sliding:
 		if "Goomba" in body.name or "KoopaGreen" in body.name or "KoopaRed" in body.name:
 			$AudioKick.play()
-			print(self == body)
 			body.bump()
 		if "Player" in body.name:
 			body.damage()
