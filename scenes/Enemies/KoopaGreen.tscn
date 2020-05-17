@@ -156,6 +156,7 @@ collision_mask = 4
 shape = SubResource( 2 )
 
 [node name="PlayerDamage" type="Area2D" parent="."]
+modulate = Color( 0.0431373, 0, 1, 1 )
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDamage"]
@@ -163,10 +164,12 @@ position = Vector2( 0, 2 )
 shape = SubResource( 3 )
 
 [node name="Terrain" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 0.5 )
 shape = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 position = Vector2( -3, 0 )
 scale = Vector2( 1.3, 1 )
 
@@ -180,6 +183,7 @@ anims/flip = SubResource( 6 )
 anims/shaking = SubResource( 7 )
 
 [node name="Sliding" type="Area2D" parent="."]
+modulate = Color( 0.8, 0, 1, 1 )
 collision_layer = 4
 collision_mask = 5
 
@@ -189,6 +193,7 @@ shape = SubResource( 8 )
 disabled = true
 
 [node name="Kick" type="Node2D" parent="."]
+visible = false
 
 [node name="KickRight" type="RayCast2D" parent="Kick"]
 position = Vector2( -7, 8 )

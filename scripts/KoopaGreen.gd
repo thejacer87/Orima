@@ -15,6 +15,7 @@ onready var audio_squish = $AudioSquish
 onready var audio_bump = $AudioBump
 onready var kick_right = $Kick/KickRight
 onready var kick_left = $Kick/KickLeft
+onready var sliding_collision = $Sliding/CollisionShape2D
 
 func _ready() -> void:
 	inital_speed = speed
@@ -122,8 +123,8 @@ func _on_Sliding_body_entered(body: Node) -> void:
 		if "Goomba" in body.name or "KoopaGreen" in body.name or "KoopaRed" in body.name:
 			$AudioKick.play()
 			body.bump()
-		if "Player" in body.name:
-			body.damage()
+#		if "Player" in body.name:
+#			body.damage()
 
 
 func _on_PlayerDamage_body_entered(body: Node) -> void:
@@ -133,9 +134,10 @@ func _on_PlayerDamage_body_entered(body: Node) -> void:
 
 
 func enable_collisions():
+	print("enabled")
 	$Terrain.set_deferred("disabled", false)
 	$Kill/CollisionShape2D.set_deferred("disabled", false)
-	$Sliding/CollisionShape2D.set_deferred("disabled", false)
+	sliding_collision.set_deferred("disabled", false)
 	kick_left.set_deferred("enabled", false)
 	kick_right.set_deferred("enabled", false)
 
@@ -145,4 +147,4 @@ func remove_collisions():
 	kick_left.set_deferred("enabled", true)
 	kick_right.set_deferred("enabled", true)
 	$Terrain.set_deferred("disabled", false)
-	$Sliding/CollisionShape2D.set_deferred("disabled", true)
+#	sliding_collision.set_deferred("disabled", true)
