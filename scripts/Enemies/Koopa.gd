@@ -1,7 +1,9 @@
 extends Enemy
-class_name KoopaGreen
+class_name Koopa
 
 const SLIDE_FACTOR := 7
+
+export var is_red := false
 
 var is_sliding := false
 var inital_velocity : Vector2
@@ -10,17 +12,23 @@ var inital_speed : float
 var is_flipped := false
 var is_stopped := false
 
+onready var sprite = $Sprite
 onready var audio_kick = $AudioKick
 onready var audio_squish = $AudioSquish
 onready var audio_bump = $AudioBump
 onready var kick_right = $Kick/KickRight
 onready var kick_left = $Kick/KickLeft
 onready var sliding_collision = $Sliding/CollisionShape2D
+onready var ledge_turnaround = $LedgeTurnaround
+
 
 func _ready() -> void:
 	inital_speed = speed
 	inital_gravity = gravity
 	inital_velocity = velocity
+	if is_red:
+		sprite.set_texture(load(Globals.sprites.koopa_red))
+		ledge_turnaround.enabled = true
 
 
 func _physics_process(_delta: float) -> void:
@@ -29,6 +37,9 @@ func _physics_process(_delta: float) -> void:
 
 	if is_sliding and is_on_wall():
 		audio_bump.play()
+
+	if is_red and not ledge_turnaround.is_colliding():
+		direction *= -1
 
 
 func _on_body_entered(player: Player) -> void:
@@ -58,6 +69,9 @@ func kick():
 
 
 func flip():
+
+	if is_red:
+		ledge_turnaround.set_deferred("enabled", false)
 	remove_collisions()
 	velocity = Vector2.ZERO
 	speed = 0
@@ -97,6 +111,7 @@ func bump():
 	yield(get_tree().create_timer(3), "timeout")
 	die()
 
+
 func move_again():
 	$AnimationPlayer.play_backwards("flip")
 	enable_collisions()
@@ -120,11 +135,9 @@ func _on_Timer2_timeout() -> void:
 
 func _on_Sliding_body_entered(body: Node) -> void:
 	if body != self and is_sliding:
-		if "Goomba" in body.name or "KoopaGreen" in body.name or "KoopaRed" in body.name:
+		if "Goomba" in body.name or "Koopa" in body.name:
 			$AudioKick.play()
 			body.bump()
-#		if "Player" in body.name:
-#			body.damage()
 
 
 func _on_PlayerDamage_body_entered(body: Node) -> void:
@@ -134,7 +147,6 @@ func _on_PlayerDamage_body_entered(body: Node) -> void:
 
 
 func enable_collisions():
-	print("enabled")
 	$Terrain.set_deferred("disabled", false)
 	$Kill/CollisionShape2D.set_deferred("disabled", false)
 	sliding_collision.set_deferred("disabled", false)

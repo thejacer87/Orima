@@ -37,7 +37,8 @@ var music = {
 		"underworld": "res://SFX/Music/02-underworld.wav",
 	}
 var sprites = {
-		"brick": "res://sprites/brick.png"
+		"brick": "res://sprites/brick.png",
+		"koopa_red": "res://sprites/koopa_red.png"
 	}
 var destination := Vector2()
 var loader
@@ -145,9 +146,10 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 				"goomba.png 5":
 					child = Globals.Enemies.GOOMBA.instance()
 				"koopa_green.png 6":
-					child = Globals.Enemies.KOOPA_GREEN.instance()
+					child = Globals.Enemies.KOOPA.instance()
 				"koopa_red.png 7":
-					child = Globals.Enemies.KOOPA_RED.instance()
+					child = Globals.Enemies.KOOPA.instance()
+					child.is_red = true
 				"brick_coin.png 11":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
