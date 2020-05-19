@@ -20,6 +20,7 @@ onready var kick_right = $Kick/KickRight
 onready var kick_left = $Kick/KickLeft
 onready var sliding_collision = $Sliding/CollisionShape2D
 onready var ledge_turnaround = $LedgeTurnaround
+onready var animation_player = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -38,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 	if is_sliding and is_on_wall():
 		audio_bump.play()
 
-	if is_red and not ledge_turnaround.is_colliding():
+	if is_red and not is_sliding and not ledge_turnaround.is_colliding():
 		direction *= -1
 
 
@@ -69,14 +70,11 @@ func kick():
 
 
 func flip():
-
-	if is_red:
-		ledge_turnaround.set_deferred("enabled", false)
 	remove_collisions()
 	velocity = Vector2.ZERO
 	speed = 0
 	gravity = 0
-	$AnimationPlayer.play("flip")
+	animation_player.play("flip")
 	audio_squish.play()
 	$Timer.start()
 	$Timer2.start()
@@ -92,7 +90,7 @@ func stop():
 	velocity = Vector2.ZERO
 	speed = 0
 	gravity = 0
-	$AnimationPlayer.stop()
+	animation_player.stop()
 	audio_squish.play()
 	$Timer.start()
 	$Timer2.start()
@@ -104,16 +102,15 @@ func stop():
 
 
 func bump():
-	print("bump koopa")
 	velocity.y = min(200, velocity.y - 200)
-	$AnimationPlayer.play("bump")
+	animation_player.play("bump")
 	.remove_collisions()
 	yield(get_tree().create_timer(3), "timeout")
 	die()
 
 
 func move_again():
-	$AnimationPlayer.play_backwards("flip")
+	animation_player.play_backwards("flip")
 	enable_collisions()
 	# this fucks things up for the kick if it's in `enable_collisions()`
 	$TurnAround/CollisionShape2D.set_deferred("disabled", false)
@@ -130,7 +127,7 @@ func _on_Timer_timeout() -> void:
 
 func _on_Timer2_timeout() -> void:
 	if not is_sliding:
-		$AnimationPlayer.play("shaking")
+		animation_player.play("shaking")
 
 
 func _on_Sliding_body_entered(body: Node) -> void:
@@ -159,4 +156,4 @@ func remove_collisions():
 	kick_left.set_deferred("enabled", true)
 	kick_right.set_deferred("enabled", true)
 	$Terrain.set_deferred("disabled", false)
-#	sliding_collision.set_deferred("disabled", true)
+	sliding_collision.set_deferred("disabled", true)
