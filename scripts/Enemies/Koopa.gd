@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 	if is_sliding and is_on_wall():
 		audio_bump.play()
 
-	if is_red and not is_sliding and not ledge_turnaround.is_colliding():
+	if is_red and not is_sliding and not ledge_turnaround.is_colliding() and is_on_floor():
 		direction *= -1
 
 

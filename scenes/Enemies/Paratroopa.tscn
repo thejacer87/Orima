@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://scripts/Enemies/FlyingKoopa.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Enemies/Paratroopa.gd" type="Script" id=1]
 [ext_resource path="res://sprites/koopa_flying.png" type="Texture" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -19,9 +19,14 @@ animations = [ {
 "speed": 6.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 2 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 9, 5 )
+
 [node name="Paratroopa" type="Node2D"]
 script = ExtResource( 1 )
-move_to = Vector2( 0, 112 )
 
 [node name="Body" type="StaticBody2D" parent="."]
 
@@ -29,6 +34,26 @@ move_to = Vector2( 0, 112 )
 frames = SubResource( 3 )
 playing = true
 
+[node name="Kill" type="Area2D" parent="Body"]
+monitorable = false
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Kill"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 0, -8 )
+rotation = 3.14159
+shape = SubResource( 4 )
+one_way_collision = true
+
+[node name="PlayerDamage" type="Area2D" parent="Body"]
+modulate = Color( 0.0431373, 0, 1, 1 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/PlayerDamage"]
+position = Vector2( 0, 2 )
+shape = SubResource( 5 )
+
 [node name="MovementTween" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
+[connection signal="body_entered" from="Body/Kill" to="." method="_on_Kill_body_entered"]

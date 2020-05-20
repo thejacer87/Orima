@@ -23,3 +23,15 @@ func _init_tween():
 
 func _physics_process(delta):
 	body.position = body.position.linear_interpolate(follow, 0.075)
+
+
+func _on_Kill_body_entered(player: Player) -> void:
+	queue_free()
+	player.velocity.y = max(player.velocity.y - 350, -350)
+	var koopa = Globals.Enemies.KOOPA.instance()
+	koopa.is_red = true
+	koopa.position = body.global_position
+	koopa.get_node("Kill").set_deferred("monitoring", false)
+	get_tree().get_root().add_child(koopa)
+	yield(get_tree().create_timer(0.5), "timeout")
+	koopa.get_node("Kill").set_deferred("monitoring", true)
