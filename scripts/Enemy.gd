@@ -11,10 +11,6 @@ var is_on_screen := false
 var is_dead := false
 
 
-func _ready() -> void:
-	pass
-
-
 func _physics_process(delta: float) -> void:
 	if is_on_screen:
 		velocity.x = speed * direction
