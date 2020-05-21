@@ -4,6 +4,7 @@ class_name Koopa
 const SLIDE_FACTOR := 7
 
 export var is_red := false
+export var was_paratroopa := false
 
 var is_sliding := false
 var inital_velocity : Vector2
