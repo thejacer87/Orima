@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://scenes/Checkpoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/coin.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://sprites/brick_mushroom_1up.png" type="Texture" id=27]
 [ext_resource path="res://sprites/brick_coin.png" type="Texture" id=28]
 [ext_resource path="res://sprites/brick_mushroom.png" type="Texture" id=29]
+[ext_resource path="res://scenes/Levels/MainCamera.tscn" type="PackedScene" id=30]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -482,14 +483,6 @@ tile_data = PoolIntArray( 17, 8, 0, 65, 8, 0, 83, 8, 0, 84, 8, 0, 132, 8, 0, 133
 tile_set = SubResource( 10 )
 tile_data = PoolIntArray( 262226, 5, 0, 262228, 5, 0, 327699, 1, 0, 327758, 0, 0, 327759, 0, 0, 327760, 0, 0, 327761, 0, 0, 327762, 0, 0, 327763, 0, 0, 327764, 0, 0, 327765, 0, 0, 327769, 0, 0, 327770, 0, 0, 327771, 0, 0, 327772, 1, 0, 327787, 1, 0, 327799, 0, 0, 327800, 0, 0, 327801, 0, 0, 327806, 0, 0, 327807, 1, 0, 327808, 1, 0, 327809, 0, 0, 524349, 12, 0, 589836, 1, 0, 589841, 0, 0, 589842, 2, 0, 589843, 0, 0, 589844, 1, 0, 589845, 0, 0, 589899, 0, 0, 589900, 13, 0, 589901, 0, 0, 589916, 11, 0, 589928, 2, 0, 589931, 1, 0, 589934, 1, 0, 589940, 0, 0, 589951, 0, 0, 589952, 0, 0, 589990, 0, 0, 589991, 0, 0, 589992, 1, 0, 589993, 0, 0, 786452, 5, 0, 786474, 5, 0, 786483, 5, 0, 786485, 5, 0, 786520, 5, 0, 786532, 5, 0, 786534, 5, 0, 786547, 6, 0, 786550, 5, 0, 786552, 5, 0, 786561, 5, 0, 786563, 5, 0, 786605, 5, 0, 786607, 5, 0 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 32, 200 )
-current = true
-limit_left = 0
-limit_top = 8
-limit_right = 3328
-limit_bottom = 232
-
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 32, 200 )
 z_index = 1
@@ -527,3 +520,6 @@ position = Vector2( 1312, 224 )
 
 [node name="DeathBlock3" parent="." instance=ExtResource( 5 )]
 position = Vector2( -72, 248 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 30 )]
+position = Vector2( 32, 200 )

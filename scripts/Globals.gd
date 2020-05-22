@@ -8,6 +8,7 @@ const MUSHROOM = preload("res://scenes/Mushroom.tscn")
 const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 
 var GameState
+var GUI
 var GameMusic
 var Player
 var Enemies
