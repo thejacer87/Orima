@@ -3,7 +3,7 @@ extends Node
 
 enum powerup_states {SMALL, BIG, FIRE_FLOWER, INVICIBLE}
 
-onready var starting_lives := 3
+var starting_lives := 3
 var lives setget set_lives
 var coins setget set_coins
 var powerup setget set_powerup
@@ -21,7 +21,7 @@ func die() -> void:
 	Globals.GameMusic.play(Globals.music["die"])
 	self.powerup = powerup_states.SMALL
 	lives -= 1
-	if lives < 0:
+	if lives <= 0:
 		game_over()
 	else:
 		yield(get_tree().create_timer(2), "timeout")
@@ -32,7 +32,8 @@ func die() -> void:
 
 
 func update_GUI() -> void:
-	Globals.GUI.update_GUI(coins, lives)
+	if is_instance_valid(Globals.GUI):
+		Globals.GUI.update_GUI(coins, lives)
 
 
 func game_over() -> void:
