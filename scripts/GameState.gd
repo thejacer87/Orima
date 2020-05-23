@@ -46,7 +46,12 @@ func set_lives(value) -> void:
 
 
 func set_coins(value) -> void:
-	coins = value
+	if value == 100:
+		coins = 0
+		lives += 1
+		Globals.GameMusic.play(Globals.sounds["1up"])
+	else:
+		coins = value
 	update_GUI()
 
 

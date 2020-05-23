@@ -37,6 +37,9 @@ var music = {
 		"die": "res://SFX/Sounds/smb_mariodie.wav",
 		"underworld": "res://SFX/Music/02-underworld.wav",
 	}
+var sounds = {
+		"1up": "res://SFX/Sounds/smb_1-up.wav",
+	}
 var sprites = {
 		"brick": "res://sprites/brick.png",
 		"koopa_red": "res://sprites/koopa_red.png"
