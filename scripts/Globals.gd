@@ -94,7 +94,7 @@ func goto_level(level_path, coordinates):
 		return
 	set_process(true)
 
-	if current_scene != null:
+	if is_instance_valid(current_scene):
 		current_scene.queue_free()
 
 	# start your "loading..." animation

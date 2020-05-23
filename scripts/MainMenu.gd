@@ -43,6 +43,9 @@ func cheat_code(event):
 func _on_Start_pressed() -> void:
 	Globals.GameMusic.stop()
 	SceneTransition.change_scene(Globals.levels["1-1"], Globals.default_starting_position)
+	# That's no moon, it's a hack!
+	yield(get_tree().create_timer(1.5), "timeout")
+	queue_free()
 
 
 func _on_Quit_pressed() -> void:
