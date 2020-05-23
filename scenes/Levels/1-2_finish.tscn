@@ -19,7 +19,7 @@
 [ext_resource path="res://sprites/brick_coin.png" type="Texture" id=17]
 [ext_resource path="res://sprites/brick_mushroom.png" type="Texture" id=18]
 [ext_resource path="res://sprites/cloud.png" type="Texture" id=19]
-[ext_resource path="res://scripts/Levels/1-2_finish.gd" type="Script" id=20]
+[ext_resource path="res://scripts/Levels/Level_1-2_finish.gd" type="Script" id=20]
 
 [sub_resource type="TileSet" id=1]
 0/name = "brick.png 0"

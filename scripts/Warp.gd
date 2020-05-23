@@ -21,11 +21,12 @@ func _process(delta: float) -> void:
 
 	if (Input.is_action_pressed(warp_direction) and bodies.size() > 0):
 		var player: Player = bodies[0]
-		pipe_audio.play()
-		player.warp(direction)
-		player.is_warping = true
-		# wait for warp animation to finish
-		yield(get_tree().create_timer(1), "timeout")
-		player.is_warping = false
-		Globals.goto_level(target_scene, local_position)
-		yield(get_tree().create_timer(0.5), "timeout")
+		if not player.is_warping:
+			pipe_audio.play()
+			player.warp(direction)
+			player.is_warping = true
+			# wait for warp animation to finish
+			yield(get_tree().create_timer(1), "timeout")
+			player.is_warping = false
+			Globals.goto_level(target_scene, local_position)
+			yield(get_tree().create_timer(0.5), "timeout")

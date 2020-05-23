@@ -9,6 +9,6 @@ func _ready() -> void:
 
 func update_GUI(coins, lives) -> void:
 	if life_count != null:
-		life_count.text = "x %d" % lives
+		life_count.text = "%0*d" % [2, lives]
 	if coin_count != null:
-		coin_count.text = "x %d" % coins
+		coin_count.text = "%0*d" % [2, coins]

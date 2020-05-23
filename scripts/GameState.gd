@@ -15,7 +15,6 @@ func _ready() -> void:
 	self.lives = max(0, starting_lives)
 	self.coins = 0
 	self.powerup = powerup_states.SMALL
-#	update_GUI()
 
 
 func die() -> void:
@@ -31,6 +30,7 @@ func die() -> void:
 			Globals.default_starting_position
 		)
 
+
 func update_GUI() -> void:
 	Globals.GUI.update_GUI(coins, lives)
 
@@ -41,13 +41,13 @@ func game_over() -> void:
 
 
 func set_lives(value) -> void:
-	update_GUI()
 	lives = value
+	update_GUI()
 
 
 func set_coins(value) -> void:
-	update_GUI()
 	coins = value
+	update_GUI()
 
 
 func set_powerup(value) -> void:
