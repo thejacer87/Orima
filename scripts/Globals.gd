@@ -8,6 +8,7 @@ const MUSHROOM = preload("res://scenes/Mushroom.tscn")
 const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 
 var GameState
+var GUI
 var GameMusic
 var Player
 var Enemies
@@ -35,6 +36,9 @@ var music = {
 		"main": "res://SFX/Music/01-main-theme-overworld.wav",
 		"die": "res://SFX/Sounds/smb_mariodie.wav",
 		"underworld": "res://SFX/Music/02-underworld.wav",
+	}
+var sounds = {
+		"1up": "res://SFX/Sounds/smb_1-up.wav",
 	}
 var sprites = {
 		"brick": "res://sprites/brick.png",
@@ -120,7 +124,7 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.get_node("Sprite").self_modulate = color
 					child.get_node("EmptySprite").self_modulate = color
 					child.get_node("Sprite").visible = false
-					child.get_node("Items").add_child(Globals.COIN.instance())
+#					child.get_node("Items").add_child(Globals.COIN.instance())
 				"mushroom.png 2":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").self_modulate = color
