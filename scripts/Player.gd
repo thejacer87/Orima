@@ -6,6 +6,7 @@ const ACC := 100
 const RUN_SCALE := 1.5
 const SMALL_SHAPE := Vector2(7.75, 7.5)
 const BIG_SHAPE := Vector2(15.5, 7.5)
+const MAX_FALL_SPEED := 250
 
 var gravity
 var max_jump_velocity
@@ -76,7 +77,8 @@ func move(delta: float) -> void:
 		else:
 			velocity.x = 0
 
-	velocity.y += gravity * delta
+#	velocity.y += max(gravity * delta, 5)
+	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
 
 	var snap = Vector2.DOWN * 8 if not is_jumping else Vector2.ZERO
 	velocity = move_and_slide_with_snap(velocity, snap, FLOOR)
@@ -134,6 +136,9 @@ func die():
 			animation_player.play("dead")
 		Globals.GameState.die()
 
+func kill_bump() -> void:
+	velocity.y = -80
+	
 
 func _on_SmallHurtbox_area_entered(area: Area2D) -> void:
 	self.damage()

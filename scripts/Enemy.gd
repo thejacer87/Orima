@@ -48,7 +48,7 @@ func bump():
 
 func _on_body_entered(player: Player) -> void:
 	is_dead = true
-	player.velocity.y = max(player.velocity.y - 350, -350)
+	player.kill_bump()
 	squish()
 
 

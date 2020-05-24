@@ -21,6 +21,7 @@ func _ready() -> void:
 	if is_hidden:
 		hide_block()
 
+
 func hide_block(hide = true) -> void:
 	sprite.visible = not hide
 	empty_sprite.visible = not hide
