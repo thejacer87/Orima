@@ -142,6 +142,12 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.get_node("EmptySprite").self_modulate = color
 					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
 					child.get_node("Items").add_child(Globals.MUSHROOM_1UP.instance())
+				"bush.png 15":
+					child = Globals.BLOCK.instance()
+					child.get_node("Sprite").self_modulate = color
+					child.get_node("EmptySprite").self_modulate = color
+					child.is_hidden = true
+					child.get_node("Items").add_child(Globals.MUSHROOM_1UP.instance())
 				"coin.png 3":
 					child = Globals.COIN.instance()
 				"piranha_open.png 4":
