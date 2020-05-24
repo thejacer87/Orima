@@ -80,11 +80,13 @@ texture = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="BlockCollision" parent="." instance=ExtResource( 5 )]
 
 [node name="BumpKill" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 collision_mask = 4
 

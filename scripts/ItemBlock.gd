@@ -1,11 +1,12 @@
 extends StaticBody2D
 
-export(bool) var is_hidden = false
+var is_hidden := false
 
 onready var hit_anitmation = $AnimationPlayer
 onready var sprite = $Sprite
 onready var empty_sprite = $EmptySprite
 onready var collision = $CollisionShape2D
+onready var block_collision = $BlockCollision/CollisionPolygon2D
 onready var block_hitbox = $BlockHitbox/CollisionShape2D
 onready var bump_kill_collision = $BumpKill/CollisionShape2D
 onready var items = $Items
@@ -18,9 +19,13 @@ func _ready() -> void:
 		item.z_index = -1
 		item.visible = false
 	if is_hidden:
-		sprite.visible = false
-		empty_sprite.visible = false
-		collision.set_deferred('disabled', true)
+		hide_block()
+
+func hide_block(hide = true) -> void:
+	sprite.visible = not hide
+	empty_sprite.visible = not hide
+	collision.set_deferred('disabled', hide)
+	block_collision.set_deferred('disabled', hide)
 
 
 func _on_BumpKill_body_entered(body: Node) -> void:
@@ -35,7 +40,7 @@ func _on_BlockHitbox_bump(player: Player) -> void:
 			hit_anitmation.play("hit")
 			audio_bump.play()
 			# Make entire block visible in case it was a hidden block
-			visible = true
+			hide_block(false)
 
 			var item_count = items.get_child_count()
 			var item = items.get_child(0)
