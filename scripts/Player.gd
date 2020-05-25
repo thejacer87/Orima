@@ -6,7 +6,7 @@ const ACC := 100
 const RUN_SCALE := 1.5
 const SMALL_SHAPE := Vector2(7.75, 7.5)
 const BIG_SHAPE := Vector2(15.5, 7.5)
-const MAX_FALL_SPEED := 250
+const MAX_FALL_SPEED := 300
 
 var gravity
 var max_jump_velocity
@@ -14,7 +14,7 @@ var min_jump_velocity
 var speed
 var health := 1
 var walk_speed : float = 7.0 * Globals.UNIT_SIZE
-var max_jump_height : float = 4.75 * Globals.UNIT_SIZE
+var max_jump_height : float = 4.5 * Globals.UNIT_SIZE
 var min_jump_height : float = 1.25 * Globals.UNIT_SIZE
 var jump_duration := .5
 var is_dying := false
@@ -138,7 +138,7 @@ func die():
 
 func kill_bump() -> void:
 	velocity.y = -80
-	
+
 
 func _on_SmallHurtbox_area_entered(area: Area2D) -> void:
 	self.damage()
