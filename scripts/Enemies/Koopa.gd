@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_body_entered(player: Player) -> void:
-	player.velocity.y = min(player.velocity.y - 120, -120)
+	player.kill_bump()
 	if is_sliding:
 		stop()
 	else:

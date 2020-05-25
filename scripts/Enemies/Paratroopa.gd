@@ -28,7 +28,7 @@ func _physics_process(delta):
 func _on_Kill_body_entered(player: Player) -> void:
 	visible = false
 	$Squish.play()
-	player.velocity.y = min(player.velocity.y - 120, -120)
+	player.kill_bump()
 	var koopa = Globals.Enemies.KOOPA.instance()
 	koopa.is_red = true
 	koopa.add_to_group("former_paratroopas")
