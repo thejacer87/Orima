@@ -212,7 +212,7 @@ remote_path = NodePath("../../Camera2D")
 position = Vector2( 52, 144 )
 
 [node name="TileMap" type="TileMap" parent="."]
-self_modulate = Color( 0.333333, 0.333333, 0.333333, 1 )
+self_modulate = Color( 0.8, 0.8, 0.8, 1 )
 tile_set = SubResource( 9 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 2
