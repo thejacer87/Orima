@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 1.0
+height = 24.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "spin"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="FireBar" type="Node2D"]
+
+[node name="Fireballs" type="Area2D" parent="."]
+rotation = 3.10364
+collision_layer = 4
+
+[node name="Sprite" type="Sprite" parent="Fireballs"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fireballs"]
+position = Vector2( 0, -12 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fireballs"]
+anims/spin = SubResource( 2 )
