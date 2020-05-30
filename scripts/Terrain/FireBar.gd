@@ -1,9 +1,11 @@
 extends Node2D
 
 onready var animation_player = $Fireballs/AnimationPlayer
+onready var item_block = $ItemBlock
 
 func _ready():
-	$ItemBlock.is_empty = true
+	item_block.is_empty = true
+	item_block.modulate = "#CE4D08"
 	animation_player.play("spin")
 
 

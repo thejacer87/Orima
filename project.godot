@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Orima"
-run/main_scene="res://scenes/Levels/1-1.tscn"
+run/main_scene="res://scenes/Levels/1-4.tscn"
 config/icon="res://sprites/mario.png"
 
 [autoload]

@@ -4,6 +4,7 @@ const UNIT_SIZE = 16
 const COIN = preload("res://scenes/Coin.tscn")
 const BRICK = preload("res://scenes/Brick.tscn")
 const BLOCK = preload("res://scenes/ItemBlock.tscn")
+const FIREBAR = preload("res://scenes/Terrain/FireBar.tscn")
 const MUSHROOM = preload("res://scenes/Mushroom.tscn")
 const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 
@@ -36,6 +37,7 @@ var music = {
 		"main": "res://SFX/Music/01-main-theme-overworld.wav",
 		"die": "res://SFX/Sounds/smb_mariodie.wav",
 		"underworld": "res://SFX/Music/02-underworld.wav",
+		"castle": "res://SFX/Music/04-castle.wav",
 	}
 var sounds = {
 		"1up": "res://SFX/Sounds/smb_1-up.wav",
@@ -124,7 +126,7 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.get_node("Sprite").self_modulate = color
 					child.get_node("EmptySprite").self_modulate = color
 					child.get_node("Sprite").visible = false
-#					child.get_node("Items").add_child(Globals.COIN.instance())
+					child.is_empty = true
 				"mushroom.png 2":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").self_modulate = color
@@ -162,6 +164,8 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.is_red = true
 				"koopa_flying.png 14":
 					child = Globals.Enemies.PARATROOPA.instance()
+				"fireball.png 16":
+					child = Globals.FIREBAR.instance()
 				"brick_coin.png 11":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
