@@ -8,6 +8,8 @@ current = true
 limit_left = 0
 limit_top = 8
 limit_bottom = 232
+smoothing_enabled = true
+smoothing_speed = 25.0
 
 [node name="GUI" parent="." instance=ExtResource( 1 )]
 
