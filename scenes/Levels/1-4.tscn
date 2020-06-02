@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/TileMaps/DynamicTileMap.tscn" type="PackedScene" id=2]
@@ -255,6 +255,9 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 10/shapes = [  ]
 10/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 16, 4 )
+
 [node name="1-4" type="Node2D"]
 script = ExtResource( 14 )
 
@@ -285,14 +288,14 @@ tile_data = PoolIntArray( 196606, 1, 0, 196607, 1, 0, 131074, 1, 0, 131075, 1, 0
 [node name="DynamicTileMap" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( 262223, 10, 0, 262231, 16, 0, 327785, 9, 0, 327788, 9, 0, 327791, 9, 0, 393239, 10, 0, 393246, 2, 0, 393253, 10, 0, 393265, 16, 0, 393275, 16, 0, 393282, 16, 0, 589899, 16, 0, 589907, 16, 0, 589915, 10, 0, 589928, 9, 0, 589931, 9, 0, 589934, 9, 0, 655390, 16, 0 )
 
-[node name="Bowser" parent="DynamicTileMap" instance=ExtResource( 19 )]
-position = Vector2( 2184, 144 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 2128, 88 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+
+[node name="Bowser" parent="." instance=ExtResource( 19 )]
+position = Vector2( 2184, 144 )
 
 [node name="ParallaxBackground" parent="." instance=ExtResource( 15 )]
 
@@ -300,7 +303,18 @@ remote_path = NodePath("../../Camera2D")
 modulate = Color( 0, 0, 0, 1 )
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 17 )]
-position = Vector2( 2112, 96 )
-move_to = Vector2( 64, 0 )
+position = Vector2( 2128, 96 )
+move_to = Vector2( 72, 0 )
+
+[node name="TileMap" parent="MovingPlatform/Platform" index="0"]
+tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0 )
+
+[node name="CollisionShape2D" parent="MovingPlatform/Platform" index="1"]
+position = Vector2( 16, 4 )
+shape = SubResource( 10 )
 
 [editable path="ParallaxBackground"]
+
+[editable path="MovingPlatform"]
+
+[editable path="MovingPlatform/Platform"]
