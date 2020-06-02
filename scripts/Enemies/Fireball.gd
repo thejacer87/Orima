@@ -6,7 +6,7 @@ onready var animation_player := $AnimationPlayer
 
 func _ready() -> void:
 	animation_player.play("move")
-	
+
 func _physics_process(delta) -> void:
 	position.x += SPEED * delta
 
