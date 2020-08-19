@@ -31,6 +31,7 @@ var levels_flip = {
 var scenes = {
 		"menu": "res://scenes/MainMenu.tscn",
 		"gameover": "res://scenes/GameOver.tscn",
+		"winner": "res://scenes/Winner.tscn",
 	}
 var music = {
 		"menu": "res://SFX/Music/title.wav",

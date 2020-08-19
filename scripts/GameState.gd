@@ -1,6 +1,5 @@
 extends Node
 
-
 enum powerup_states {SMALL, BIG, FIRE_FLOWER, INVICIBLE}
 
 var starting_lives := 3

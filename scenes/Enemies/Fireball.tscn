@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/Enemies/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bowser_fire.png" type="Texture" id=2]
+[ext_resource path="res://SFX/Sounds/smb_bowserfire.wav" type="AudioStream" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "move"
 length = 0.2
 loop = true
@@ -21,7 +22,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1, -1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 4 )
 
 [node name="Fireball" type="StaticBody2D"]
@@ -32,14 +33,17 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/move = SubResource( 2 )
+anims/move = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Fireball_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

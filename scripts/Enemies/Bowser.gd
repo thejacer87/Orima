@@ -3,6 +3,8 @@ extends KinematicBody2D
 
 onready var animation_player := $AnimationPlayer
 onready var mouth := $Body/Mouth
+onready var fire_timer := $FireTimer
+onready var jump_timer := $JumpTimer
 onready var fireball := preload("res://scenes/Enemies/Fireball.tscn")
 
 var left_limit : Vector2
@@ -42,7 +44,6 @@ func _on_FireTimer_random_timeout() -> void:
 
 func jump() -> void:
 	if is_on_floor():
-		print("jump")
 		velocity.y = max_jump_velocity
 
 
@@ -51,6 +52,14 @@ func move_horizontal(delta) -> void:
 #	position.x = dest.x
 	pass
 
+
+func stop_shooting() -> void:
+	fire_timer.queue_free()
+	jump_timer.queue_free()
+
+
+func die() -> void:
+	queue_free()
 
 func _on_JumpTimer_random_timeout():
 	jump()
