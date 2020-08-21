@@ -14,7 +14,7 @@ var GameMusic
 var Player
 var Enemies
 
-var default_starting_position := Vector2(40.0, 0.0)
+var default_starting_position := Vector2(40.0, 104.0)
 var levels = {
 		"1-1": "res://scenes/Levels/1-1.tscn",
 		"1-2": "res://scenes/Levels/1-2.tscn",
@@ -89,7 +89,7 @@ func _process(time):
 			break
 
 
-func goto_level(level_path, coordinates):
+func goto_level(level_path, coordinates = null):
 	destination = coordinates
 	loader = ResourceLoader.load_interactive(level_path)
 	if loader == null:
@@ -193,5 +193,5 @@ func set_new_scene(scene_resource):
 	current_scene = scene_resource.instance()
 	get_node("/root").add_child(current_scene)
 	var player = current_scene.get_node("Player")
-	if player != null and not GameState.checkpoint_reached:
-		player.global_position = destination   # move player to new position
+	if player != null and destination != null and not GameState.checkpoint_reached:
+		player.global_position = destination  # move player to new position

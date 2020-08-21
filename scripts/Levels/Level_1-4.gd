@@ -9,13 +9,10 @@ onready var bridge = $Bridge
 onready var bowser = $Bowser
 
 
-
 func _ready() -> void:
 	Globals.convert_tilecells_to_nodes(self, dynamic_tilemap)
 	Globals.GameState.update_GUI()
 	Globals.GameMusic.play(Globals.music["castle"])
-	player.position.y = 104
-	player.position.x = 12
 
 
 func _on_BridgeSwitch_body_entered(body: Node) -> void:

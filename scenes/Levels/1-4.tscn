@@ -278,7 +278,7 @@ position = Vector2( 2088, 248 )
 position = Vector2( 2168, 248 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2144, 88 )
+position = Vector2( 12.9459, 103.685 )
 
 [node name="TileMap" type="TileMap" parent="."]
 self_modulate = Color( 0.8, 0.8, 0.8, 1 )
@@ -293,7 +293,7 @@ tile_data = PoolIntArray( 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0
 tile_data = PoolIntArray( 262223, 10, 0, 262231, 16, 0, 327785, 9, 0, 327788, 9, 0, 327791, 9, 0, 393239, 10, 0, 393246, 2, 0, 393253, 10, 0, 393265, 16, 0, 393275, 16, 0, 393282, 16, 0, 589899, 16, 0, 589907, 16, 0, 589915, 10, 0, 589928, 9, 0, 589931, 9, 0, 589934, 9, 0, 655390, 16, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 15 )]
-position = Vector2( 2144, 88 )
+position = Vector2( 12.9459, 103.685 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
