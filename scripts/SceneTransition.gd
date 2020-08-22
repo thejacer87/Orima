@@ -17,7 +17,7 @@ func change_scene(scene, position, delay = 1.5):
 	yield(get_tree().create_timer(delay), "timeout")
 	emit_signal("scene_changed")
 
-func reload_scene(scene, position, delay = 1.5):
+func reload_scene(scene, position = null, delay = 1.5):
 	lives.text = "x   %d" % Globals.GameState.lives
 	level.text = "WORLD %s" % Globals.levels_flip[scene]
 	animation_player.play("fade_out")

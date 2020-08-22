@@ -4,6 +4,7 @@ const UNIT_SIZE = 16
 const COIN = preload("res://scenes/Coin.tscn")
 const BRICK = preload("res://scenes/Brick.tscn")
 const BLOCK = preload("res://scenes/ItemBlock.tscn")
+const FIREBAR = preload("res://scenes/Terrain/FireBar.tscn")
 const MUSHROOM = preload("res://scenes/Mushroom.tscn")
 const MUSHROOM_1UP = preload("res://scenes/Mushroom1Up.tscn")
 
@@ -13,7 +14,7 @@ var GameMusic
 var Player
 var Enemies
 
-var default_starting_position := Vector2(40.0, 0.0)
+var default_starting_position := Vector2(40.0, 104.0)
 var levels = {
 		"1-1": "res://scenes/Levels/1-1.tscn",
 		"1-2": "res://scenes/Levels/1-2.tscn",
@@ -30,12 +31,14 @@ var levels_flip = {
 var scenes = {
 		"menu": "res://scenes/MainMenu.tscn",
 		"gameover": "res://scenes/GameOver.tscn",
+		"winner": "res://scenes/Winner.tscn",
 	}
 var music = {
 		"menu": "res://SFX/Music/title.wav",
 		"main": "res://SFX/Music/01-main-theme-overworld.wav",
 		"die": "res://SFX/Sounds/smb_mariodie.wav",
 		"underworld": "res://SFX/Music/02-underworld.wav",
+		"castle": "res://SFX/Music/04-castle.wav",
 	}
 var sounds = {
 		"1up": "res://SFX/Sounds/smb_1-up.wav",
@@ -86,7 +89,7 @@ func _process(time):
 			break
 
 
-func goto_level(level_path, coordinates):
+func goto_level(level_path, coordinates = null):
 	destination = coordinates
 	loader = ResourceLoader.load_interactive(level_path)
 	if loader == null:
@@ -124,7 +127,7 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.get_node("Sprite").self_modulate = color
 					child.get_node("EmptySprite").self_modulate = color
 					child.get_node("Sprite").visible = false
-#					child.get_node("Items").add_child(Globals.COIN.instance())
+					child.is_empty = true
 				"mushroom.png 2":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").self_modulate = color
@@ -148,6 +151,14 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.get_node("EmptySprite").self_modulate = color
 					child.is_hidden = true
 					child.get_node("Items").add_child(Globals.MUSHROOM_1UP.instance())
+				"cloud.png 9":
+					child = Globals.BLOCK.instance()
+					child.get_node("EmptySprite").self_modulate = "CCCCCC"
+					child.is_hidden = true
+					var coin = Globals.COIN.instance()
+					coin.monitoring = false
+					coin.monitorable = false
+					child.get_node("Items").add_child(coin)
 				"coin.png 3":
 					child = Globals.COIN.instance()
 				"piranha_open.png 4":
@@ -162,6 +173,8 @@ func convert_tilecells_to_nodes(level, tilemap, color := "#CE4D08") -> void:
 					child.is_red = true
 				"koopa_flying.png 14":
 					child = Globals.Enemies.PARATROOPA.instance()
+				"fireball.png 16":
+					child = Globals.FIREBAR.instance()
 				"brick_coin.png 11":
 					child = Globals.BLOCK.instance()
 					child.get_node("Sprite").set_texture(load(Globals.sprites.brick))
@@ -180,5 +193,5 @@ func set_new_scene(scene_resource):
 	current_scene = scene_resource.instance()
 	get_node("/root").add_child(current_scene)
 	var player = current_scene.get_node("Player")
-	if player != null and not GameState.checkpoint_reached:
-		player.global_position = destination   # move player to new position
+	if player != null and destination != null and not GameState.checkpoint_reached:
+		player.global_position = destination  # move player to new position

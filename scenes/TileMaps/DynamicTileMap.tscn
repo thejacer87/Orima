@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sprites/brick.png" type="Texture" id=1]
 [ext_resource path="res://sprites/block.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://sprites/brick_mushroom.png" type="Texture" id=14]
 [ext_resource path="res://sprites/koopa_flying.png" type="Texture" id=15]
 [ext_resource path="res://sprites/bush.png" type="Texture" id=16]
+[ext_resource path="res://sprites/fireball.png" type="Texture" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "brick.png 0"
@@ -242,6 +243,20 @@
 15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
+16/name = "fireball.png 16"
+16/texture = ExtResource( 17 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 16, 16 )
+16/tile_mode = 0
+16/occluder_offset = Vector2( 0, 0 )
+16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
+16/shapes = [  ]
+16/z_index = 0
 
 [node name="DynamicTileMap" type="TileMap"]
 tile_set = SubResource( 1 )

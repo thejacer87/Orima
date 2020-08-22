@@ -132,8 +132,8 @@ func damage():
 func die():
 	if not is_dying:
 		is_dying = true
-		if health <= 0:
-			animation_player.play("dead")
+#		if health <= 0:
+		animation_player.play("dead")
 		Globals.GameState.die()
 
 func kill_bump() -> void:
