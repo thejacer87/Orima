@@ -3,9 +3,11 @@ extends StaticBody2D
 const SPEED := -50
 
 onready var animation_player := $AnimationPlayer
+onready var audio_stream_player := $AudioStreamPlayer
 
 func _ready() -> void:
 	animation_player.play("move")
+	audio_stream_player.play()
 
 func _physics_process(delta) -> void:
 	position.x += SPEED * delta

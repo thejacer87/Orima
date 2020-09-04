@@ -235,6 +235,7 @@ tile_data = PoolIntArray( 131076, 8, 0, 131077, 8, 0, 131098, 8, 0, 196611, 8, 0
 [node name="FlagPole" parent="." instance=ExtResource( 3 )]
 position = Vector2( 360, 136 )
 target_scene = "res://scenes/Levels/1-3.tscn"
+local_position = Vector2( 96, 200 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 0
