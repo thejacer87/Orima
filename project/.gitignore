@@ -4,3 +4,4 @@ screenshots/
 user/
 *.import
 build/
+.vscode
