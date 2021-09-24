@@ -6,41 +6,57 @@ const SPEED_RUN := 15.0 * Globals.UNIT_SIZE
 const MAX_FALL_SPEED := 300
 
 
-
 var gravity
 var velocity := Vector2.ZERO
 var max_jump_velocity
+var max_run_jump_velocity
 var min_jump_velocity
-var max_jump_height := 4.5 * Globals.UNIT_SIZE
-var min_jump_height := 1.25 * Globals.UNIT_SIZE
 var speed := SPEED_WALK
 var snap = Vector2.DOWN * 8
 var jump_duration := .5
-var is_running := false
-var is_jumping := false
+var idle_friction := 0.2
+var friction := 0.02
 
 
 func _ready() -> void:
 	yield(owner, "ready")
+	var max_jump_height = 4.5 * Globals.UNIT_SIZE
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
-	min_jump_velocity = -sqrt(2 * gravity * min_jump_height)
+	max_run_jump_velocity = -sqrt(2 * gravity * (max_jump_height + Globals.UNIT_SIZE))
+	min_jump_velocity = -sqrt(2 * gravity * 1.25 * Globals.UNIT_SIZE)
 
 
 func physics_process(delta: float) -> void:
-	var direction = get_direction()
-	var state = "Move/Walk" if speed == SPEED_WALK else "Move/Run"
-	if direction.x > 0:
-		velocity.x = min(velocity.x + 100, speed)
-		_state_machine.transition_to(state)
-	elif direction.x < 0:
-		velocity.x = max(velocity.x - 100, -speed)
-		_state_machine.transition_to(state)
+	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+
+	if direction:
+		velocity.x = lerp(velocity.x, direction * speed, friction)
+		_state_machine.transition_to("Move/Walk" if speed == SPEED_WALK else "Move/Run")
 	else:
-		velocity.x = 0
+		velocity.x = lerp(velocity.x, 0, idle_friction)
 		_state_machine.transition_to("Move/Idle")
 
+	if velocity.y > 0:
+		_state_machine.transition_to("Move/Fall")
+
+#	if direction.x > 0:
+#		velocity.x = min(velocity.x + 100, speed)
+#	elif direction.x < 0:
+#		velocity.x = max(velocity.x - 100, -speed)
+#		_state_machine.transition_to(state)
+#	else:
+#		velocity.x = 0
+
 	apply_velocity(delta)
+
+	# Hack needed so if the player presses run while in the air. probably a
+	# better solution available
+	if (Input.is_action_pressed("run")):
+		var a = InputEventAction.new()
+		a.action = "run"
+		a.pressed = true
+		Input.parse_input_event(a)
 
 
 func unhandled_input(event: InputEvent) -> void:
@@ -54,11 +70,6 @@ func unhandled_input(event: InputEvent) -> void:
 
 func apply_velocity(delta: float) -> void:
 	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
-#	velocity = player.move_and_slide_with_snap(velocity, snap, FLOOR)
-	velocity = player.move_and_slide(velocity, FLOOR)
-
-
-func get_direction() -> Vector2:
-	return Vector2(Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"), 0)
-
+	velocity = player.move_and_slide_with_snap(velocity, snap, FLOOR)
+#	velocity = player.move_and_slide(velocity, FLOOR)
 
