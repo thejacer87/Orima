@@ -2,7 +2,7 @@ extends PlayerState
 
 const FLOOR := Vector2.UP
 const SPEED_WALK := 7.0 * Globals.UNIT_SIZE
-const SPEED_RUN := 15.0 * Globals.UNIT_SIZE
+const SPEED_RUN := 18.0 * Globals.UNIT_SIZE
 const MAX_FALL_SPEED := 300
 
 

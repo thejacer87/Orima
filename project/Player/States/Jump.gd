@@ -14,6 +14,7 @@ func physics_process(delta: float) -> void:
 		if _parent.velocity.x:
 			_parent.velocity.x = lerp(_parent.velocity.x, direction * _parent.SPEED_WALK, 0)
 		else:
+			print(direction)
 			_parent.velocity.x = lerp(_parent.velocity.x, direction * _parent.SPEED_WALK, _parent.idle_friction)
 #		pass
 	_parent.apply_velocity(delta)
