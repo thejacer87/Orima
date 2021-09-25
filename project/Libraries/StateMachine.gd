@@ -6,7 +6,7 @@ class_name StateMachine
 export var initial_state := NodePath()
 
 onready var state: State = get_node(initial_state) setget set_state
-onready var _state_name := state.name setget , get_state_name
+onready var _state_name := state.name
 
 
 func _init() -> void:
@@ -41,6 +41,3 @@ func set_state(value: State) -> void:
 	state = value
 	_state_name = state.name
 
-
-func get_state_name() -> String:
-	return _state_name
