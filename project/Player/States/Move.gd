@@ -1,18 +1,19 @@
 extends PlayerState
 
 const FLOOR := Vector2.UP
+const FLOOR_SNAP := Vector2.DOWN * 8
 const SPEED_WALK := 7.0 * Globals.UNIT_SIZE
 const SPEED_RUN := 18.0 * Globals.UNIT_SIZE
 const MAX_FALL_SPEED := 300
 
 
 var gravity
+var floor_snap
 var velocity := Vector2.ZERO
 var max_jump_velocity
 var max_run_jump_velocity
 var min_jump_velocity
 var speed := SPEED_WALK
-var snap = Vector2.DOWN * 8
 var jump_duration := .5
 var idle_friction := 0.2
 var friction := 0.02
@@ -21,6 +22,7 @@ var friction := 0.02
 func _ready() -> void:
 	yield(owner, "ready")
 	var max_jump_height = 4.5 * Globals.UNIT_SIZE
+	floor_snap = FLOOR_SNAP
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
 	max_run_jump_velocity = -sqrt(2 * gravity * (max_jump_height + Globals.UNIT_SIZE))
@@ -28,7 +30,7 @@ func _ready() -> void:
 
 
 func physics_process(delta: float) -> void:
-	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	var direction = get_direction()
 
 	if direction:
 		velocity.x = lerp(velocity.x, direction * speed, friction)
@@ -40,15 +42,7 @@ func physics_process(delta: float) -> void:
 	if velocity.y > 0:
 		_state_machine.transition_to("Move/Fall")
 
-#	if direction.x > 0:
-#		velocity.x = min(velocity.x + 100, speed)
-#	elif direction.x < 0:
-#		velocity.x = max(velocity.x - 100, -speed)
-#		_state_machine.transition_to(state)
-#	else:
-#		velocity.x = 0
-
-	apply_velocity(delta)
+	apply_velocity()
 
 	# Hack needed so if the player presses run while in the air. probably a
 	# better solution available
@@ -68,8 +62,12 @@ func unhandled_input(event: InputEvent) -> void:
 		speed = SPEED_WALK
 
 
-func apply_velocity(delta: float) -> void:
+func apply_velocity() -> void:
+	var delta = get_physics_process_delta_time()
 	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
-	velocity = player.move_and_slide_with_snap(velocity, snap, FLOOR)
+	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
 #	velocity = player.move_and_slide(velocity, FLOOR)
 
+
+func get_direction() -> float:
+	return Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
