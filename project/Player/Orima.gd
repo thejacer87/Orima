@@ -31,5 +31,6 @@ func play_animation(animation: String) -> void:
 
 
 func collect_powerup(powerup: String) -> void:
-	print("Powerups/%s" % [powerup])
+	if powerup == "Mushroom" and powerup_state_machine._state_name == "FireFlower":
+		return
 	powerup_state_machine.transition_to("Powerups/%s" % [powerup])
