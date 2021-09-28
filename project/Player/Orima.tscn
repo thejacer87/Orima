@@ -16,7 +16,7 @@
 [ext_resource path="res://Player/mario.png" type="Texture" id=14]
 [ext_resource path="res://Player/mario_fire_big.png" type="Texture" id=15]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "FireFlower"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
@@ -42,32 +42,8 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 0, -8 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("NormalCollision:polygon")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -7, 8, 7, 8, 2, -24, -2, -24 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("RunCollision:polygon")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -8, 8, 8, 8, 2, -24, -2, -24 ) ]
-}
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -92,32 +68,8 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 0, -8 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("NormalCollision:polygon")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -7, 8, 7, 8, 2, -24, -2, -24 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("RunCollision:polygon")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -8, 8, 8, 8, 2, -24, -2, -24 ) ]
-}
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -142,30 +94,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 0, 0 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("NormalCollision:polygon")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -7, 8, 7, 8, 2, -8, -2, -8 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("RunCollision:polygon")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ PoolVector2Array( -8, 8, 8, 8, 2, -8, -2, -8 ) ]
-}
 
 [node name="Orima" type="KinematicBody2D"]
 collision_mask = 0
@@ -173,19 +101,22 @@ script = ExtResource( 1 )
 
 [node name="PowerupStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
-initial_state = NodePath("Powerups")
+initial_state = NodePath("Powerups/Normal")
 
 [node name="Powerups" type="Node" parent="PowerupStateMachine"]
 script = ExtResource( 10 )
 
 [node name="Normal" type="Node" parent="PowerupStateMachine/Powerups"]
 script = ExtResource( 11 )
+collision_node = NodePath("../../../NormalCollision")
 
 [node name="Mushroom" type="Node" parent="PowerupStateMachine/Powerups"]
 script = ExtResource( 12 )
+collision_node = NodePath("../../../BigCollision")
 
 [node name="FireFlower" type="Node" parent="PowerupStateMachine/Powerups"]
 script = ExtResource( 13 )
+collision_node = NodePath("../../../BigCollision")
 
 [node name="MovementStateMachine" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -193,31 +124,51 @@ initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="MovementStateMachine"]
 script = ExtResource( 3 )
+initial_collision_shape = NodePath("")
 
 [node name="Walk" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 5 )
+initial_collision_shape = null
 
 [node name="Idle" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 9 )
+initial_collision_shape = null
 
 [node name="Run" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 7 )
+initial_collision_shape = NodePath("../../../RunCollision")
 
 [node name="Jump" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 6 )
+initial_collision_shape = null
 
 [node name="Fall" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 8 )
+initial_collision_shape = null
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -8 )
-texture = ExtResource( 2 )
+texture = ExtResource( 14 )
 
-[node name="NormalCollision" type="CollisionPolygon2D" parent="."]
+[node name="NormalCollision" type="CollisionPolygon2D" parent="." groups=[
+"collisions",
+]]
+polygon = PoolVector2Array( -7, 8, 7, 8, 2, -8, -2, -8 )
+
+[node name="BigCollision" type="CollisionPolygon2D" parent="." groups=[
+"collisions",
+]]
 polygon = PoolVector2Array( -7, 8, 7, 8, 2, -24, -2, -24 )
+disabled = true
 
-[node name="RunCollision" type="CollisionPolygon2D" parent="."]
-visible = false
+[node name="RunCollision" type="CollisionPolygon2D" parent="." groups=[
+"collisions",
+]]
+polygon = PoolVector2Array( -8, 8, 8, 8, 2, -8, -2, -8 )
+disabled = true
+
+[node name="BigRunCollision" type="CollisionPolygon2D" parent="." groups=[
+"collisions",
+]]
 polygon = PoolVector2Array( -8, 8, 8, 8, 2, -24, -2, -24 )
 disabled = true
 
@@ -226,9 +177,9 @@ current = true
 limit_bottom = 256
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FireFlower = SubResource( 3 )
-anims/Mushroom = SubResource( 4 )
-anims/Normal = SubResource( 5 )
+anims/FireFlower = SubResource( 1 )
+anims/Mushroom = SubResource( 2 )
+anims/Normal = SubResource( 3 )
 
 [node name="MovementStateLabel" type="RichTextLabel" parent="."]
 margin_right = 40.0

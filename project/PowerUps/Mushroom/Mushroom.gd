@@ -6,6 +6,7 @@ func _ready() -> void:
 
 
 func _on_Mushroom_body_entered(orima: Orima) -> void:
-	orima.collect_powerup("Mushroom")
+	# orima.collect_powerup("Mushroom")
+	orima.collect_powerup("Normal")
 	queue_free()
 

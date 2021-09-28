@@ -8,7 +8,9 @@ onready var movement_state_label := $MovementStateLabel
 onready var powerup_state_machine := $PowerupStateMachine
 onready var powerups := $PowerupStateMachine/Powerups
 onready var collision := $NormalCollision
+onready var big_collision := $BigCollision
 onready var run_collision := $RunCollision
+onready var big_run_collision := $BigRunCollision
 
 var run_shape_vertices
 
@@ -41,9 +43,17 @@ func collect_powerup(powerup: String) -> void:
 
 
 func set_run_shape(is_running: bool = false) -> void:
-	if is_running:
-		run_collision.disabled = false
-		collision.disabled = true
+	if powerup_state_machine._state_name == "Normal":
+		if is_running:
+			run_collision.set_deferred("disabled", false)
+			collision.set_deferred("disabled", true)
+		else:
+			run_collision.set_deferred("disabled", true)
+			collision.set_deferred("disabled", false)
 	else:
-		run_collision.disabled = true
-		collision.disabled = false
+		if is_running:
+			big_run_collision.disabled = false
+			big_collision.set_deferred("disabled", true)
+		else:
+			big_run_collision.set_deferred("disabled", true)
+			big_collision.set_deferred("disabled", false)

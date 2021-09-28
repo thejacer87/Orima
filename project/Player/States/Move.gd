@@ -71,3 +71,4 @@ func apply_velocity() -> void:
 
 func get_direction() -> float:
 	return Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+
