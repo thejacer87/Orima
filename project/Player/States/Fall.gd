@@ -2,7 +2,7 @@ extends PlayerState
 
 var initial_direction := 0
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	var direction = _parent.get_direction()
 
 	if direction:

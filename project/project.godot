@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://Libraries/StateMachine.gd"
+}, {
+"base": "Node2D",
+"class": "WorldBase",
+"language": "GDScript",
+"path": "res://Worlds/WorldBase.gd"
 } ]
 _global_script_class_icons={
 "Orima": "",
 "PlayerState": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"WorldBase": ""
 }
 
 [application]

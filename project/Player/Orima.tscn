@@ -124,27 +124,21 @@ initial_state = NodePath("Move")
 
 [node name="Move" type="Node" parent="MovementStateMachine"]
 script = ExtResource( 3 )
-initial_collision_shape = NodePath("")
 
 [node name="Walk" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 5 )
-initial_collision_shape = null
 
 [node name="Idle" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 9 )
-initial_collision_shape = null
 
 [node name="Run" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 7 )
-initial_collision_shape = NodePath("../../../RunCollision")
 
 [node name="Jump" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 6 )
-initial_collision_shape = null
 
 [node name="Fall" type="Node" parent="MovementStateMachine/Move"]
 script = ExtResource( 8 )
-initial_collision_shape = null
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 14 )
@@ -172,10 +166,6 @@ disabled = true
 polygon = PoolVector2Array( -8, 8, 8, 8, 2, -24, -2, -24 )
 disabled = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-limit_bottom = 256
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FireFlower = SubResource( 1 )
 anims/Mushroom = SubResource( 2 )
@@ -187,3 +177,5 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]

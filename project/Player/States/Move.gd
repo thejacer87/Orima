@@ -29,7 +29,7 @@ func _ready() -> void:
 	min_jump_velocity = -sqrt(2 * gravity * 1.25 * Globals.UNIT_SIZE)
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	var direction = get_direction()
 
 	if direction:

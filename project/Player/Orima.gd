@@ -11,24 +11,20 @@ onready var collision := $NormalCollision
 onready var big_collision := $BigCollision
 onready var run_collision := $RunCollision
 onready var big_run_collision := $BigRunCollision
+onready var remote_transform := $RemoteTransform2D
 
 var run_shape_vertices
 
 
 func _ready() -> void:
 	Globals.Player = self
-	connect("powerup_collected", self, "_on_powerup_collected")
-
-	for powerup in powerups.get_children():
-		connect("powerup_collected", powerup, "_on_powerup_collected")
 
 
-func _physics_process(delta: float) -> void:
-#	powerup_state_machine.transition_to("Normal")
+func _physics_process(_delta: float) -> void:
 	pass
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	movement_state_label.text = movement_state_machine._state_name
 
 
@@ -57,3 +53,20 @@ func set_run_shape(is_running: bool = false) -> void:
 		else:
 			big_run_collision.set_deferred("disabled", true)
 			big_collision.set_deferred("disabled", false)
+
+
+func set_current_camera(camera_limits: Dictionary) -> void:
+	var old_camera = get_viewport().get_camera()
+	if old_camera:
+		old_camera.queue_free()
+	var camera = Camera2D.new()
+	camera.limit_left = camera_limits.left
+	camera.limit_top = camera_limits.top
+	camera.limit_right = camera_limits.right
+	camera.limit_bottom = camera_limits.bottom
+	camera.current = true
+	add_child(camera)
+
+
+func die() -> void:
+	get_tree().quit()

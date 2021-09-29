@@ -11,7 +11,7 @@ func unhandled_input(event: InputEvent) -> void:
 	_parent.unhandled_input(event)
 
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(_msg: Dictionary = {}) -> void:
 	owner.set_run_shape(true)
 
 
