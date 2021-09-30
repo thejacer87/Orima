@@ -2,8 +2,8 @@ extends PlayerState
 
 const FLOOR := Vector2.UP
 const FLOOR_SNAP := Vector2.DOWN * 8
-const SPEED_WALK := 7.0 * Globals.UNIT_SIZE
-const SPEED_RUN := 18.0 * Globals.UNIT_SIZE
+const SPEED_WALK := 12.0 * 3 / 5 * Globals.UNIT_SIZE
+const SPEED_RUN := 12.0 * Globals.UNIT_SIZE
 const MAX_FALL_SPEED := 300
 
 
@@ -65,8 +65,8 @@ func unhandled_input(event: InputEvent) -> void:
 func apply_velocity() -> void:
 	var delta = get_physics_process_delta_time()
 	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
-	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
-#	velocity = player.move_and_slide(velocity, FLOOR)
+#	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
+	velocity = player.move_and_slide(velocity, FLOOR)
 
 
 func get_direction() -> float:

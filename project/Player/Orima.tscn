@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player/Orima.gd" type="Script" id=1]
 [ext_resource path="res://Player/mario_big.png" type="Texture" id=2]
@@ -95,6 +95,9 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 256 )
+
 [node name="Orima" type="KinematicBody2D"]
 collision_mask = 0
 script = ExtResource( 1 )
@@ -179,3 +182,10 @@ __meta__ = {
 }
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="LeftBarrier" type="StaticBody2D" parent="."]
+position = Vector2( -64, 0 )
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBarrier"]
+shape = SubResource( 4 )

@@ -12,8 +12,11 @@ onready var big_collision := $BigCollision
 onready var run_collision := $RunCollision
 onready var big_run_collision := $BigRunCollision
 onready var remote_transform := $RemoteTransform2D
+onready var left_barrier := $LeftBarrier
+onready var camera_scene := preload("res://Player/PlayerCamera.tscn")
 
 var run_shape_vertices
+var camera
 
 
 func _ready() -> void:
@@ -26,6 +29,15 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	movement_state_label.text = movement_state_machine._state_name
+	_update_camera_limit()
+
+
+func _update_camera_limit() -> void:
+	var new_position = global_position - Vector2(Globals.SCREEN_WIDTH / 2, 0)
+	if new_position.x > camera.limit_left:
+		camera.limit_left = new_position.x
+
+	left_barrier.position.x = to_local(Vector2(camera.limit_left, 0)).x
 
 
 func play_animation(animation: String) -> void:
@@ -56,16 +68,16 @@ func set_run_shape(is_running: bool = false) -> void:
 
 
 func set_current_camera(camera_limits: Dictionary) -> void:
-	var old_camera = get_viewport().get_camera()
-	if old_camera:
-		old_camera.queue_free()
-	var camera = Camera2D.new()
-	camera.limit_left = camera_limits.left
-	camera.limit_top = camera_limits.top
-	camera.limit_right = camera_limits.right
-	camera.limit_bottom = camera_limits.bottom
-	camera.current = true
-	add_child(camera)
+	var new_camera = camera_scene.instance()
+	new_camera.limit_left = camera_limits.left
+	new_camera.limit_top = camera_limits.top
+	new_camera.limit_right = camera_limits.right
+	new_camera.limit_bottom = camera_limits.bottom
+	new_camera.current = true
+	add_child(new_camera)
+	if camera:
+		camera.queue_free()
+	camera = new_camera
 
 
 func die() -> void:
