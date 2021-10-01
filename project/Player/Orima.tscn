@@ -181,8 +181,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-
 [node name="LeftBarrier" type="StaticBody2D" parent="."]
 position = Vector2( -64, 0 )
 collision_layer = 0

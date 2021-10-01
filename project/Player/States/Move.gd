@@ -2,26 +2,32 @@ extends PlayerState
 
 const FLOOR := Vector2.UP
 const FLOOR_SNAP := Vector2.DOWN * 8
-const SPEED_WALK := 12.0 * 3 / 5 * Globals.UNIT_SIZE
-const SPEED_RUN := 12.0 * Globals.UNIT_SIZE
+const SPEED_WALK := 6 * Globals.UNIT_SIZE
+const SPEED_RUN := 10 * Globals.UNIT_SIZE
+#const SPEED_WALK := 0x1900 / Globals.UNIT_SIZE / 16
+#const SPEED_RUN := 0x2900 / Globals.UNIT_SIZE / 16
 const MAX_FALL_SPEED := 300
 
 
+onready var speed := SPEED_WALK
+onready var velocity := Vector2.ZERO
+onready var friction := 0.02
+onready var jump_duration := 0.5
+onready var deceleration_idle := 0.2
+onready var deceleration_skid := 0.02
+onready var acceleration_walk := 0.015
+onready var acceleration_run := 0.0225
+
 var gravity
 var floor_snap
-var velocity := Vector2.ZERO
 var max_jump_velocity
 var max_run_jump_velocity
 var min_jump_velocity
-var speed := SPEED_WALK
-var jump_duration := .5
-var idle_friction := 0.2
-var friction := 0.02
 
 
 func _ready() -> void:
 	yield(owner, "ready")
-	var max_jump_height = 4.5 * Globals.UNIT_SIZE
+	var max_jump_height = 4.2 * Globals.UNIT_SIZE
 	floor_snap = FLOOR_SNAP
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -32,12 +38,22 @@ func _ready() -> void:
 func physics_process(_delta: float) -> void:
 	var direction = get_direction()
 
+	var acc = deceleration_idle
 	if direction:
-		velocity.x = lerp(velocity.x, direction * speed, friction)
-		_state_machine.transition_to("Move/Walk" if speed == SPEED_WALK else "Move/Run")
+		# If moving in current direction.
+		if sign(velocity.x) == direction:
+			if speed == SPEED_RUN:
+				acc = acceleration_run
+				_state_machine.transition_to("Move/Run")
+			else:
+				acc = acceleration_walk
+				_state_machine.transition_to("Move/Walk")
+		elif velocity.x:
+			acc = deceleration_skid
 	else:
-		velocity.x = lerp(velocity.x, 0, idle_friction)
 		_state_machine.transition_to("Move/Idle")
+
+	velocity.x = lerp(velocity.x, direction * speed, acc)
 
 	if velocity.y > 0:
 		_state_machine.transition_to("Move/Fall")
@@ -65,8 +81,7 @@ func unhandled_input(event: InputEvent) -> void:
 func apply_velocity() -> void:
 	var delta = get_physics_process_delta_time()
 	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
-#	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
-	velocity = player.move_and_slide(velocity, FLOOR)
+	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
 
 
 func get_direction() -> float:

@@ -3,19 +3,17 @@ class_name Orima
 
 
 onready var animantion_player := $AnimationPlayer
-onready var movement_state_machine := $MovementStateMachine
 onready var movement_state_label := $MovementStateLabel
+onready var movement_state_machine := $MovementStateMachine
 onready var powerup_state_machine := $PowerupStateMachine
 onready var powerups := $PowerupStateMachine/Powerups
 onready var collision := $NormalCollision
 onready var big_collision := $BigCollision
 onready var run_collision := $RunCollision
 onready var big_run_collision := $BigRunCollision
-onready var remote_transform := $RemoteTransform2D
 onready var left_barrier := $LeftBarrier
 onready var camera_scene := preload("res://Player/PlayerCamera.tscn")
 
-var run_shape_vertices
 var camera
 
 
