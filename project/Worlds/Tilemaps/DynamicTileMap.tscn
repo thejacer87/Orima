@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/brick_coin.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/brick_mushroom.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/coin.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/brick_mushroom_1up.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/block.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/question.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/mushroom.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/mushroom_1up.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/brick.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/used.png" type="Texture" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "coin"
@@ -65,7 +67,7 @@
 3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
-4/name = "block"
+4/name = "question"
 4/texture = ExtResource( 5 )
 4/tex_offset = Vector2( 0, 0 )
 4/modulate = Color( 1, 1, 1, 1 )
@@ -107,6 +109,34 @@
 6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
+7/name = "brick"
+7/texture = ExtResource( 8 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 16, 16 )
+7/tile_mode = 0
+7/occluder_offset = Vector2( 0, 0 )
+7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
+7/shapes = [  ]
+7/z_index = 0
+8/name = "used"
+8/texture = ExtResource( 9 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/tile_mode = 0
+8/occluder_offset = Vector2( 0, 0 )
+8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
+8/shapes = [  ]
+8/z_index = 0
 
 [node name="DynamicTileMap" type="TileMap"]
 tile_set = SubResource( 1 )

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/used.png" type="Texture" id=1]
+[ext_resource path="res://Worlds/Blocks/Used.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Used" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="BlockCollision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

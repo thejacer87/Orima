@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 7.5 )
+
+[node name="BlockCollision" type="CollisionShape2D"]
+position = Vector2( 0, -0.5 )
+shape = SubResource( 1 )
