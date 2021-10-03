@@ -21,8 +21,8 @@ func _ready() -> void:
 	Globals.Player = self
 
 
-func _physics_process(_delta: float) -> void:
-	pass
+func _physics_process(delta: float) -> void:
+	check_block_collisions()
 
 
 func _process(_delta: float) -> void:
@@ -36,6 +36,13 @@ func _update_camera_limit() -> void:
 		camera.limit_left = new_position.x
 
 	left_barrier.position.x = to_local(Vector2(camera.limit_left, 0)).x
+
+
+func check_block_collisions() -> void:
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider is Block:
+			collision.collider.hit(collision)
 
 
 func play_animation(animation: String) -> void:

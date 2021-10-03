@@ -175,6 +175,7 @@ anims/Mushroom = SubResource( 2 )
 anims/Normal = SubResource( 3 )
 
 [node name="MovementStateLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {

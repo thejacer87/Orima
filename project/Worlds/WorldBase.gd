@@ -41,6 +41,8 @@ func initialize_dynamic_tilemap() -> void:
 				"question":
 					node = Globals.QUESTION.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
+					var coin = load("res://PickUps/Coin.tscn")
+					node.set_items(coin.instance())
 				"used":
 					node = Globals.USED.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color

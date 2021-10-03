@@ -6,6 +6,5 @@ func _ready() -> void:
 	pass
 
 
-func hit() -> void:
-	print("hit")
-	print(name)
+func hit(collision: KinematicCollision2D) -> void:
+	pass
