@@ -6,6 +6,7 @@ func physics_process(_delta: float) -> void:
 	var direction = _parent.get_direction()
 
 	if not initial_direction and not direction:
+		# maybe disable the collision and move orima manually?
 		_parent.velocity.x = 0
 
 	if direction:

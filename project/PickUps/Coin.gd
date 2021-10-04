@@ -6,5 +6,14 @@ func _ready() -> void:
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
-	print("coin up")
+	$Area2D.set_deferred("monitoring", false)
+	set_deferred("visible", false)
+	$AudioStreamPlayer.play()
+	yield($AudioStreamPlayer, "finished")
 	queue_free()
+
+
+func activate() -> void:
+	# up coin counter
+	$AnimationPlayer.play("activate")
+
