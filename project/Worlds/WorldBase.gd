@@ -22,8 +22,10 @@ func init_orima() -> void:
 	var orima = Globals.Player
 	if not orima:
 		orima = load("res://Player/Orima.tscn").instance()
-	orima.position = starting_position
+
+	# double check that this shouldn't be in the if statement
 	add_child(orima)
+	orima.position = starting_position
 	orima.set_current_camera(camera_limit)
 
 
