@@ -6,7 +6,7 @@ class_name StateMachine
 export var initial_state := NodePath()
 
 onready var state: State = get_node(initial_state) setget set_state
-onready var _state_name := state.name
+onready var _state_name := state.name setget , get_current_state
 
 
 func _init() -> void:
@@ -24,6 +24,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	state.physics_process(delta)
+
+
+func get_current_state() -> String:
+	return _state_name
 
 
 func transition_to(target_state_path: String, msg: Dictionary = {}) -> void:

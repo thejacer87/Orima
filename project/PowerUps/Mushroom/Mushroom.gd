@@ -38,10 +38,14 @@ func activate() -> void:
 
 
 func _on_PowerUpCollectArea2D_body_entered(orima: Orima) -> void:
-	visible = false
-	collect_shape.set_deferred("disabled", true)
-	orima.collect_powerup("Mushroom")
-	audio_collect.play()
-	yield(audio_collect, "finished")
+	match orima.get_powerup_state():
+		"Normal":
+			visible = false
+			collect_shape.set_deferred("disabled", true)
+			orima.collect_powerup("Mushroom")
+			audio_collect.play()
+			yield(audio_collect, "finished")
+		"Mushroom", "FireFlower", "Star":
+			pass
 	queue_free()
 

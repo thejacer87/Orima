@@ -48,6 +48,10 @@ func init_dynamic_tilemap() -> void:
 				"brick":
 					node = Globals.BRICK.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
+				"brick_coin":
+					node = Globals.BRICK_COIN.instance()
+					node.set_coins(10)
+					node.modulate_sprites(dynamic_tilemap_color)
 				"question":
 					node = Globals.QUESTION.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color

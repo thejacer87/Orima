@@ -35,7 +35,7 @@ func _update_camera_limit() -> void:
 	if new_position.x > camera.limit_left:
 		camera.limit_left = new_position.x
 
-	left_barrier.position.x = to_local(Vector2(camera.limit_left, 0)).x
+	left_barrier.position.x = to_local(Vector2(camera.limit_left - Globals.UNIT_SIZE / 2, 0)).x
 
 
 func check_block_collisions() -> void:
@@ -50,9 +50,12 @@ func play_animation(animation: String) -> void:
 
 
 func collect_powerup(powerup: String) -> void:
-	if powerup == "Mushroom" and powerup_state_machine._state_name == "FireFlower":
-		return
-	powerup_state_machine.transition_to("Powerups/%s" % [powerup])
+	if powerup == "Mushroom":
+		match powerup_state_machine._state_name:
+			"FireFlower", "Mushroom":
+				return
+			"Normal":
+				powerup_state_machine.transition_to("Powerups/%s" % [powerup])
 
 
 func set_run_shape(is_running: bool = false) -> void:
@@ -65,7 +68,7 @@ func set_run_shape(is_running: bool = false) -> void:
 			normal_collision.set_deferred("disabled", false)
 	else:
 		if is_running:
-			big_run_collision.disabled = false
+			big_run_collision.set_deferred("disabled", false)
 			big_collision.set_deferred("disabled", true)
 		else:
 			big_run_collision.set_deferred("disabled", true)
@@ -83,6 +86,14 @@ func set_current_camera(camera_limits: Dictionary) -> void:
 	if camera:
 		camera.queue_free()
 	camera = new_camera
+
+
+func get_powerup_state() -> String:
+	return powerup_state_machine.get_current_state()
+
+
+func get_movement_state() -> String:
+	return movement_state_machine.get_current_state()
 
 
 func die() -> void:

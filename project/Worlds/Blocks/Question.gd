@@ -3,7 +3,7 @@ extends Block
 onready var sprite := $Sprite
 onready var used_sprite = $UsedSprite
 
-var item setget set_item, get_item
+var item setget set_item
 
 
 func _ready() -> void:
@@ -20,11 +20,13 @@ func get_item() -> Array:
 
 func hit(collision: KinematicCollision2D) -> void:
 	if collision.normal == Vector2.DOWN:
-		$AnimationPlayer.play("bump")
+		$AudioStreamPlayer.play()
 		if item:
+			$AnimationPlayer.play("bump")
 			var node = load(item).instance()
 			add_child(node)
 			node.activate()
+			item = null
 
 
 func change_to_used() -> void:

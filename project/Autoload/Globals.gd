@@ -4,6 +4,7 @@ const UNIT_SIZE = 16
 const SCREEN_WIDTH = 256
 const COIN = preload("res://PickUps/Coin.tscn")
 const BRICK = preload("res://Worlds/Blocks/Brick.tscn")
+const BRICK_COIN = preload("res://Worlds/Blocks/BrickCoin.tscn")
 const QUESTION = preload("res://Worlds/Blocks/Question.tscn")
 const USED = preload("res://Worlds/Blocks/Used.tscn")
 #const BLOCK = preload("res://scenes/ItemBlock.tscn")
