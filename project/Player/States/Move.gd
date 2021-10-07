@@ -1,11 +1,11 @@
 extends PlayerState
 
-const FLOOR := Vector2.UP
 const FLOOR_SNAP := Vector2.DOWN * 8
 const SPEED_WALK := 6 * Globals.UNIT_SIZE
-const SPEED_RUN := 10 * Globals.UNIT_SIZE
+const SPEED_RUN := SPEED_WALK * 5 / 3
 #const SPEED_WALK := 0x1900 / Globals.UNIT_SIZE / 16
 #const SPEED_RUN := 0x2900 / Globals.UNIT_SIZE / 16
+const MAX_JUMP_UNITS := 4.5
 const MAX_FALL_SPEED := 300
 
 
@@ -27,7 +27,7 @@ var min_jump_velocity
 
 func _ready() -> void:
 	yield(owner, "ready")
-	var max_jump_height = 4.2 * Globals.UNIT_SIZE
+	var max_jump_height = MAX_JUMP_UNITS * Globals.UNIT_SIZE
 	floor_snap = FLOOR_SNAP
 	gravity = 2 * max_jump_height / pow(jump_duration, 2)
 	max_jump_velocity = -sqrt(2 * gravity * max_jump_height)
@@ -81,9 +81,13 @@ func unhandled_input(event: InputEvent) -> void:
 func apply_velocity() -> void:
 	var delta = get_physics_process_delta_time()
 	velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
-	velocity = player.move_and_slide_with_snap(velocity, floor_snap, FLOOR)
+	velocity = player.move_and_slide_with_snap(velocity, floor_snap, Globals.FLOOR)
 
 
 func get_direction() -> float:
 	return Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+
+
+func bounce() -> void:
+	_state_machine.transition_to("Move/Jump", {"bounce" : true})
 

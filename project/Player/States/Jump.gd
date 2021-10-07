@@ -28,13 +28,16 @@ func unhandled_input(event: InputEvent) -> void:
 		_parent.speed = _parent.SPEED_WALK
 
 
-func enter(_msg: Dictionary = {}) -> void:
+func enter(msg: Dictionary = {}) -> void:
 	initial_direction = _parent.get_direction()
 	# Change snap to enable jump.
 	_parent.floor_snap = Vector2.ZERO
 	# Increase the initial jump velocity if the player is running.
-	var running_jump = abs(_parent.velocity.x) > _parent.SPEED_WALK
-	_parent.velocity.y = _parent.max_run_jump_velocity if running_jump else _parent.max_jump_velocity
+	if msg.has("bounce"):
+		_parent.velocity.y = -128
+	else:
+		var running_jump = abs(_parent.velocity.x) > _parent.SPEED_WALK
+		_parent.velocity.y = _parent.max_run_jump_velocity if running_jump else _parent.max_jump_velocity
 
 
 func exit() -> void:

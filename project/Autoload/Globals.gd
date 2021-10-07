@@ -2,6 +2,7 @@ extends Node
 
 const UNIT_SIZE = 16
 const SCREEN_WIDTH = 256
+const FLOOR = Vector2.UP
 const COIN = preload("res://PickUps/Coin.tscn")
 const BRICK = preload("res://Worlds/Blocks/Brick.tscn")
 const BRICK_COIN = preload("res://Worlds/Blocks/BrickCoin.tscn")

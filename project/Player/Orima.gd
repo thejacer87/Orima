@@ -5,6 +5,7 @@ class_name Orima
 onready var animantion_player := $AnimationPlayer
 onready var movement_state_label := $MovementStateLabel
 onready var movement_state_machine := $MovementStateMachine
+onready var movement := $MovementStateMachine/Move
 onready var powerup_state_machine := $PowerupStateMachine
 onready var powerups := $PowerupStateMachine/Powerups
 onready var normal_collision := $NormalCollision
@@ -21,7 +22,7 @@ func _ready() -> void:
 	Globals.Player = self
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	check_block_collisions()
 
 
@@ -31,11 +32,15 @@ func _process(_delta: float) -> void:
 
 
 func _update_camera_limit() -> void:
-	var new_position = global_position - Vector2(Globals.SCREEN_WIDTH / 2, 0)
+	var new_position = global_position - Vector2(Globals.SCREEN_WIDTH / 2.0, 0)
 	if new_position.x > camera.limit_left:
 		camera.limit_left = new_position.x
 
-	left_barrier.position.x = to_local(Vector2(camera.limit_left - Globals.UNIT_SIZE / 2, 0)).x
+	left_barrier.position.x = to_local(Vector2(camera.limit_left - Globals.UNIT_SIZE / 2.0, 0)).x
+
+
+func enemy_bounce() -> void:
+	movement.bounce()
 
 
 func check_block_collisions() -> void:
