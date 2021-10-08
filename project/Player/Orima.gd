@@ -16,6 +16,7 @@ onready var left_barrier := $LeftBarrier
 onready var camera_scene := preload("res://Player/PlayerCamera.tscn")
 
 var camera
+var velocity setget set_velocity, get_velocity
 
 
 func _ready() -> void:
@@ -91,6 +92,14 @@ func set_current_camera(camera_limits: Dictionary) -> void:
 	if camera:
 		camera.queue_free()
 	camera = new_camera
+
+
+func get_velocity() -> Vector2:
+	return movement.velocity
+
+
+func set_velocity(value) -> void:
+	velocity = value
 
 
 func get_powerup_state() -> String:

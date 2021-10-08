@@ -2,7 +2,8 @@ extends KinematicBody2D
 class_name Enemy
 
 
-var speed := 1.0 * Globals.UNIT_SIZE
+#var speed := 1.0 * Globals.UNIT_SIZE
+var speed := 16.0
 var velocity := Vector2.ZERO
 var direction := -1
 var gravity := 98
@@ -24,11 +25,12 @@ func die():
 
 
 func _on_HitCollision_orima_entered(orima: Orima) -> void:
-	orima.enemy_bounce()
-	die()
+	if orima.velocity.y > 0:
+		$HurtCollision.set_deferred("monitoring", false)
+		orima.enemy_bounce()
+		die()
 
 
 func _on_HurtCollision_orima_entered(orima: Orima) -> void:
-#	var c = $HitCollision.get_node("CollisionShape2D")
-#	c.set_deferred("disable", true)
 	$HitCollision.set_deferred("monitoring", false)
+	orima.die()

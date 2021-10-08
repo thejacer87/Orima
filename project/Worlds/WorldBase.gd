@@ -45,6 +45,8 @@ func init_dynamic_tilemap() -> void:
 			var tile_name = tilemap.tile_set.tile_get_name(cell_id)
 
 			match tile_name:
+				"bagoom":
+					node = Globals.BAGOOM.instance()
 				"brick":
 					node = Globals.BRICK.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
@@ -52,19 +54,19 @@ func init_dynamic_tilemap() -> void:
 					node = Globals.BRICK_COIN.instance()
 					node.set_coins(10)
 					node.modulate_sprites(dynamic_tilemap_color)
-				"question":
-					node = Globals.QUESTION.instance()
-					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
-					node.set_item("res://PickUps/Coin.tscn")
+				"coin":
+					node = Globals.COIN.instance()
 				"mushroom":
 					node = Globals.QUESTION.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
 					node.set_item("res://PowerUps/Mushroom/Mushroom.tscn")
+				"question":
+					node = Globals.QUESTION.instance()
+					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
+					node.set_item("res://PickUps/Coin.tscn")
 				"used":
 					node = Globals.USED.instance()
 					node.get_node("Sprite").self_modulate = dynamic_tilemap_color
-				"coin":
-					node = Globals.COIN.instance()
 
 			if node:
 				node.position = tilemap.map_to_world(cell) + (tilemap.cell_size / 2) + offset
